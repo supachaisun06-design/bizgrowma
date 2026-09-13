@@ -1,0 +1,156 @@
+﻿---
+// FAQ Section - AEO (Answer Engine Optimization) + FAQ Schema
+// คำถามเขียนในรูปแบบ Voice Search / Natural Language
+const faqs = [
+  {
+    q: "บริการ IT Support รายเดือน ราคาเท่าไหร่?",
+    a: "ราคาเริ่มต้นที่ 2,990 บาท/เดือน สำหรับแพ็กเกจ Starter (10–20 เครื่อง) ขึ้นอยู่กับจำนวนเครื่องและขอบเขตงาน สามารถติดต่อเพื่อขอใบเสนอราคาที่เหมาะกับธุรกิจของคุณได้ฟรี ไม่มีข้อผูกมัด",
+  },
+  {
+    q: "ถ้าเซิร์ฟเวอร์ล่ม ใช้เวลาแก้ไขนานแค่ไหน (SLA)?",
+    a: "BizGrow Tech การันตีการตอบสนองปัญหาผ่าน Remote ภายใน 15 นาที สำหรับแพ็กเกจ Enterprise และภายใน 30 นาทีสำหรับแพ็กเกจ Pro กรณีต้องเข้าพื้นที่ (On-site) รับประกันภายใน 4 ชั่วโมงในเขตกรุงเทพและปริมณฑล",
+  },
+  {
+    q: "บริการนี้เหมาะกับธุรกิจประเภทใด?",
+    a: "เหมาะสำหรับ SME คลินิก โรงพยาบาล ออฟฟิศทั่วไป และธุรกิจที่ไม่มีแผนก IT ประจำ หรือต้องการลดต้นทุนจากการจ้างพนักงาน IT เต็มเวลา ลูกค้าของเราครอบคลุมทั้งธุรกิจค้าปลีก ร้านอาหาร บริษัทนำเข้าส่งออก และสถาบันการศึกษา",
+  },
+  {
+    q: "ต้องเซ็นสัญญาระยะยาวไหม?",
+    a: "สัญญาขั้นต่ำ 3 เดือนเพื่อให้ทีมงานเข้าใจระบบของคุณอย่างถ่องแท้ หลังจากนั้นสามารถต่อรายเดือนได้ ไม่มีค่าปรับการยกเลิก",
+  },
+  {
+    q: "BizGrow Tech ให้บริการพื้นที่ไหนบ้าง?",
+    a: "ให้บริการ On-site ในเขตกรุงเทพ ปริมณฑล และจังหวัดใกล้เคียง ส่วน Remote Support ให้บริการทั่วประเทศ",
+  },
+  {
+    q: "ถ้าอุปกรณ์พัง จัดหาให้ได้ไหม?",
+    a: "BizGrow Tech มีบริการจัดหาและติดตั้งอุปกรณ์คอมพิวเตอร์ เซิร์ฟเวอร์ และอุปกรณ์เครือข่าย ในราคาพิเศษสำหรับลูกค้า Contract",
+  },
+];
+---
+
+<section class="faq section" id="faq" aria-label="Frequently Asked Questions">
+  <div class="container">
+    <div class="faq__header">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">คำถามที่พบบ่อย</h2>
+      <p class="section-subtitle">คำตอบตรงประเด็น ไม่ต้องเดา ไม่ต้องรอ</p>
+    </div>
+
+    <div class="faq__list" role="list" itemscope itemtype="https://schema.org/FAQPage">
+      {faqs.map((item, i) => (
+        <article
+          class="faq__item"
+          role="listitem"
+          itemscope
+          itemprop="mainEntity"
+          itemtype="https://schema.org/Question"
+        >
+          <details class="faq__details" name="faq-group">
+            <summary class="faq__question">
+              <span itemprop="name">{item.q}</span>
+              <span class="faq__chevron" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </span>
+            </summary>
+            <div
+              class="faq__answer"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">{item.a}</p>
+            </div>
+          </details>
+        </article>
+      ))}
+    </div>
+
+    <div class="faq__cta">
+      <p>ยังมีคำถามอีกไหม?</p>
+      <a href="#contact" class="btn btn-primary">ติดต่อทีมงานเราโดยตรง</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__header { max-width: 640px; margin-bottom: 3rem; }
+
+  .faq__list {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .faq__item {
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .faq__item:has(.faq__details[open]) {
+    border-color:  "rgba(107,190,40,0.$($args[0].Groups[1].Value))" ;
+  }
+
+  .faq__details { width: 100%; }
+
+  .faq__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    list-style: none;
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .faq__question::-webkit-details-marker { display: none; }
+  .faq__question::marker { display: none; }
+
+  .faq__question:hover { color: var(--color-orange); }
+
+  .faq__chevron {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.25s ease, color 0.2s;
+  }
+
+  .faq__details[open] .faq__chevron {
+    transform: rotate(180deg);
+    color: var(--color-orange);
+  }
+
+  .faq__answer {
+    padding: 0 1.5rem 1.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+  }
+
+  .faq__cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .faq__cta p {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+  }
+</style>
+
+

@@ -1,0 +1,207 @@
+﻿---
+// Contact / CTA Section
+---
+
+<section class="contact section" id="contact" aria-label="Contact Form">
+  <div class="container">
+    <div class="contact__wrapper">
+      <div class="contact__info">
+        <p class="section-label">ติดต่อเรา</p>
+        <h2 class="section-title">ปรึกษาปัญหาไอทีฟรี<br />ไม่มีข้อผูกมัด</h2>
+        <p class="section-subtitle">
+          ทีมผู้เชี่ยวชาญของเราพร้อมรับฟังและให้คำแนะนำที่เหมาะกับธุรกิจของคุณ
+          ภายใน 24 ชั่วโมง
+        </p>
+
+        <div class="contact__details">
+          <a href="tel:+6620000000" class="contact__detail-item">
+            <span class="contact__detail-icon" aria-hidden="true">📞</span>
+            <div>
+              <span class="contact__detail-label">โทรศัพท์</span>
+              <span class="contact__detail-val">02-000-0000</span>
+            </div>
+          </a>
+          <a href="mailto:hello@bizgrowtech.com" class="contact__detail-item">
+            <span class="contact__detail-icon" aria-hidden="true">✉️</span>
+            <div>
+              <span class="contact__detail-label">อีเมล</span>
+              <span class="contact__detail-val">hello@bizgrowtech.com</span>
+            </div>
+          </a>
+          <div class="contact__detail-item">
+            <span class="contact__detail-icon" aria-hidden="true">⏰</span>
+            <div>
+              <span class="contact__detail-label">เวลาทำการ (Remote 24/7)</span>
+              <span class="contact__detail-val">จ–ศ 8:00–18:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact__form" action="#" method="POST" aria-label="Contact form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" class="form-label">ชื่อ-นามสกุล <span aria-label="required">*</span></label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="คุณสมชาย ใจดี" required autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="company" class="form-label">ชื่อบริษัท</label>
+            <input type="text" id="company" name="company" class="form-input" placeholder="บริษัท ABC จำกัด" autocomplete="organization" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone" class="form-label">เบอร์โทรศัพท์ <span aria-label="required">*</span></label>
+            <input type="tel" id="phone" name="phone" class="form-input" placeholder="08X-XXX-XXXX" required autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">อีเมล</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@company.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="devices" class="form-label">จำนวนเครื่องคอมพิวเตอร์ที่มี</label>
+          <select id="devices" name="devices" class="form-input form-select">
+            <option value="">เลือกจำนวนเครื่อง</option>
+            <option value="1-10">1–10 เครื่อง</option>
+            <option value="10-20">10–20 เครื่อง (Starter)</option>
+            <option value="21-50">21–50 เครื่อง (Pro)</option>
+            <option value="50+">50+ เครื่อง (Enterprise)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">ปัญหาที่ต้องการแก้ไข</label>
+          <textarea id="message" name="message" class="form-input form-textarea" rows="4" placeholder="เช่น เซิร์ฟเวอร์ช้า, ระบบล่มบ่อย, ต้องการ Backup..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary contact__submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          ส่งข้อความ — ฟรี ไม่มีข้อผูกมัด
+        </button>
+
+        <p class="contact__privacy">
+          🔒 ข้อมูลของคุณปลอดภัย เราไม่แชร์ข้อมูลกับบุคคลที่สาม
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .contact__detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    transition: border-color 0.2s;
+    text-decoration: none;
+  }
+
+  a.contact__detail-item:hover { border-color: var(--color-orange); }
+
+  .contact__detail-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+  .contact__detail-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.1rem;
+  }
+  .contact__detail-val { font-size: 0.95rem; font-weight: 600; color: var(--color-text); }
+
+  /* Form */
+  .contact__form {
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+
+  .form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .form-label span { color: #EF4444; }
+
+  .form-input {
+    background: var(--color-dark-2);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--color-text);
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-green);
+    box-shadow: 0 0 0 3px  "rgba(107,190,40,0.$($args[0].Groups[1].Value))" ;
+  }
+
+  .form-input::placeholder { color: var(--color-text-muted); }
+
+  .form-select { appearance: none; cursor: pointer; }
+
+  .form-textarea { resize: vertical; min-height: 100px; }
+
+  .contact__submit {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .contact__privacy {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .contact__wrapper { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .contact__form { padding: 1.5rem; }
+  }
+</style>
+
+

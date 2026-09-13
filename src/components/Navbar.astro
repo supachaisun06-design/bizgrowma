@@ -1,0 +1,250 @@
+﻿---
+const navLinks = [
+  { href: "#why-outsource", label: "ทำไมต้อง Outsource" },
+  { href: "#packages",      label: "แพ็กเกจ" },
+  { href: "#process",       label: "ขั้นตอน" },
+  { href: "#faq",           label: "FAQ" },
+  { href: "#trust",         label: "รีวิว" },
+];
+---
+
+<header class="navbar" role="banner">
+  <div class="container navbar__container">
+
+    <!-- LOGO -->
+    <a href="/" class="navbar__logo" aria-label="BizGrow Tech - กลับหน้าหลัก">
+      <img
+        src="/logo.jpg"
+        alt="BizGrow Tech Logo"
+        width="40"
+        height="40"
+        class="navbar__logo-img"
+        loading="eager"
+      />
+      <span class="navbar__logo-text">
+        <span class="logo-biz">BizGrow</span><span class="logo-tech">Tech</span>
+      </span>
+    </a>
+
+    <nav class="navbar__nav" aria-label="Main navigation">
+      {navLinks.map((link) => (
+        <a href={link.href} class="navbar__link">{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="navbar__actions">
+      <a href="tel:+6620000000" class="navbar__phone" aria-label="โทร 02-000-0000">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+        </svg>
+        02-000-0000
+      </a>
+      <a href="#contact" class="btn btn-primary navbar__cta">ปรึกษาฟรี</a>
+    </div>
+
+    <button class="navbar__hamburger" id="hamburger" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="navbar__mobile" id="mobile-menu" aria-label="Mobile navigation">
+    {navLinks.map((link) => (
+      <a href={link.href} class="navbar__mobile-link">{link.label}</a>
+    ))}
+    <a href="#contact" class="btn btn-primary" style="margin-top: 0.5rem; justify-content: center; width: 100%;">ปรึกษาฟรี</a>
+  </div>
+</header>
+
+<script>
+  const hamburger = document.getElementById("hamburger") as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById("mobile-menu") as HTMLElement | null;
+
+  hamburger?.addEventListener("click", () => {
+    const isOpen = mobileMenu?.classList.contains("is-open");
+    mobileMenu?.classList.toggle("is-open", !isOpen);
+    hamburger.setAttribute("aria-expanded", String(!isOpen));
+    hamburger.classList.toggle("is-open", !isOpen);
+  });
+
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("is-open");
+      hamburger?.setAttribute("aria-expanded", "false");
+      hamburger?.classList.remove("is-open");
+    });
+  });
+
+  const navbar = document.querySelector(".navbar") as HTMLElement | null;
+  window.addEventListener("scroll", () => {
+    navbar?.classList.toggle("navbar--scrolled", window.scrollY > 40);
+  }, { passive: true });
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0.75rem 0;
+    transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+  }
+
+  .navbar--scrolled {
+    background: rgba(12, 14, 9, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(107,190,40,0.12);
+    padding: 0.5rem 0;
+  }
+
+  .navbar__container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  /* --- Logo --- */
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .navbar__logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 2px rgba(107,190,40,0.4);
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .navbar__logo-text {
+    font-family: var(--font-en);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .logo-biz { color: var(--color-text); }
+  .logo-tech { color: var(--color-green); }
+
+  /* --- Nav links --- */
+  .navbar__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .navbar__link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .navbar__link:hover {
+    color: var(--color-text);
+    background: rgba(107,190,40,0.08);
+  }
+
+  /* --- Actions --- */
+  .navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .navbar__phone {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color 0.15s;
+    text-decoration: none;
+  }
+  .navbar__phone:hover { color: var(--color-green-light); }
+
+  .navbar__cta { padding: 0.5rem 1.2rem; font-size: 0.875rem; }
+
+  /* --- Hamburger --- */
+  .navbar__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .navbar__hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+    transform-origin: center;
+  }
+
+  .navbar__hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .navbar__hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .navbar__hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* --- Mobile Menu (transition-based, no hidden attr) --- */
+  .navbar__mobile {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.3s ease;
+    background: rgba(12, 14, 9, 0.97);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(107,190,40,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 1.5rem;
+  }
+
+  .navbar__mobile.is-open {
+    max-height: 420px;
+    opacity: 1;
+    pointer-events: all;
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  .navbar__mobile-link {
+    padding: 0.8rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid rgba(107,190,40,0.08);
+    transition: color 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .navbar__mobile-link:hover { color: var(--color-green-light); }
+
+  @media (max-width: 900px) {
+    .navbar__nav,
+    .navbar__phone,
+    .navbar__cta { display: none; }
+    .navbar__hamburger { display: flex; }
+  }
+</style>

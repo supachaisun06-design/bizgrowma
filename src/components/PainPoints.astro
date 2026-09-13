@@ -1,0 +1,135 @@
+﻿---
+const problems = [
+  {
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    iconColor: "#F59E0B",
+    title: "ต้นทุนสูงจากการจ้าง IT ประจำ",
+    desc: "เงินเดือนพนักงาน IT ระดับกลางสูงถึง 35,000–60,000 บาท/เดือน บวกค่าสวัสดิการและอุปกรณ์ เป็นภาระหนักสำหรับ SME",
+  },
+  {
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+    iconColor: "#EF4444",
+    title: "ระบบล่ม (Downtime) สูญเสียโอกาสธุรกิจ",
+    desc: "ทุก 1 ชั่วโมงที่ระบบล่ม คือรายได้ที่หายไป ลูกค้าที่หงุดหงิด และความน่าเชื่อถือที่ลดลง",
+  },
+  {
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
+    iconColor: "#8B5CF6",
+    title: "ภัยคุกคามความปลอดภัยไซเบอร์",
+    desc: "ไวรัส Ransomware และการรั่วไหลของข้อมูลสร้างความเสียหายได้มากกว่าล้านบาท SME มักไม่มีผู้เชี่ยวชาญด้าน Cybersecurity",
+  },
+  {
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    iconColor: "#0EA5E9",
+    title: "ขาดผู้ดูแลระบบอย่างต่อเนื่อง",
+    desc: "เมื่อ IT ลาออกหรือลาป่วย ทั้งองค์กรหยุดชะงัก ไม่มีใครรู้ระบบ ไม่มีการสำรองข้อมูล",
+  },
+];
+---
+
+<section class="pain section" id="why-outsource">
+  <div class="container">
+    <div class="pain__header">
+      <p class="section-label">ปัญหาที่พบบ่อย</p>
+      <h2 class="section-title">ทำไมองค์กรถึงต้องใช้บริการ IT Outsource?</h2>
+      <p class="section-subtitle">
+        ปัญหาเหล่านี้คือสิ่งที่ธุรกิจส่วนใหญ่เผชิญอยู่ทุกวัน — BizGrow Tech ช่วยแก้ได้ครบในที่เดียว
+      </p>
+    </div>
+
+    <div class="pain__grid" role="list">
+      {problems.map((item) => (
+        <article class="pain__card card" role="listitem" style={`--icon-color: ${item.iconColor}`}>
+          <div class="pain__icon-wrap" aria-hidden="true" set:html={item.icon} />
+          <h3 class="pain__card-title">{item.title}</h3>
+          <p class="pain__card-desc">{item.desc}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="pain__solution">
+      <div class="pain__solution-badge">✅ BizGrow Tech แก้ปัญหาทั้งหมดนี้ในสัญญาเดียว</div>
+      <ul class="pain__solution-list">
+        <li>ลดต้นทุนการจ้างพนักงาน IT ประจำ ได้ถึง 60%</li>
+        <li>แก้ปัญหาระบบล่ม (Downtime) ที่ทำให้เสียโอกาสทางธุรกิจ</li>
+        <li>มีผู้เชี่ยวชาญด้าน Cybersecurity ดูแลระบบความปลอดภัย</li>
+        <li>ทีม IT พร้อมตลอด ไม่มีปัญหาเรื่องการลาป่วยหรือลาออก</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pain__header { max-width: 640px; margin-bottom: 3rem; }
+
+  .pain__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .pain__card {
+    padding: 1.75rem;
+    border-top: 2px solid var(--icon-color);
+  }
+
+  .pain__icon-wrap {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--icon-color);
+    margin-bottom: 1.1rem;
+  }
+
+  .pain__card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--color-text);
+  }
+
+  .pain__card-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .pain__solution {
+    background: linear-gradient(135deg, rgba(30,64,175,0.15) 0%, rgba(14,165,233,0.08) 100%);
+    border: 1px solid  "rgba(107,190,40,0.$($args[0].Groups[1].Value))" ;
+    border-radius: var(--radius);
+    padding: 2.25rem;
+  }
+
+  .pain__solution-badge {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1.25rem;
+  }
+
+  .pain__solution-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.65rem;
+  }
+
+  .pain__solution-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .pain__solution-list li::before {
+    content: "→";
+    color: var(--color-orange);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+</style>
+

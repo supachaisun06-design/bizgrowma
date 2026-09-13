@@ -1,0 +1,252 @@
+﻿---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "บริการดูแลระบบคอมพิวเตอร์ครบวงจร (IT Support Outsource) โดย BizGrow Tech",
+  description = "BizGrow Tech ให้บริการดูแลระบบคอมพิวเตอร์ เซิร์ฟเวอร์ และเครือข่ายสำหรับองค์กรแบบรายเดือน ช่วยลดปัญหา Downtime ปกป้องข้อมูล และแก้ไขปัญหาไอทีโดยทีมผู้เชี่ยวชาญ",
+} = Astro.props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "บริการ IT Support รายเดือน ราคาเท่าไหร่?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ราคาเริ่มต้นที่ 2,990 บาท/เดือน ขึ้นอยู่กับจำนวนเครื่องและขอบเขตงาน" }
+    },
+    {
+      "@type": "Question",
+      "name": "ถ้าเซิร์ฟเวอร์ล่ม ใช้เวลาแก้ไขนานแค่ไหน (SLA)?",
+      "acceptedAnswer": { "@type": "Answer", "text": "BizGrow Tech การันตีการตอบสนองปัญหาผ่าน Remote ภายใน 15 นาที" }
+    },
+    {
+      "@type": "Question",
+      "name": "บริการนี้เหมาะกับธุรกิจประเภทใด?",
+      "acceptedAnswer": { "@type": "Answer", "text": "เหมาะสำหรับ SME คลินิก ออฟฟิศทั่วไป ที่ไม่มีแผนก IT ประจำ" }
+    }
+  ]
+};
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BizGrow Tech",
+  "description": description,
+  "url": "https://bizgrowtech.com"
+};
+---
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="th_TH" />
+    <link rel="canonical" href="https://bizgrowtech.com/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+
+  :root {
+    /* =========================================
+       BizGrow Tech Brand Colors
+       Logo: Green #6BBE28 + Orange #F5921C
+       ========================================= */
+
+    /* --- GREEN (Primary brand) --- */
+    --color-green:        #6BBE28;   /* logo letter color */
+    --color-green-dark:   #4E9219;   /* hover, deeper */
+    --color-green-light:  #82D63A;   /* lighter glow */
+    --color-green-dim:    rgba(107,190,40,0.12);
+
+    /* --- ORANGE (Accent / CTA) --- */
+    --color-orange:       #F5921C;   /* logo arrow color */
+    --color-orange-dark:  #D97B0E;
+    --color-orange-light: #F9AA4B;
+    --color-orange-dim:   rgba(245,146,28,0.12);
+
+    /* --- Dark backgrounds (night-mode tech feel) --- */
+    --color-dark:         #0C0E09;   /* near-black with green tint */
+    --color-dark-2:       #111408;
+    --color-dark-3:       #161A0B;
+    --color-dark-card:    #151A0D;
+    --color-border:       #252E14;
+
+    /* --- Text --- */
+    --color-text:         #F0F4E8;   /* warm white with green tint */
+    --color-text-muted:   #96A878;   /* muted green-toned grey */
+    --color-text-dim:     #64754A;
+
+    /* --- Semantic --- */
+    --color-success:      #6BBE28;   /* = brand green */
+    --color-warning:      #F5921C;   /* = brand orange */
+
+    /* --- Gradients --- */
+    --gradient-primary:   linear-gradient(135deg, #4E9219 0%, #6BBE28 100%);
+    --gradient-accent:    linear-gradient(135deg, #F5921C 0%, #F9AA4B 100%);
+    --gradient-brand:     linear-gradient(135deg, #6BBE28 0%, #F5921C 100%);
+    --gradient-glow:      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(107,190,40,0.18) 0%, transparent 70%);
+
+    /* --- Fonts --- */
+    --font-th:   "Anuphan", "Noto Sans Thai", system-ui, sans-serif;
+    --font-en:   "Poppins", system-ui, sans-serif;
+    --font-main: var(--font-th);
+
+    /* --- Layout --- */
+    --max-w:     1200px;
+    --radius:    14px;
+    --radius-sm: 8px;
+    --radius-lg: 22px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-main);
+    background-color: var(--color-dark);
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== Layout ===== */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+  .section { padding: 5.5rem 0; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-en);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-orange);
+    margin-bottom: 1rem;
+  }
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--gradient-accent);
+    border-radius: 2px;
+  }
+
+  .section-title {
+    font-size: clamp(1.85rem, 4vw, 2.75rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    line-height: 1.75;
+  }
+
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-family: var(--font-th);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Primary = Orange (CTA / attention) */
+  .btn-primary {
+    background: var(--gradient-accent);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(245,146,28,0.4);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(245,146,28,0.55);
+    filter: brightness(1.08);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  /* Secondary = Green */
+  .btn-green {
+    background: var(--gradient-primary);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(107,190,40,0.35);
+  }
+  .btn-green:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(107,190,40,0.5);
+    filter: brightness(1.08);
+  }
+
+  /* Outline */
+  .btn-outline {
+    background: transparent;
+    color: var(--color-text);
+    border: 1.5px solid rgba(107,190,40,0.3);
+  }
+  .btn-outline:hover {
+    border-color: var(--color-green);
+    color: var(--color-green-light);
+    background: var(--color-green-dim);
+    transform: translateY(-2px);
+  }
+
+  /* ===== Card base ===== */
+  .card {
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s, transform 0.25s, box-shadow 0.25s;
+  }
+  .card:hover {
+    border-color: rgba(107,190,40,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  @media (max-width: 768px) {
+    .section { padding: 4rem 0; }
+    .container { padding: 0 1.25rem; }
+  }
+</style>
