@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://bizgrowtech.com',
+  site: 'https://it-outsource.bizgrowtech.com',
 });
