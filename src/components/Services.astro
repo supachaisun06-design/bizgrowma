@@ -1,0 +1,210 @@
+﻿---
+// Services Section - 5 main service categories (based on gentechit.co.th structure)
+const services = [
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+    color: "#6BBE28",
+    title: "ดูแลอุปกรณ์ปลายทาง (Endpoint Management)",
+    items: [
+      "อัปเดต OS, Driver และ Software อย่างสม่ำเสมอ",
+      "ติดตั้งระบบ Antivirus / Endpoint Security",
+      "ทำความสะอาด ตรวจสอบประสิทธิภาพ และแก้ปัญหาช้า",
+      "สำรองข้อมูล (Backup) และทดสอบการกู้คืน (Restore Test)",
+      "รองรับทั้ง Windows และ macOS",
+    ],
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
+    color: "#4E9219",
+    title: "บริหารจัดการ Server (Server Management)",
+    items: [
+      "Monitor สถานะ CPU, RAM, Disk, Temperature แบบ Real-time",
+      "ดูแล Windows Server, Active Directory, DNS, DHCP, File Server",
+      "จัดการ VM Environment (VMware, Hyper-V, Proxmox)",
+      "วางแผนและดำเนิน Patch Management อย่างปลอดภัย",
+      "ตั้งค่า Backup ไปยัง Synology NAS และ Cloud",
+    ],
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>`,
+    color: "#F5921C",
+    title: "บริหารเครือข่าย (Network Management)",
+    items: [
+      "Monitor Bandwidth, Latency และ Packet Loss ตลอด 24/7",
+      "ดูแล Firewall (Fortinet FortiGate, pfSense, Sophos)",
+      "จัดการ Switch, Router, Access Point (Cisco, MikroTik, Ubiquiti)",
+      "ตั้งค่า VLAN, VPN Site-to-Site, SSL VPN",
+      "ตรวจสอบช่องโหว่ Security Audit ทุกเดือน",
+    ],
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>`,
+    color: "#D97B0E",
+    title: "Remote & On-site Support",
+    items: [
+      "Remote Support ตอบสนองภายใน 15–30 นาที (ตามแพ็กเกจ)",
+      "On-site เข้าพื้นที่ฉุกเฉิน ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย",
+      "IT Helpdesk รับแจ้งปัญหาผ่าน Line Official, Email และโทรศัพท์",
+      "บริการนอกเวลา (Emergency) สำหรับแพ็กเกจ Pro ขึ้นไป",
+    ],
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 0-3-1-3-3V5l-6-2-6 2v4c0 2-2 3-3 3 1 0 3 1 3 3v4l6 2 6-2v-4c0-2 2-3 3-3z"/></svg>`,
+    color: "#6BBE28",
+    title: "วางแผนระบบ IT (IT Consulting)",
+    items: [
+      "ออกแบบและวางแผน IT Roadmap ระยะสั้น-ยาวสำหรับองค์กร",
+      "แนะนำการ Upgrade Server, Network และ Cloud Infrastructure",
+      "วางแผน Disaster Recovery Plan (DRP) รับมือเหตุฉุกเฉิน",
+      "รองรับ Microsoft 365, Azure, Google Workspace",
+      "จัดทำรายงานสรุปรายเดือน พร้อมคำแนะนำการพัฒนาต่อ",
+    ],
+  },
+];
+---
+
+<section class="services section" id="services" aria-label="IT Services">
+  <div class="container">
+    <div class="services__header">
+      <p class="section-label">ขอบเขตบริการ</p>
+      <h2 class="section-title">บริการดูแลระบบ IT ครบวงจร<br />สำหรับองค์กรทุกขนาด</h2>
+      <p class="section-subtitle">
+        BizGrow Tech ให้บริการ IT Outsource แบบครอบคลุม ตั้งแต่อุปกรณ์ปลายทาง เซิร์ฟเวอร์ เครือข่าย
+        จนถึงการวางกลยุทธ์ IT ระยะยาว — ทีมเดียว ดูแลครบ
+      </p>
+    </div>
+
+    <div class="services__grid">
+      {services.map((svc) => (
+        <article class="services__card" style={`--svc-color: ${svc.color}`}>
+          <div class="services__card-header">
+            <div class="services__icon" aria-hidden="true" set:html={svc.icon} />
+            <h3 class="services__card-title">{svc.title}</h3>
+          </div>
+          <ul class="services__list">
+            {svc.items.map((item) => (
+              <li class="services__list-item">
+                <span class="services__check" aria-hidden="true">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <div class="services__cta-row">
+      <p class="services__cta-text">สนใจบริการใด? ปรึกษาทีมงานฟรี ไม่มีข้อผูกมัด</p>
+      <a href="#contact" class="btn btn-primary">ขอคำปรึกษาฟรี</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services__header { max-width: 700px; margin-bottom: 3rem; }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Last row: 2 cards centered */
+  .services__card:nth-child(4) { grid-column: 1 / 2; }
+  .services__card:nth-child(5) { grid-column: 2 / 3; }
+
+  .services__card {
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--svc-color);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  .services__card:hover {
+    border-color: var(--svc-color);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .services__card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .services__icon {
+    width: 52px; height: 52px;
+    background: color-mix(in srgb, var(--svc-color) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--svc-color) 25%, transparent);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--svc-color);
+    flex-shrink: 0;
+  }
+
+  .services__card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .services__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .services__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+  }
+
+  .services__check {
+    color: var(--svc-color);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+    font-size: 0.85rem;
+  }
+
+  .services__cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: rgba(107,190,40,0.04);
+    border: 1px solid rgba(107,190,40,0.15);
+    border-radius: var(--radius);
+    flex-wrap: wrap;
+  }
+
+  .services__cta-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    flex: 1;
+    min-width: 200px;
+  }
+
+  @media (max-width: 1024px) {
+    .services__grid { grid-template-columns: repeat(2, 1fr); }
+    .services__card:nth-child(4),
+    .services__card:nth-child(5) { grid-column: auto; }
+  }
+  @media (max-width: 600px) {
+    .services__grid { grid-template-columns: 1fr; }
+    .services__cta-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>

@@ -1,194 +1,175 @@
-﻿---
-// Trust Signals Section - GEO/SEO E-E-A-T
-const certifications = [
-  { name: "CompTIA A+", org: "CompTIA", color: "#E31837" },
-  { name: "CompTIA Network+", org: "CompTIA", color: "#E31837" },
-  { name: "Cisco CCNA", org: "Cisco", color: "#049FD9" },
-  { name: "Microsoft Certified", org: "Microsoft", color: "#00A4EF" },
-  { name: "VMware VCP", org: "VMware", color: "#607078" },
-];
-
+---
+// Trust Signals Section - GEO/AIO Local Area Focus + Testimonials
 const testimonials = [
   {
-    quote: "หลังจากใช้บริการ BizGrow Tech ปัญหาระบบล่มที่เกิดขึ้นเกือบทุกสัปดาห์หายไปเลย ทีมงานตอบสนองเร็ว แก้ปัญหาได้จริง",
+    quote: "หลังจากใช้บริการ BizGrow Tech ปัญหาระบบล่มที่เกิดขึ้นเกือบทุกสัปดาห์หายไปเลย ทีมงานตอบสนองเร็ว เข้าพื้นที่บางบัวทองได้ภายในไม่กี่ชั่วโมง",
     author: "คุณสมชาย วิทยาการ",
     role: "ผู้จัดการฝ่าย Operations",
-    company: "บริษัท ABC Trading จำกัด",
+    company: "บริษัท ABC Trading จำกัด บางบัวทอง",
     rating: 5,
   },
   {
     quote: "ประหยัดค่าใช้จ่ายด้าน IT ไปได้กว่า 40% เมื่อเทียบกับการจ้างพนักงานประจำ แถมได้ผู้เชี่ยวชาญหลายคนดูแลแทนคนเดียว",
     author: "คุณนงนุช ศรีสวัสดิ์",
     role: "Director",
-    company: "XYZ Clinic Group",
+    company: "XYZ Clinic ไทรน้อย",
     rating: 5,
   },
   {
-    quote: "Data ของเราเคยโดน Ransomware ครั้งหนึ่ง หลังจากให้ BizGrow Tech ดูแล ระบบ Backup และ Security แน่นมาก",
+    quote: "Data ของเราเคยโดน Ransomware ครั้งหนึ่ง หลังจากให้ BizGrow Tech ดูแล ระบบ Backup และ Security แน่นมาก ไม่ต้องกังวลอีกแล้ว",
     author: "คุณประเสริฐ มานะดี",
     role: "CEO",
-    company: "StartUp Thailand Co., Ltd.",
+    company: "StartUp Co., Ltd. บางใหญ่",
     rating: 5,
   },
 ];
 
-const clientLogos = [
-  "ABC Trading", "XYZ Clinic", "MedHub", "RetailPlus", "TechStart", "EduPro"
+const areas = [
+  { name: "ไทรน้อย", desc: "ครอบคลุมทั้งตำบล ไทรน้อย ขุนศรี คลองขวาง และใกล้เคียง", icon: "🏢" },
+  { name: "บางบัวทอง", desc: "ดูแลองค์กรในเขตบางบัวทอง บางรักน้อย ละหาร โสน", icon: "🏪" },
+  { name: "บางใหญ่", desc: "บริการครอบคลุมเทศบาลเมืองบางใหญ่ บ้านใหม่ บางแม่นาง", icon: "🏬" },
+  { name: "บางกรวย", desc: "ให้บริการในเขตบางกรวย วัดชลอ บางสีทอง ศาลากลาง", icon: "🏗️" },
 ];
 ---
 
-<section class="trust section" id="trust" aria-label="Trust Signals and Credentials">
+<section class="trust section" id="trust" aria-label="Service Areas and Reviews">
   <div class="container">
-    <!-- Client Logos -->
-    <div class="trust__clients">
-      <p class="trust__clients-label">ไว้วางใจโดยองค์กรชั้นนำกว่า 200 แห่ง</p>
-      <div class="trust__logos" role="list" aria-label="Client logos">
-        {clientLogos.map((name) => (
-          <div class="trust__logo" role="listitem" aria-label={name}>
-            <span class="trust__logo-text">{name}</span>
+
+    <!-- GEO: Service Area Block -->
+    <div class="trust__area-section">
+      <div class="trust__area-header">
+        <p class="section-label">พื้นที่ให้บริการ</p>
+        <h2 class="section-title">
+          บริการ IT Outsource เฉพาะโซน<br />
+          <span class="trust__area-highlight">นนทบุรี ฝั่งตะวันตก</span>
+        </h2>
+        <p class="section-subtitle">
+          BizGrow Tech เชี่ยวชาญพื้นที่นนทบุรีโดยเฉพาะ ทีม On-site สามารถเข้าถึงได้รวดเร็ว
+          ภายใน 2–4 ชั่วโมง ไม่ว่าจะเป็นเหตุฉุกเฉินหรือ Preventive Maintenance
+        </p>
+      </div>
+
+      <div class="trust__area-grid">
+        {areas.map((area) => (
+          <div class="trust__area-card">
+            <div class="trust__area-icon" aria-hidden="true">{area.icon}</div>
+            <div>
+              <strong class="trust__area-name">{area.name}</strong>
+              <p class="trust__area-desc">{area.desc}</p>
+            </div>
           </div>
+        ))}
+      </div>
+
+      <div class="trust__area-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>
+        </svg>
+        Remote Support ให้บริการทั่วประเทศ — สำหรับพื้นที่นอกโซน สามารถนัดหมายล่วงหน้าได้
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="trust__testimonials">
+      <p class="section-label">รีวิวจากลูกค้า</p>
+      <h2 class="section-title">ลูกค้าในพื้นที่พูดถึงเรา</h2>
+      <div class="trust__test-list" role="list">
+        {testimonials.map((t) => (
+          <blockquote class="trust__test-card" role="listitem" itemscope itemtype="https://schema.org/Review">
+            <div class="trust__test-stars" aria-label={`${t.rating} ดาวจาก 5 ดาว`} role="img">
+              {"★".repeat(t.rating)}
+            </div>
+            <p class="trust__test-quote" itemprop="reviewBody">"{t.quote}"</p>
+            <footer class="trust__test-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+              <div class="trust__test-avatar" aria-hidden="true">
+                {t.author.split(" ").map((w: string) => w[0]).join("").slice(0,2)}
+              </div>
+              <div>
+                <cite class="trust__test-name" itemprop="name">{t.author}</cite>
+                <span class="trust__test-meta">{t.role} · {t.company}</span>
+              </div>
+            </footer>
+          </blockquote>
         ))}
       </div>
     </div>
 
-    <div class="trust__grid">
-      <!-- Certifications -->
-      <div class="trust__certs">
-        <p class="section-label">ใบรับรองมาตรฐาน</p>
-        <h2 class="trust__cert-title">ทีมงานที่ผ่านการรับรองระดับสากล</h2>
-        <p class="trust__cert-desc">
-          ผู้เชี่ยวชาญของเรามีใบรับรองมาตรฐานสากล รับประกันความสามารถและความเชี่ยวชาญในระดับสูงสุด
-        </p>
-        <div class="trust__cert-list" role="list">
-          {certifications.map((cert) => (
-            <div class="trust__cert-item" role="listitem" style={`--cert-color: ${cert.color}`}>
-              <div class="trust__cert-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-                  <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
-              <div>
-                <strong class="trust__cert-name">{cert.name}</strong>
-                <span class="trust__cert-org">{cert.org} Certified</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Testimonials -->
-      <div class="trust__testimonials">
-        <p class="section-label">รีวิวจากลูกค้าจริง</p>
-        <h2 class="trust__test-title">สิ่งที่ลูกค้าพูดถึงเรา</h2>
-        <div class="trust__test-list" role="list">
-          {testimonials.map((t) => (
-            <blockquote class="trust__test-card" role="listitem" itemscope itemtype="https://schema.org/Review">
-              <div class="trust__test-stars" aria-label={`${t.rating} ดาวจาก 5 ดาว`} role="img">
-                {"★".repeat(t.rating)}
-              </div>
-              <p class="trust__test-quote" itemprop="reviewBody">"{t.quote}"</p>
-              <footer class="trust__test-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
-                <div class="trust__test-avatar" aria-hidden="true">
-                  {t.author.split(" ").map(w => w[0]).join("").slice(0,2)}
-                </div>
-                <div>
-                  <cite class="trust__test-name" itemprop="name">{t.author}</cite>
-                  <span class="trust__test-meta">{t.role} · {t.company}</span>
-                </div>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <style>
-  .trust__clients {
-    text-align: center;
-    margin-bottom: 5rem;
+  /* === Service Area === */
+  .trust__area-section { margin-bottom: 5rem; }
+  .trust__area-header { max-width: 640px; margin-bottom: 2.5rem; }
+
+  .trust__area-highlight {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .trust__clients-label {
+  .trust__area-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .trust__area-card {
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-green);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .trust__area-card:hover {
+    border-color: var(--color-green);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(107,190,40,0.12);
+  }
+
+  .trust__area-icon {
+    font-size: 1.75rem;
+    width: 48px; height: 48px;
+    background: rgba(107,190,40,0.08);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .trust__area-name {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-green-light);
+    margin-bottom: 0.3rem;
+  }
+  .trust__area-desc { font-size: 0.82rem; color: var(--color-text-muted); line-height: 1.6; }
+
+  .trust__area-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(245,146,28,0.07);
+    border: 1px solid rgba(245,146,28,0.18);
+    border-radius: 8px;
+    padding: 0.55rem 1rem;
     font-size: 0.85rem;
     color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.05em;
   }
+  .trust__area-note svg { color: var(--color-orange); flex-shrink: 0; }
 
-  .trust__logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .trust__logo {
-    background: var(--color-dark-card);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 0.75rem 2rem;
-    transition: border-color 0.2s;
-  }
-  .trust__logo:hover { border-color:  "rgba(107,190,40,0.$($args[0].Groups[1].Value))" ; }
-
-  .trust__logo-text {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text-muted);
-  }
-
-  .trust__grid {
+  /* === Testimonials === */
+  .trust__test-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
   }
-
-  /* Certifications */
-  .trust__cert-title, .trust__test-title {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
-  }
-  .trust__cert-desc { font-size: 0.95rem; color: var(--color-text-muted); margin-bottom: 1.5rem; }
-
-  .trust__cert-list { display: flex; flex-direction: column; gap: 0.75rem; }
-
-  .trust__cert-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--color-dark-card);
-    border: 1px solid var(--color-border);
-    border-left: 3px solid var(--cert-color);
-    border-radius: var(--radius);
-    padding: 0.85rem 1.25rem;
-  }
-
-  .trust__cert-icon {
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--cert-color);
-    flex-shrink: 0;
-  }
-
-  .trust__cert-name {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-text);
-  }
-  .trust__cert-org { font-size: 0.8rem; color: var(--color-text-muted); }
-
-  /* Testimonials */
-  .trust__test-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
 
   .trust__test-card {
     background: var(--color-dark-card);
@@ -197,56 +178,33 @@ const clientLogos = [
     padding: 1.5rem;
     transition: border-color 0.2s;
   }
-  .trust__test-card:hover { border-color:  "rgba(107,190,40,0.$($args[0].Groups[1].Value))" ; }
+  .trust__test-card:hover { border-color: rgba(107,190,40,0.35); }
 
-  .trust__test-stars {
-    color: #FBC02D;
-    font-size: 1.1rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
-  }
+  .trust__test-stars { color: #FBC02D; font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
 
   .trust__test-quote {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--color-text-muted);
     line-height: 1.75;
     margin-bottom: 1.25rem;
     font-style: normal;
   }
 
-  .trust__test-author {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-style: normal;
-  }
+  .trust__test-author { display: flex; align-items: center; gap: 0.75rem; font-style: normal; }
 
   .trust__test-avatar {
-    width: 40px;
-    height: 40px;
+    width: 38px; height: 38px;
     background: linear-gradient(135deg, var(--color-green), var(--color-orange));
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #fff;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 800; color: #fff; flex-shrink: 0;
   }
 
-  .trust__test-name {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-text);
-    font-style: normal;
-  }
-  .trust__test-meta { font-size: 0.8rem; color: var(--color-text-muted); }
+  .trust__test-name { display: block; font-size: 0.88rem; font-weight: 700; color: var(--color-text); font-style: normal; }
+  .trust__test-meta { font-size: 0.78rem; color: var(--color-text-muted); }
 
   @media (max-width: 900px) {
-    .trust__grid { grid-template-columns: 1fr; gap: 3rem; }
+    .trust__area-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust__test-list { grid-template-columns: 1fr; }
   }
 </style>
-
-

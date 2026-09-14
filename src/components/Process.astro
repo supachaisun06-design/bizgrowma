@@ -1,0 +1,144 @@
+﻿---
+const steps = [
+  {
+    num: "01",
+    title: "ติดต่อสอบถาม",
+    desc: "แจ้งข้อมูลเกี่ยวกับระบบ IT ขององค์กรของคุณ จำนวนอุปกรณ์ Server และปัญหาที่ต้องการแก้ไข",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>`,
+  },
+  {
+    num: "02",
+    title: "ประเมินระบบ (IT Assessment)",
+    desc: "ทีมงานเข้าตรวจสอบระบบจริง ทั้ง Remote และ On-site เพื่อวิเคราะห์จุดเสี่ยงและออกแบบแพ็กเกจที่เหมาะสม",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`,
+  },
+  {
+    num: "03",
+    title: "รับใบเสนอราคา",
+    desc: "ออกแบบแพ็กเกจเฉพาะสำหรับคุณ พร้อม Scope of Work ชัดเจน ราคาตรงไปตรงมา ไม่มีค่าใช้จ่ายซ่อนเร้น",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+  },
+  {
+    num: "04",
+    title: "เริ่มใช้บริการ (Onboarding)",
+    desc: "จัดทำ Onboarding Document บันทึกข้อมูลระบบ ติดตั้ง Monitoring Tool และเริ่มดูแลระบบของคุณทันที",
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+  },
+];
+---
+
+<section class="process section" id="process" aria-label="How we work">
+  <div class="container">
+    <div class="process__header">
+      <p class="section-label">ขั้นตอนการทำงาน</p>
+      <h2 class="section-title">เริ่มต้นดูแลระบบ IT ของคุณ<br />ง่ายแค่ 4 ขั้นตอน</h2>
+      <p class="section-subtitle">
+        ตั้งแต่ติดต่อจนถึงเริ่มใช้งานจริง ใช้เวลาเฉลี่ยไม่เกิน 3–5 วันทำการ
+      </p>
+    </div>
+
+    <div class="process__grid">
+      {steps.map((step, i) => (
+        <div class="process__step">
+          <div class="process__step-line" aria-hidden="true"></div>
+          <div class="process__step-num-wrap">
+            <div class="process__step-num" aria-hidden="true">{step.num}</div>
+          </div>
+          <div class="process__step-icon" aria-hidden="true" set:html={step.icon} />
+          <h3 class="process__step-title">{step.title}</h3>
+          <p class="process__step-desc">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process__header { max-width: 640px; margin-bottom: 3.5rem; }
+
+  .process__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .process__step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1.75rem 1.5rem;
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .process__step:hover {
+    border-color: rgba(107,190,40,0.35);
+    transform: translateY(-2px);
+  }
+
+  .process__step-line {
+    position: absolute;
+    top: 2.2rem;
+    left: calc(100% + 0px);
+    width: calc(1.5rem + 2px);
+    height: 2px;
+    background: linear-gradient(to right, rgba(107,190,40,0.4), transparent);
+    pointer-events: none;
+  }
+
+  .process__step:last-child .process__step-line { display: none; }
+
+  .process__step-num-wrap {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .process__step-num {
+    font-family: var(--font-en);
+    font-size: 2rem;
+    font-weight: 900;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .process__step-icon {
+    width: 44px; height: 44px;
+    background: rgba(107,190,40,0.1);
+    border: 1px solid rgba(107,190,40,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-green-light);
+    flex-shrink: 0;
+  }
+
+  .process__step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: 0.25rem;
+  }
+
+  .process__step-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 900px) {
+    .process__grid { grid-template-columns: repeat(2, 1fr); }
+    .process__step-line { display: none; }
+  }
+  @media (max-width: 500px) {
+    .process__grid { grid-template-columns: 1fr; }
+  }
+</style>
