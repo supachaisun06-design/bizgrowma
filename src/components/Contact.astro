@@ -45,7 +45,9 @@
         </div>
       </div>
 
-      <form class="contact__form" action="#" method="POST" aria-label="Contact form">
+      <form id="contactForm" class="contact__form" action="#" method="POST" aria-label="Contact form">
+        <div id="formAlert" class="form-alert" style="display: none;"></div>
+
         <div class="form-row">
           <div class="form-group">
             <label for="name" class="form-label">ชื่อ-นามสกุล <span aria-label="required">*</span></label>
@@ -84,12 +86,14 @@
           <textarea id="message" name="message" class="form-input form-textarea" rows="4" placeholder="เช่น เซิร์ฟเวอร์ช้า, ระบบล่มบ่อย, ต้องการ Backup..."></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary contact__submit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <line x1="22" y1="2" x2="11" y2="13"/>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-          ส่งข้อความ — ฟรี ไม่มีข้อผูกมัด
+        <button type="submit" id="submitBtn" class="btn btn-primary contact__submit">
+          <span class="btn-text">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="display:inline; vertical-align:middle; margin-right:4px;">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            ส่งข้อความ — ฟรี ไม่มีข้อผูกมัด
+          </span>
         </button>
 
         <p class="contact__privacy">
@@ -99,6 +103,69 @@
     </div>
   </div>
 </section>
+
+<script>
+  // Script สำหรับส่งฟอร์มไปยัง Google Apps Script Webhook (ส่งเข้า LINE Notify)
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = submitBtn?.querySelector('.btn-text');
+  const formAlert = document.getElementById('formAlert');
+
+  // *** เปลี่ยน URL นี้เป็น Webhook URL ที่ได้จาก Google Apps Script ***
+  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyqwQ8TSZOM47ll5iPCFlmPbkk_cGs4o4EZNzUJh2rVtU5ji1cEw9QpL5ytYCArMPCy/exec';
+
+  if (form && submitBtn && btnText && formAlert) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+
+
+      // เปลี่ยนสถานะปุ่ม
+      submitBtn.setAttribute('disabled', 'true');
+      btnText.textContent = 'กำลังส่งข้อมูล...';
+      formAlert.style.display = 'none';
+
+      const formData = new FormData(form as HTMLFormElement);
+      const data = Object.fromEntries(formData);
+
+      try {
+        const response = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          // Google Apps Script รับ Content-Type: text/plain ได้ดีสุดสำหรับ CORS
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          showAlert('ส่งข้อความเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด', 'success');
+          (form as HTMLFormElement).reset();
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showAlert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง หรือติดต่อทางโทรศัพท์', 'error');
+      } finally {
+        // คืนสถานะปุ่ม
+        submitBtn.removeAttribute('disabled');
+        btnText.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="display:inline; vertical-align:middle; margin-right:4px;">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          ส่งข้อความ — ฟรี ไม่มีข้อผูกมัด
+        `;
+      }
+    });
+  }
+
+  function showAlert(message: string, type: 'success' | 'error') {
+    if (!formAlert) return;
+    formAlert.textContent = message;
+    formAlert.className = `form-alert form-alert--${type}`;
+    formAlert.style.display = 'block';
+  }
+</script>
 
 <style>
   .contact__wrapper {
@@ -199,6 +266,24 @@
     font-size: 0.8rem;
     color: var(--color-text-muted);
     margin-top: 1rem;
+  }
+
+  .form-alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .form-alert--success {
+    background: rgba(107,190,40,0.1);
+    color: var(--color-green-light);
+    border: 1px solid rgba(107,190,40,0.3);
+  }
+  .form-alert--error {
+    background: rgba(239,68,68,0.1);
+    color: #EF4444;
+    border: 1px solid rgba(239,68,68,0.3);
   }
 
   @media (max-width: 900px) {
