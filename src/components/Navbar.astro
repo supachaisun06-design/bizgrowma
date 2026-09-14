@@ -39,6 +39,14 @@ const navLinks = [
         </svg>
         092-282-4848
       </a>
+      <button id="shareBtn" class="btn btn-outline navbar__share" aria-label="แชร์เว็บไซต์">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+          <polyline points="16 6 12 2 8 6"></polyline>
+          <line x1="12" y1="2" x2="12" y2="15"></line>
+        </svg>
+        แชร์
+      </button>
       <a href="#contact" class="btn btn-primary navbar__cta">ปรึกษาฟรี</a>
     </div>
 
@@ -52,33 +60,75 @@ const navLinks = [
     {navLinks.map((link) => (
       <a href={link.href} class="navbar__mobile-link">{link.label}</a>
     ))}
-    <a href="#contact" class="btn btn-primary" style="margin-top: 0.5rem; justify-content: center; width: 100%;">ปรึกษาฟรี</a>
+    <div style="display: flex; gap: 0.5rem; margin-top: 1rem; width: 100%;">
+      <button id="shareBtnMobile" class="navbar__share" style="flex: 1; justify-content: center;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+          <polyline points="16 6 12 2 8 6"></polyline>
+          <line x1="12" y1="2" x2="12" y2="15"></line>
+        </svg>
+        แชร์
+      </button>
+      <a href="#contact" class="btn btn-primary" style="flex: 1; justify-content: center;">ปรึกษาฟรี</a>
+    </div>
   </div>
 </header>
 
 <script>
+  // Mobile Menu Logic
   const hamburger = document.getElementById("hamburger") as HTMLButtonElement | null;
-  const mobileMenu = document.getElementById("mobile-menu") as HTMLElement | null;
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileLinks = document.querySelectorAll(".navbar__mobile-link");
 
-  hamburger?.addEventListener("click", () => {
-    const isOpen = mobileMenu?.classList.contains("is-open");
-    mobileMenu?.classList.toggle("is-open", !isOpen);
-    hamburger.setAttribute("aria-expanded", String(!isOpen));
-    hamburger.classList.toggle("is-open", !isOpen);
-  });
-
-  mobileMenu?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("is-open");
-      hamburger?.setAttribute("aria-expanded", "false");
-      hamburger?.classList.remove("is-open");
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener("click", () => {
+      const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", String(!isExpanded));
+      hamburger.classList.toggle("is-active");
+      mobileMenu.classList.toggle("is-open");
     });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        hamburger.setAttribute("aria-expanded", "false");
+        hamburger.classList.remove("is-active");
+        mobileMenu.classList.remove("is-open");
+      });
+    });
+  }
+
+  // Navbar Scroll Effect
+  const navbar = document.querySelector(".navbar");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add("navbar--scrolled");
+    } else {
+      navbar?.classList.remove("navbar--scrolled");
+    }
   });
 
-  const navbar = document.querySelector(".navbar") as HTMLElement | null;
-  window.addEventListener("scroll", () => {
-    navbar?.classList.toggle("navbar--scrolled", window.scrollY > 40);
-  }, { passive: true });
+  // Share Logic
+  const shareData = {
+    title: document.title,
+    text: 'BizGrow Tech - บริการ IT Support ดูแลระบบคอมพิวเตอร์ครบวงจร',
+    url: window.location.href
+  };
+
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(shareData.url);
+        alert('คัดลอกลิงก์เรียบร้อยแล้ว!');
+      }
+    } catch (err) {
+      console.log('Error sharing:', err);
+    }
+  };
+
+  document.getElementById('shareBtn')?.addEventListener('click', handleShare);
+  document.getElementById('shareBtnMobile')?.addEventListener('click', handleShare);
 </script>
 
 <style>
@@ -177,6 +227,21 @@ const navLinks = [
     text-decoration: none;
   }
   .navbar__phone:hover { color: var(--color-green-light); }
+
+  .navbar__share {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    padding: 0.45rem 0.8rem;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .navbar__share:hover { background: rgba(255,255,255,0.05); border-color: var(--color-text-muted); }
 
   .navbar__cta { padding: 0.5rem 1.2rem; font-size: 0.875rem; }
 
