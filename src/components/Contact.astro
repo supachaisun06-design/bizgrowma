@@ -131,20 +131,22 @@
       try {
         const response = await fetch(WEBHOOK_URL, {
           method: 'POST',
-          // Google Apps Script รับ Content-Type: text/plain ได้ดีสุดสำหรับ CORS
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(data)
         });
 
-        if (response.ok) {
+        const responseData = await response.json();
+
+        if (response.ok && responseData.status === 'success') {
           showAlert('ส่งข้อความเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด', 'success');
           (form as HTMLFormElement).reset();
         } else {
-          throw new Error('Network response was not ok');
+          console.error('GAS Error:', responseData);
+          throw new Error(responseData.message || 'Error from server');
         }
       } catch (error) {
         console.error('Error:', error);
-        showAlert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง หรือติดต่อทางโทรศัพท์', 'error');
+        showAlert('เกิดข้อผิดพลาด: ' + (error.message || 'กรุณาลองใหม่อีกครั้ง หรือติดต่อทางโทรศัพท์'), 'error');
       } finally {
         // คืนสถานะปุ่ม
         submitBtn.removeAttribute('disabled');
