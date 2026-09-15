@@ -20,7 +20,7 @@ try {
 
     <div class="blog-grid">
       {posts.length > 0 ? posts.map((post: any) => (
-        <a href={`/blog/${post.slug}`} class="blog-card">
+        <a href={`/blog/${decodeURIComponent(post.slug)}`} class="blog-card">
           <div class="blog-image">
             {post._embedded && post._embedded['wp:featuredmedia'] ? (
               <img 

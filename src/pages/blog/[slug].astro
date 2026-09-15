@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   }
 
   return posts.map((post: any) => ({
-    params: { slug: post.slug },
+    params: { slug: decodeURIComponent(post.slug) },
     props: { post },
   }));
 }
