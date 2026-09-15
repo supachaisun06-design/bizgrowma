@@ -27,7 +27,9 @@ try {
                 src={post._embedded['wp:featuredmedia'][0].source_url} 
                 alt={post.title.rendered} 
                 loading="lazy" 
-                decoding="async" 
+                decoding="async"
+                width="600"
+                height="338" 
               />
             ) : (
               <div class="blog-image-placeholder">No Image</div>

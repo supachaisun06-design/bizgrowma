@@ -89,7 +89,15 @@ const breadcrumbSchema = {
 
       {featureImage && (
         <div class="blog-hero-image">
-          <img src={featureImage} alt={post.title.rendered.replace(/<[^>]+>/g, '')} />
+          <img 
+            src={featureImage} 
+            alt={post.title.rendered.replace(/<[^>]+>/g, '')} 
+            width="800" 
+            height="450" 
+            loading="eager" 
+            decoding="async" 
+            fetchpriority="high" 
+          />
         </div>
       )}
       
