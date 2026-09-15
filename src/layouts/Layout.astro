@@ -6,7 +6,7 @@ interface Props {
 }
 
 const {
-  title = "บริการดูแลระบบคอมพิวเตอร์ครบวงจร (IT Support Outsource) โดย BizGrow Tech",
+  title = "IT Support Outsource บริการดูแลระบบคอมพิวเตอร์ | BizGrow Tech",
   description = "BizGrow Tech ให้บริการดูแลระบบคอมพิวเตอร์ เซิร์ฟเวอร์ และเครือข่ายสำหรับองค์กรแบบรายเดือน ช่วยลดปัญหา Downtime ปกป้องข้อมูล และแก้ไขปัญหาไอทีโดยทีมผู้เชี่ยวชาญ",
   image,
 } = Astro.props;
@@ -47,6 +47,16 @@ const localBusinessSchema = {
     "closes": "18:00"
   }
 };
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "description": description,
+  "url": "https://it-outsource.bizgrowtech.com/",
+  "datePublished": "2026-09-15T00:00:00+07:00",
+  "dateModified": new Date().toISOString()
+};
 ---
 <!DOCTYPE html>
 <html lang="th">
@@ -71,10 +81,14 @@ const localBusinessSchema = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" />
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" />
     <link rel="preload" as="image" href="/hero-server.webp" fetchpriority="high" />
     <link rel="icon" type="image/jpeg" href="/logo.jpg" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
 
     <!-- Google tag (gtag.js) Delayed by User Interaction (Hides from Lighthouse) -->
     <script type="text/javascript" is:inline>
