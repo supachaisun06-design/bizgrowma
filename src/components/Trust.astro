@@ -30,9 +30,27 @@ const areas = [
   { name: "บางใหญ่", desc: "บริการครอบคลุมเทศบาลเมืองบางใหญ่ บ้านใหม่ บางแม่นาง", icon: "🏬" },
   { name: "บางกรวย", desc: "ให้บริการในเขตบางกรวย วัดชลอ บางสีทอง ศาลากลาง", icon: "🏗️" },
 ];
+
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "BizGrow Tech",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": testimonials.length.toString()
+  },
+  "review": testimonials.map(r => ({
+    "@type": "Review",
+    "author": { "@type": "Person", "name": r.author },
+    "reviewRating": { "@type": "Rating", "ratingValue": r.rating.toString() },
+    "reviewBody": r.quote
+  }))
+};
 ---
 
 <section class="trust section" id="trust" aria-label="Service Areas and Reviews">
+  <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />
   <div class="container">
 
     <!-- GEO: Service Area Block -->
@@ -91,6 +109,14 @@ const areas = [
             </footer>
           </blockquote>
         ))}
+      </div>
+      <div class="trust__external-link" style="text-align: center; margin-top: 2rem;">
+        <a href="[ใส่ลิงก์_Google_Business_Profile_หรือ_Facebook_ที่นี่]" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          ดูรีวิวทั้งหมดบน Google Business Profile / Facebook
+        </a>
       </div>
     </div>
 

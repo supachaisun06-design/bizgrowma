@@ -58,7 +58,7 @@ const rows = [
   { key: "pm",      label: "ตรวจเช็ก-บำรุงรักษา (PM)",      icon: "📋" },
   { key: "server",  label: "ดูแล Server & Cloud",             icon: "🗄️" },
   { key: "backup",  label: "Backup & Security",               icon: "🔒" },
-  { key: "report",  label: "รายงานสรุปประจำเดือน",          icon: "📊" },
+  { key: "report",  label: "รายงานสรุป (Report)",             icon: "📊" },
 ];
 
 const addons = [
@@ -67,9 +67,24 @@ const addons = [
   { label: "ดูแล NAS หรือ Firewall เพิ่มเติม",       price: "500 – 1,000 บาท / เครื่อง / เดือน" },
   { label: "เรียกเข้าหน้างานฉุกเฉินนอกโควตา",       price: "1,500 – 2,500 บาท / ครั้ง" },
 ];
+
+const serviceSchema = packages.map(pkg => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": `แพ็กเกจ ${pkg.name} IT Support (${pkg.devices})`,
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "BizGrow Tech"
+  },
+  "areaServed": "Nonthaburi",
+  "description": `บริการดูแลระบบคอมพิวเตอร์รายเดือน แพ็กเกจ ${pkg.name} สำหรับ ${pkg.tagline} รองรับอุปกรณ์ ${pkg.devices}`
+}));
 ---
 
 <section class="packages section" id="packages" aria-label="Service Packages">
+  {serviceSchema.map(schema => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))}
   <div class="container">
 
     <div class="packages__header">

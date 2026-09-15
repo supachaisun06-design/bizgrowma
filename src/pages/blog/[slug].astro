@@ -104,7 +104,11 @@ const breadcrumbSchema = {
       <div class="blog-header">
         <h1 class="blog-title" set:html={post.title.rendered} />
         <div class="blog-meta">
-          <span>📅 {new Date(post.date).toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span>✍️ เขียนโดย: {post._embedded?.author?.[0]?.name || "ทีมงาน BizGrow Tech"}</span>
+          <span>📅 เผยแพร่: {new Date(post.date).toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          {post.modified && post.modified !== post.date && (
+            <span>(อัปเดตล่าสุด: {new Date(post.modified).toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })})</span>
+          )}
         </div>
       </div>
 
@@ -193,6 +197,10 @@ const breadcrumbSchema = {
   .blog-meta {
     color: var(--color-text-muted);
     font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
   }
   .blog-footer {
     margin-top: 4rem;

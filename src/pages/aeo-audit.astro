@@ -1,0 +1,413 @@
+﻿---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="เช็กฟรี: AI แนะนำแบรนด์คุณหรือยัง? · BizGrow Tech"
+  description="เช็กฟรีว่า ChatGPT / AI แนะนำธุรกิจคุณหรือยัง เมื่อลูกค้าถามหา — บริการ AEO & GEO โดย BizGrow Tech"
+>
+  <Navbar />
+
+  <main class="aeo-main">
+    <div class="aeo-wrap">
+
+      <!-- Eyebrow badge -->
+      <div class="eyebrow">🆓 เครื่องมือฟรี · AEO Checker</div>
+
+      <!-- Headline -->
+      <h1 class="aeo-title">
+        เช็กฟรี: <span class="highlight">AI แนะนำแบรนด์คุณ</span> หรือยัง?
+      </h1>
+      <p class="aeo-lede">
+        ยุคนี้ลูกค้าถาม ChatGPT / AI ว่า "เจ้าไหนดี" — มาดูกันว่า AI พูดถึงธุรกิจคุณไหม เมื่อมีคนถามหา
+      </p>
+
+      <!-- Form Card -->
+      <div class="aeo-card">
+        <div id="form-section">
+          <div class="field">
+            <label for="brand">ชื่อแบรนด์/ร้าน *</label>
+            <input id="brand" type="text" placeholder="เช่น BizGrow Tech, คลินิก ABC" />
+          </div>
+          <div class="field">
+            <label for="url">เว็บไซต์/เพจ</label>
+            <input id="url" type="text" placeholder="เช่น bizgrowtech.com" />
+          </div>
+          <div class="field">
+            <label for="category">ประเภทธุรกิจ *</label>
+            <input id="category" type="text" placeholder="เช่น IT Support Outsource สำหรับ SME" />
+            <div class="hint">ยิ่งเจาะจง ผลยิ่งแม่น</div>
+          </div>
+          <div class="field">
+            <label for="name">ชื่อคุณ *</label>
+            <input id="name" type="text" placeholder="ชื่อผู้ติดต่อ" />
+          </div>
+          <div class="field">
+            <label for="phone">เบอร์โทรติดต่อกลับ *</label>
+            <input id="phone" type="tel" inputmode="tel" placeholder="08x-xxx-xxxx" />
+          </div>
+          <div class="field">
+            <label for="keywords">คีย์เวิร์ด/บริการที่สนใจ *</label>
+            <input id="keywords" type="text" placeholder="เช่น ดูแลระบบ IT รายเดือน, แก้ปัญหา Server" />
+          </div>
+          <div class="field">
+            <label for="contact">LINE ID (ถ้ามี)</label>
+            <input id="contact" type="text" placeholder="LINE ID" />
+          </div>
+          <button class="aeo-btn" id="go-btn">🔍 เช็กฟรีเดี๋ยวนี้</button>
+        </div>
+
+        <!-- Loading -->
+        <div class="spin-wrap" id="spin" style="display:none">
+          <div class="spin-icon">⏳</div>
+          <div class="spin-text">กำลังถาม AI จริง... (10–30 วินาที)</div>
+        </div>
+
+        <!-- Result -->
+        <div id="result" style="display:none"></div>
+      </div>
+
+      <!-- Footer note -->
+      <p class="foot-note">
+        BizGrow Tech · IT Support & AEO/GEO สำหรับธุรกิจไทยยุค AI · บริการพื้นที่ นนทบุรี และทั่วประเทศ
+      </p>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Page layout */
+  .aeo-main {
+    min-height: 100vh;
+    padding: 7rem 1.25rem 5rem;
+    background:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(107,190,40,0.10) 0%, transparent 65%),
+      var(--color-dark);
+  }
+
+  .aeo-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    display: inline-block;
+    background: var(--color-orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+  }
+
+  /* Headline */
+  .aeo-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.15;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.02em;
+  }
+  .aeo-title .highlight {
+    background: linear-gradient(135deg, #6BBE28, #F5921C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .aeo-lede {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.75;
+  }
+
+  /* Card */
+  .aeo-card {
+    background: var(--color-dark-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 2rem 1.75rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  /* Fields */
+  .field {
+    margin-bottom: 1.1rem;
+  }
+  .field label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.01em;
+  }
+  .field input {
+    font-family: var(--font-main);
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    background: rgba(255,255,255,0.04);
+    color: var(--color-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .field input:focus {
+    border-color: var(--color-green);
+    box-shadow: 0 0 0 3px rgba(107,190,40,0.18);
+  }
+  .field input::placeholder {
+    color: var(--color-text-dim);
+  }
+  .hint {
+    font-size: 0.76rem;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+  }
+
+  /* Submit button */
+  .aeo-btn {
+    width: 100%;
+    padding: 0.95rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-main);
+    font-size: 1.05rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #F5921C 0%, #F9AA4B 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(245,146,28,0.45);
+    transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  }
+  .aeo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(245,146,28,0.6);
+    filter: brightness(1.08);
+  }
+  .aeo-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(245,146,28,0.35);
+  }
+  .aeo-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Spinner */
+  .spin-wrap {
+    text-align: center;
+    padding: 2.5rem 1rem;
+  }
+  .spin-icon {
+    font-size: 2.5rem;
+    animation: pulse 1.6s ease-in-out infinite;
+    margin-bottom: 0.75rem;
+  }
+  .spin-text {
+    color: var(--color-text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.55; transform: scale(0.95); }
+  }
+
+  /* Result */
+  :global(.gauge) {
+    text-align: center;
+    padding: 1.75rem;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+  }
+  :global(.gauge.bad)  { background: rgba(226,58,23,0.08); border-color: rgba(226,58,23,0.3); }
+  :global(.gauge.good) { background: rgba(107,190,40,0.08); border-color: rgba(107,190,40,0.3); }
+  :global(.gauge .big) {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  :global(.gauge.bad .big)  { color: #E23A17; }
+  :global(.gauge.good .big) { color: #6BBE28; }
+  :global(.gauge .lbl) {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+
+  :global(.comp) {
+    background: rgba(226,58,23,0.07);
+    border: 1.5px solid rgba(226,58,23,0.25);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+  :global(.comp b) { color: #E23A17; }
+
+  :global(.result-cta) {
+    background: var(--color-dark-3);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    text-align: center;
+  }
+  :global(.result-cta .cta-title) {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+  :global(.result-cta .cta-sub) {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.1rem;
+    line-height: 1.65;
+  }
+  :global(.result-cta .cta-btn) {
+    display: inline-block;
+    background: linear-gradient(135deg, #F5921C 0%, #F9AA4B 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(245,146,28,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  :global(.result-cta .cta-btn:hover) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245,146,28,0.55);
+  }
+  :global(.result-cta .cta-btn-alt) {
+    display: inline-block;
+    background: linear-gradient(135deg, #4E9219 0%, #6BBE28 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(107,190,40,0.3);
+    margin-left: 0.6rem;
+    transition: transform 0.15s;
+  }
+  :global(.result-cta .cta-btn-alt:hover) {
+    transform: translateY(-2px);
+  }
+
+  /* Footer note */
+  .foot-note {
+    color: var(--color-text-dim);
+    font-size: 0.75rem;
+    text-align: center;
+    margin-top: 1.75rem;
+    line-height: 1.6;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('go-btn');
+  const formSection = document.getElementById('form-section');
+  const spinEl = document.getElementById('spin');
+  const resultEl = document.getElementById('result');
+
+  btn.onclick = async () => {
+    const brand    = document.getElementById('brand').value.trim();
+    const url      = document.getElementById('url').value.trim();
+    const category = document.getElementById('category').value.trim();
+    const name     = document.getElementById('name').value.trim();
+    const phone    = document.getElementById('phone').value.trim();
+    const keywords = document.getElementById('keywords').value.trim();
+    const contact  = document.getElementById('contact').value.trim();
+
+    const digits = phone.replace(/[^0-9]/g, '');
+
+    if (!brand || !category || !name || !keywords) {
+      alert('กรุณากรอก ชื่อแบรนด์ · ประเภทธุรกิจ · ชื่อคุณ · คีย์เวิร์ดที่สนใจ');
+      return;
+    }
+    if (digits.length < 9 || digits.length > 13) {
+      alert('กรุณากรอกเบอร์โทรที่ติดต่อกลับได้ (ตัวเลข 9–10 หลัก)');
+      document.getElementById('phone').focus();
+      return;
+    }
+
+    formSection.style.display = 'none';
+    spinEl.style.display = 'block';
+    resultEl.style.display = 'none';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/aeo-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          brand, url, category, name, contact, phone, keywords, lang: 'th',
+          ref: new URLSearchParams(location.search).get('ref') || ''
+        })
+      });
+
+      const data = await res.json();
+
+      spinEl.style.display = 'none';
+      resultEl.style.display = 'block';
+
+      const sov = data.sov != null ? data.sov : 0;
+      const isBad = sov === 0;
+
+      const competitors = data.competitors && data.competitors.length ? data.competitors : [];
+      const compHtml = competitors.length
+        ? '<div class="comp">🔴 แทนที่จะแนะนำคุณ <b>AI แนะนำ: ' + competitors.join(', ') + '</b> — คู่แข่งกำลังได้ลูกค้าจาก AI แทนคุณ</div>'
+        : '';
+
+      const ctaTitle = isBad
+        ? '⚠️ ธุรกิจคุณกำลังหายไปจากยุค AI'
+        : '🚀 ดันให้ AI แนะนำคุณบ่อยขึ้น';
+
+      const ctaSub = isBad
+        ? 'AI ยังไม่รู้จักธุรกิจคุณ — ทีม BizGrow Tech พร้อมช่วยให้ AI พูดถึงคุณ (AEO/GEO) ทีมจะติดต่อกลับโดยเร็ว'
+        : 'ดีแล้ว! ยังมีโอกาสเพิ่ม Share of Voice ได้อีก — BizGrow Tech พร้อมช่วย';
+
+      resultEl.innerHTML =
+        '<div class="gauge ' + (isBad ? 'bad' : 'good') + '">' +
+          '<div class="big">' + sov + '%</div>' +
+          '<div class="lbl">AI แนะนำแบรนด์คุณ ' + (isBad ? '❌ ยังไม่แนะนำเลย' : '✅ แนะนำแล้ว') + '</div>' +
+        '</div>' +
+        compHtml +
+        '<div class="result-cta">' +
+          '<div class="cta-title">' + ctaTitle + '</div>' +
+          '<div class="cta-sub">' + ctaSub + '</div>' +
+          '<a href="tel:0922824848" class="cta-btn">📞 โทรหาทีม BizGrow Tech</a>' +
+          '<a href="https://line.me/ti/p/~bizgrowtech" class="cta-btn-alt">💬 LINE</a>' +
+        '</div>';
+
+    } catch (e) {
+      spinEl.innerHTML = '<p style="color:#E23A17;text-align:center;padding:1rem">ขออภัย มีข้อผิดพลาด ลองใหม่อีกครั้ง</p>';
+    }
+  };
+</script>

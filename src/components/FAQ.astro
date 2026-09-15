@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: "นอกจากดูแลระบบคอมพิวเตอร์แล้วดูแลอะไรได้อีกบ้าง?",
-    a: "BizGrow Tech ดูแลเว็บไซต์ รับทำ seo aeo geo รายเดือน และเว็บไซต์ เว็บขายของ",
+    a: "นอกจากดูแลระบบคอมพิวเตอร์แบบครบวงจรแล้ว BizGrow Tech ยังมีบริการรับทำ SEO, AEO (Answer Engine Optimization) และ GEO แบบรายเดือน รวมถึงรับออกแบบและดูแลเว็บไซต์องค์กร เว็บขายของออนไลน์ (E-commerce) ให้พร้อมใช้งานและติดอันดับบนหน้าค้นหาของ Google อย่างมีประสิทธิภาพ",
   },
   {
     q: "มีบริการนอกเวลาทำการหรือวันหยุดไหม?",
@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "ดูแลระบบ Cloud เช่น Microsoft 365 หรือ Google Workspace ได้ไหม?",
-    a: "ได้ BizGrow Tech รองรับการดูแล Microsoft 365, Azure, Google Workspace รวมถึงการตั้งค่า Security Policy, จัดการ License และการย้ายข้อมูลระหว่าง Platform อย่างปลอดภัย",
+    a: "ทีมงาน BizGrow Tech มีความเชี่ยวชาญในการดูแลระบบ Cloud ครบวงจร ทั้ง Microsoft 365, Microsoft Azure และ Google Workspace บริการครอบคลุมตั้งแต่การตั้งค่าความปลอดภัย (Security Policy), การจัดการบัญชีผู้ใช้และ License, การสำรองข้อมูล (Backup) และการย้ายข้อมูล (Migration) ระหว่าง Platform อย่างปลอดภัยและไม่มีข้อมูลสูญหาย",
   },
   {
     q: "ต้องทำสัญญาระยะยาวไหม? ยกเลิกได้ไหม?",
@@ -31,9 +31,23 @@ const faqs = [
     a: "บริการ On-site หลักครอบคลุมพื้นที่นนทบุรี ได้แก่ ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย รวมถึงกรุงเทพฯ และปริมณฑล สำหรับพื้นที่ต่างจังหวัด สามารถนัดหมายล่วงหน้าหรือใช้บริการ Remote Support ได้",
   },
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
+};
 ---
 
 <section class="faq section" id="faq" aria-label="Frequently Asked Questions">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <div class="container">
     <div class="faq__header">
       <p class="section-label">FAQ</p>

@@ -13,33 +13,39 @@ const {
 
 const ogImage = image || new URL('/og-image.jpg', Astro.site || Astro.url).toString();
 
-const faqSchema = {
+const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "บริการ IT Support Outsource รายเดือน เหมาะกับธุรกิจประเภทใด?",
-      "acceptedAnswer": { "@type": "Answer", "text": "เหมาะสำหรับธุรกิจ SME ทุกประเภท ทั้งร้านค้า คลินิก ออฟฟิศ โรงงาน ในพื้นที่ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย นนทบุรี" }
-    },
-    {
-      "@type": "Question",
-      "name": "ถ้าระบบ Server หรือ Network ล่ม ทีม BizGrow Tech แก้ไขได้เร็วแค่ไหน?",
-      "acceptedAnswer": { "@type": "Answer", "text": "BizGrow Tech การันตีตอบสนองผ่าน Remote ภายใน 1 ชม. สำหรับ On-site ในพื้นที่นนทบุรีรับประกันภายใน 4–6 ชั่วโมง" }
-    },
-    {
-      "@type": "Question",
-      "name": "บริการนี้เหมาะกับธุรกิจประเภทใด?",
-      "acceptedAnswer": { "@type": "Answer", "text": "เหมาะสำหรับ SME คลินิก ออฟฟิศทั่วไป ที่ไม่มีแผนก IT ประจำ" }
-    }
-  ]
-};
-const orgSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
   "name": "BizGrow Tech",
   "description": description,
-  "url": "https://bizgrowtech.com"
+  "url": "https://it-outsource.bizgrowtech.com",
+  "logo": "https://it-outsource.bizgrowtech.com/logo.jpg",
+  "image": "https://it-outsource.bizgrowtech.com/hero-server.webp",
+  "telephone": "092-282-4848",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[ใส่ที่อยู่บริษัทแบบเต็มที่นี่]",
+    "addressLocality": "Nonthaburi",
+    "addressRegion": "Nonthaburi",
+    "postalCode": "[รหัสไปรษณีย์]",
+    "addressCountry": "TH"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 13.9,
+    "longitude": 100.3
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Nonthaburi"
+  },
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }
 };
 ---
 <!DOCTYPE html>
@@ -68,8 +74,7 @@ const orgSchema = {
     <link rel="preload" as="image" href="/hero-server.webp" fetchpriority="high" />
     <link rel="icon" type="image/jpeg" href="/logo.jpg" />
     <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
     <!-- Google tag (gtag.js) Delayed -->
     <script type="text/javascript" is:inline>
