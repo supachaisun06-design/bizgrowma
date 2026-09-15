@@ -34,11 +34,11 @@ const navLinks = [
     </nav>
 
     <div class="navbar__actions">
-      <a href="tel:0922824848" class="navbar__phone" aria-label="โทร 092-282-4848">
+      <a href="tel:0922824848" class="navbar__phone" aria-label="โทรศัพท์ 092-282-4848">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
           <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
         </svg>
-        092-282-4848
+        <span>โทรศัพท์ 092-282-4848</span>
       </a>
       <button id="shareBtn" class="btn btn-outline navbar__share" aria-label="แชร์เว็บไซต์">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -46,7 +46,7 @@ const navLinks = [
           <polyline points="16 6 12 2 8 6"></polyline>
           <line x1="12" y1="2" x2="12" y2="15"></line>
         </svg>
-        แชร์
+        <span>แชร์เว็บไซต์</span>
       </button>
       <a href="/#contact" class="btn btn-primary navbar__cta">ปรึกษาฟรี</a>
     </div>
@@ -134,7 +134,7 @@ const navLinks = [
     top: 0; left: 0; right: 0;
     z-index: 1000;
     padding: 0.75rem 0;
-    transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+    transition: background 0.3s, box-shadow 0.3s;
   }
 
   .navbar--scrolled {
@@ -142,7 +142,6 @@ const navLinks = [
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 1px 0 rgba(107,190,40,0.12);
-    padding: 0.5rem 0;
   }
 
   .navbar__container {
