@@ -29,9 +29,27 @@ const title = `${post.title.rendered.replace(/<[^>]+>/g, '')} - BizGrow Tech`;
 const featureImage = post._embedded && post._embedded['wp:featuredmedia'] 
   ? post._embedded['wp:featuredmedia'][0].source_url 
   : null;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.title.rendered.replace(/<[^>]+>/g, ''),
+  "image": featureImage ? [featureImage] : [],
+  "datePublished": post.date,
+  "dateModified": post.modified,
+  "author": [{
+    "@type": "Person",
+    "name": post._embedded?.author?.[0]?.name || "BizGrow Tech",
+    "url": post._embedded?.author?.[0]?.link || "https://bizgrowtech.com"
+  }]
+};
 ---
 
 <Layout title={title} description={plainExcerpt} image={featureImage || undefined}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  
   <Navbar />
   
   <main id="main-content" style="padding-top: 100px; padding-bottom: 80px; min-height: 80vh;">
