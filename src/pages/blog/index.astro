@@ -12,12 +12,41 @@ try {
 } catch (e) {
   console.error(e);
 }
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "หน้าหลัก",
+      "item": "https://it-outsource.bizgrowtech.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "บทความ"
+    }
+  ]
+};
 ---
 
 <Layout title="บทความความรู้ IT Support - BizGrow Tech" description="รวมบทความน่ารู้เกี่ยวกับการดูแลระบบคอมพิวเตอร์ IT Support และการแก้ไขปัญหาเบื้องต้น">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
   <Navbar />
   <main id="main-content" style="padding-top: 100px; padding-bottom: 80px; min-height: 80vh;">
     <div class="container">
+      
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">หน้าหลัก</a></li>
+          <li aria-current="page">บทความ</li>
+        </ol>
+      </nav>
+
       <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
         <h1 class="section-title">บทความทั้งหมด</h1>
         <p class="section-desc">รวมความรู้และสาระดีๆ เกี่ยวกับการดูแลระบบคอมพิวเตอร์</p>
@@ -54,6 +83,36 @@ try {
 </Layout>
 
 <style>
+  .breadcrumb {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+  .breadcrumb ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .breadcrumb li {
+    display: inline-flex;
+    align-items: center;
+  }
+  .breadcrumb li:not(:last-child)::after {
+    content: "/";
+    margin-left: 0.5rem;
+    color: var(--color-border);
+  }
+  .breadcrumb a {
+    color: var(--color-green-light);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
   .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
