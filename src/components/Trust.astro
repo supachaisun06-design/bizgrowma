@@ -34,7 +34,19 @@ const areas = [
 const reviewSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "https://it-outsource.bizgrowtech.com/#organization",
   "name": "BizGrow Tech",
+  "image": "https://it-outsource.bizgrowtech.com/logo.jpg",
+  "telephone": "092-282-4848",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "94/11 หมู่ที่ 11 ถนน บางกรวย-ไทรน้อย หมู่บ้านสิวารัตน์ 9 ตำบล บางบัวทอง อำเภอบางบัวทอง",
+    "addressLocality": "Nonthaburi",
+    "addressRegion": "Nonthaburi",
+    "postalCode": "11110",
+    "addressCountry": "TH"
+  },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5",
@@ -43,7 +55,7 @@ const reviewSchema = {
   "review": testimonials.map(r => ({
     "@type": "Review",
     "author": { "@type": "Person", "name": r.author },
-    "reviewRating": { "@type": "Rating", "ratingValue": r.rating.toString() },
+    "reviewRating": { "@type": "Rating", "ratingValue": r.rating.toString(), "bestRating": "5" },
     "reviewBody": r.quote
   }))
 };
