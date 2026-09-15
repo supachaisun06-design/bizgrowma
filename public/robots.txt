@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://it-outsource.bizgrowtech.com/sitemap.xml

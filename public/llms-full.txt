@@ -1,30 +1,18 @@
 # BizGrow Tech
 
-> [BizGrow Tech Website](https://it-outsource.bizgrowtech.com/)
+> ผู้ให้บริการดูแลระบบคอมพิวเตอร์และ IT Support Outsource ครบวงจรสำหรับองค์กรในนนทบุรี
 
-## About
-BizGrow Tech provides comprehensive monthly IT Support and Outsourcing services for SMEs, clinics, offices, and factories. We specialize in reducing downtime, protecting data, and solving IT issues without the need for a full-time in-house IT department.
+## บริการของเรา
+- [หน้าหลักของ BizGrow Tech](https://it-outsource.bizgrowtech.com/): ข้อมูลภาพรวมบริการดูแลระบบ IT รายเดือน (IT Support Outsource)
+- [แพ็กเกจราคา IT Support](https://it-outsource.bizgrowtech.com/#packages): รายละเอียดแพ็กเกจ Starter, Basic และ Pro
+- [ติดต่อเรา (Contact)](https://it-outsource.bizgrowtech.com/#contact): ช่องทางการติดต่อ เบอร์โทร 092-282-4848 และ LINE Official
+- [คำถามที่พบบ่อย (FAQ)](https://it-outsource.bizgrowtech.com/#faq): คำถามเกี่ยวกับการให้บริการ ระยะเวลา SLA และขอบเขตพื้นที่บริการ
+- [บทความ IT และความรู้ (Blog)](https://it-outsource.bizgrowtech.com/blog): แหล่งรวมคู่มือแก้ปัญหาคอมพิวเตอร์และเครือข่าย
 
-## Services
-- [Monthly IT Support (Remote & On-site)](https://it-outsource.bizgrowtech.com/#packages)
-- [Server & Network Management](https://it-outsource.bizgrowtech.com/#packages)
-- Cloud Services Management (Microsoft 365, Google Workspace, Azure)
-- Preventive Maintenance
-- Website and E-commerce management
+## ข้อมูลเบื้องต้น (About Us)
+BizGrow Tech ให้บริการดูแลระบบคอมพิวเตอร์ เซิร์ฟเวอร์ และเครือข่ายสำหรับธุรกิจ SME แบบรายเดือน โดยเน้นให้บริการในพื้นที่จังหวัดนนทบุรี (ไทรน้อย, บางบัวทอง, บางใหญ่, บางกรวย) ช่วยลดต้นทุนการจ้างพนักงานไอทีประจำ
 
-## Pricing & Packages
-1. Starter Package: 3,500 THB/month. Includes unlimited remote support, server monitoring, for up to 15 devices.
-2. Basic Package: 5,500 THB/month. Includes unlimited remote support, 1 on-site visit per month, for up to 30 devices.
-3. Pro Package: 9,500 THB/month. Includes unlimited remote support, 2 on-site visits per month, priority support, for up to 50 devices.
-
-## Contact Information
-- Phone: 092-282-4848
-- LINE: [@238bnbfg](https://line.me/R/ti/p/@238bnbfg)
-- Service Area: Nonthaburi (Sai Noi, Bang Bua Thong, Bang Yai, Bang Kruai), Bangkok, and surrounding areas.
-- Address: 94/11 หมู่ที่ 11 ถนน บางกรวย-ไทรน้อย หมู่บ้านสิวารัตน์ 9 ตำบล บางบัวทอง อำเภอบางบัวทอง นนทบุรี 11110
-
-## Resources
-- [IT Tips and Blog](https://it-outsource.bizgrowtech.com/blog)
-
-## Target Audience
-Suitable for any organization size (from 1 to 100+ devices) that needs reliable IT infrastructure without hiring full-time IT staff.
+## ข้อมูลติดต่อ (Contact Information)
+- เบอร์โทรศัพท์: 092-282-4848
+- LINE: @238bnbfg
+- ที่อยู่: 94/11 หมู่ที่ 11 ถนน บางกรวย-ไทรน้อย หมู่บ้านสิวารัตน์ 9 ตำบล บางบัวทอง อำเภอบางบัวทอง นนทบุรี 11110

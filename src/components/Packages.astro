@@ -72,9 +72,9 @@ const serviceSchema = packages.map(pkg => ({
   "@context": "https://schema.org",
   "@type": "Service",
   "name": `แพ็กเกจ ${pkg.name} IT Support (${pkg.devices})`,
+  "serviceType": "IT Support Outsource",
   "provider": {
-    "@type": "ProfessionalService",
-    "name": "BizGrow Tech"
+    "@id": "https://it-outsource.bizgrowtech.com/#organization"
   },
   "areaServed": "Nonthaburi",
   "description": `บริการดูแลระบบคอมพิวเตอร์รายเดือน แพ็กเกจ ${pkg.name} สำหรับ ${pkg.tagline} รองรับอุปกรณ์ ${pkg.devices}`
@@ -89,9 +89,9 @@ const serviceSchema = packages.map(pkg => ({
 
     <div class="packages__header">
       <p class="section-label">แพ็กเกจบริการ</p>
-      <h2 class="section-title">ตารางราคาและแพ็กเกจบริการ<br />IT Support รายเดือน</h2>
+      <h2 class="section-title">บริการ IT Support รายเดือนมีแพ็กเกจอะไรบ้าง?</h2>
       <p class="section-subtitle">
-        4 ระดับบริการ ครอบคลุมทุกขนาดธุรกิจ — ติดต่อเพื่อรับใบเสนอราคาที่ตรงกับความต้องการของคุณ
+        บริการ IT Support รายเดือนของเรามี 3 แพ็กเกจหลัก ได้แก่ Starter (1-5 เครื่อง), Basic (5-15 เครื่อง), และ Pro (15-25 เครื่อง) ซึ่งออกแบบมาให้ครอบคลุมความต้องการของธุรกิจทุกขนาด ตั้งแต่คลินิกขนาดเล็กไปจนถึงองค์กรขนาดกลาง คุณสามารถติดต่อเพื่อรับใบเสนอราคาที่ตรงกับความต้องการของบริษัทคุณได้ทันที
       </p>
       <div class="packages__note">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">

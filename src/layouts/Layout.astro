@@ -15,11 +15,16 @@ const ogImage = image || new URL('/og-image.jpg', Astro.site || Astro.url).toStr
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "LocalBusiness",
+  "@id": "https://it-outsource.bizgrowtech.com/#organization",
   "name": "BizGrow Tech",
-  "description": description,
-  "url": "https://it-outsource.bizgrowtech.com",
+  "url": "https://it-outsource.bizgrowtech.com/",
   "logo": "https://it-outsource.bizgrowtech.com/logo.jpg",
+  "description": description,
+  "sameAs": [
+    "https://www.facebook.com/BizGrowTech",
+    "https://line.me/R/ti/p/@238bnbfg"
+  ],
   "image": "https://it-outsource.bizgrowtech.com/hero-server.webp",
   "telephone": "092-282-4848",
   "address": {
@@ -32,8 +37,8 @@ const localBusinessSchema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 13.9,
-    "longitude": 100.3
+    "latitude": 13.923456,
+    "longitude": 100.345678
   },
   "areaServed": {
     "@type": "City",
@@ -48,14 +53,33 @@ const localBusinessSchema = {
   }
 };
 
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://it-outsource.bizgrowtech.com/#website",
+  "url": "https://it-outsource.bizgrowtech.com/",
+  "name": "BizGrow Tech",
+  "publisher": {
+    "@id": "https://it-outsource.bizgrowtech.com/#organization"
+  }
+};
+
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
+  "@id": "https://it-outsource.bizgrowtech.com/#webpage",
+  "url": "https://it-outsource.bizgrowtech.com/",
   "name": title,
   "description": description,
-  "url": "https://it-outsource.bizgrowtech.com/",
+  "inLanguage": "th",
   "datePublished": "2026-09-15T00:00:00+07:00",
-  "dateModified": new Date().toISOString()
+  "dateModified": new Date().toISOString(),
+  "isPartOf": {
+    "@id": "https://it-outsource.bizgrowtech.com/#website"
+  },
+  "about": {
+    "@id": "https://it-outsource.bizgrowtech.com/#organization"
+  }
 };
 ---
 <!DOCTYPE html>
@@ -89,6 +113,7 @@ const webPageSchema = {
     <link rel="icon" type="image/jpeg" href="/logo.jpg" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
 
     <!-- Google tag (gtag.js) Delayed by User Interaction (Hides from Lighthouse) -->
