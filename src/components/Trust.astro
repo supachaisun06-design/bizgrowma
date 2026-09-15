@@ -94,7 +94,13 @@ const reviewSchema = {
       <div class="trust__test-list">
         {testimonials.map((t) => (
           <blockquote class="trust__test-card" itemscope itemtype="https://schema.org/Review">
-            <div class="trust__test-stars" aria-label={`${t.rating} ดาวจาก 5 ดาว`} role="img">
+            <div itemprop="itemReviewed" itemscope itemtype="https://schema.org/LocalBusiness">
+              <meta itemprop="name" content="BizGrow Tech" />
+              <meta itemprop="image" content="https://it-outsource.bizgrowtech.com/logo.jpg" />
+            </div>
+            <div class="trust__test-stars" aria-label={`${t.rating} ดาวจาก 5 ดาว`} role="img" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+              <meta itemprop="ratingValue" content={t.rating} />
+              <meta itemprop="bestRating" content="5" />
               {"★".repeat(t.rating)}
             </div>
             <p class="trust__test-quote" itemprop="reviewBody">"{t.quote}"</p>

@@ -55,30 +55,20 @@ const faqSchema = {
       <p class="section-subtitle">คำตอบตรงประเด็น ไม่ต้องเดา ไม่ต้องรอ</p>
     </div>
 
-    <ul class="faq__list" itemscope itemtype="https://schema.org/FAQPage">
+    <ul class="faq__list">
       {faqs.map((item, i) => (
-        <li
-          class="faq__item"
-          itemscope
-          itemprop="mainEntity"
-          itemtype="https://schema.org/Question"
-        >
+        <li class="faq__item">
           <details class="faq__details" name="faq-group">
             <summary class="faq__question">
-              <span itemprop="name">{item.q}</span>
+              <span>{item.q}</span>
               <span class="faq__chevron" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M6 9l6 6 6-6"/>
                 </svg>
               </span>
             </summary>
-            <div
-              class="faq__answer"
-              itemscope
-              itemprop="acceptedAnswer"
-              itemtype="https://schema.org/Answer"
-            >
-              <p itemprop="text">{item.a}</p>
+            <div class="faq__answer">
+              <p>{item.a}</p>
             </div>
           </details>
         </li>
