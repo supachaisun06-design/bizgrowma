@@ -37,15 +37,15 @@ const problems = [
       </p>
     </div>
 
-    <div class="pain__grid" role="list">
+    <ul class="pain__grid">
       {problems.map((item) => (
-        <article class="pain__card card" role="listitem" style={`--icon-color: ${item.iconColor}`}>
+        <li class="pain__card card" style={`--icon-color: ${item.iconColor}`}>
           <div class="pain__icon-wrap" aria-hidden="true" set:html={item.icon} />
           <h3 class="pain__card-title">{item.title}</h3>
           <p class="pain__card-desc">{item.desc}</p>
-        </article>
+        </li>
       ))}
-    </div>
+    </ul>
 
     <div class="pain__solution">
       <div class="pain__solution-badge">✅ BizGrow Tech แก้ปัญหาทั้งหมดนี้ในสัญญาเดียว</div>
@@ -67,6 +67,8 @@ const problems = [
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.25rem;
     margin-bottom: 2.5rem;
+    list-style: none;
+    padding: 0;
   }
 
   .pain__card {

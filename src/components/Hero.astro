@@ -29,22 +29,22 @@
         <strong>แบบรายเดือน</strong> เน้นให้บริการรวดเร็วในพื้นที่ นนทบุรี (ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย) ช่วยลดปัญหา Downtime ปกป้องข้อมูล และแก้ไขปัญหาไอทีโดยทีมผู้เชี่ยวชาญ
       </p>
 
-      <div class="hero__stats" role="list">
-        <div class="hero__stat" role="listitem">
+      <ul class="hero__stats">
+        <li class="hero__stat">
           <span class="hero__stat-num">1 ชม.</span>
           <span class="hero__stat-label">SLA Response Time</span>
-        </div>
-        <div class="hero__stat-divider" aria-hidden="true"></div>
-        <div class="hero__stat" role="listitem">
+        </li>
+        <li class="hero__stat-divider" aria-hidden="true"></li>
+        <li class="hero__stat">
           <span class="hero__stat-num">4 อำเภอ</span>
           <span class="hero__stat-label">พื้นที่ให้บริการ</span>
-        </div>
-        <div class="hero__stat-divider" aria-hidden="true"></div>
-        <div class="hero__stat" role="listitem">
+        </li>
+        <li class="hero__stat-divider" aria-hidden="true"></li>
+        <li class="hero__stat">
           <span class="hero__stat-num">99.9%</span>
           <span class="hero__stat-label">Uptime</span>
-        </div>
-      </div>
+        </li>
+      </ul>
 
       <div class="hero__actions">
         <a href="#contact" class="btn btn-primary hero__cta-main">
@@ -234,6 +234,9 @@
     align-items: center;
     gap: 1.75rem;
     flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .hero__stat { text-align: left; }

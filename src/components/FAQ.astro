@@ -55,11 +55,10 @@ const faqSchema = {
       <p class="section-subtitle">คำตอบตรงประเด็น ไม่ต้องเดา ไม่ต้องรอ</p>
     </div>
 
-    <div class="faq__list" role="list" itemscope itemtype="https://schema.org/FAQPage">
+    <ul class="faq__list" itemscope itemtype="https://schema.org/FAQPage">
       {faqs.map((item, i) => (
-        <article
+        <li
           class="faq__item"
-          role="listitem"
           itemscope
           itemprop="mainEntity"
           itemtype="https://schema.org/Question"
@@ -82,9 +81,9 @@ const faqSchema = {
               <p itemprop="text">{item.a}</p>
             </div>
           </details>
-        </article>
+        </li>
       ))}
-    </div>
+    </ul>
 
     <div class="faq__cta">
       <p>ยังมีคำถามอีกไหม?</p>
@@ -102,6 +101,8 @@ const faqSchema = {
     flex-direction: column;
     gap: 0.75rem;
     margin-bottom: 3rem;
+    list-style: none;
+    padding: 0;
   }
 
   .faq__item {

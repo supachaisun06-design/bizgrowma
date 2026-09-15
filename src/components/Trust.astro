@@ -91,9 +91,9 @@ const reviewSchema = {
     <div class="trust__testimonials">
       <p class="section-label">รีวิวจากลูกค้า</p>
       <h2 class="section-title">ลูกค้าในพื้นที่พูดถึงเรา</h2>
-      <div class="trust__test-list" role="list">
+      <div class="trust__test-list">
         {testimonials.map((t) => (
-          <blockquote class="trust__test-card" role="listitem" itemscope itemtype="https://schema.org/Review">
+          <blockquote class="trust__test-card" itemscope itemtype="https://schema.org/Review">
             <div class="trust__test-stars" aria-label={`${t.rating} ดาวจาก 5 ดาว`} role="img">
               {"★".repeat(t.rating)}
             </div>
