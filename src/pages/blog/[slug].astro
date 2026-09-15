@@ -1,0 +1,154 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  let posts = [];
+  try {
+    const res = await fetch('https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60&_embed&per_page=100');
+    if (res.ok) {
+      posts = await res.json();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  return posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+// Strip HTML tags for meta description
+const plainExcerpt = post.excerpt.rendered.replace(/<[^>]+>/g, '').trim() || "บทความจาก BizGrow Tech";
+const title = `${post.title.rendered.replace(/<[^>]+>/g, '')} - BizGrow Tech`;
+
+const featureImage = post._embedded && post._embedded['wp:featuredmedia'] 
+  ? post._embedded['wp:featuredmedia'][0].source_url 
+  : null;
+---
+
+<Layout title={title} description={plainExcerpt} image={featureImage || undefined}>
+  <Navbar />
+  
+  <main id="main-content" style="padding-top: 100px; padding-bottom: 80px; min-height: 80vh;">
+    <article class="container blog-single">
+      {featureImage && (
+        <div class="blog-hero-image">
+          <img src={featureImage} alt={post.title.rendered.replace(/<[^>]+>/g, '')} />
+        </div>
+      )}
+      
+      <div class="blog-header">
+        <h1 class="blog-title" set:html={post.title.rendered} />
+        <div class="blog-meta">
+          <span>📅 {new Date(post.date).toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
+      </div>
+
+      <div class="blog-content wp-content" set:html={post.content.rendered} />
+      
+      <div class="blog-footer">
+        <a href="/blog" class="btn btn-outline">&larr; กลับไปหน้าบทความ</a>
+      </div>
+    </article>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .blog-single {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .blog-hero-image {
+    width: 100%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .blog-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .blog-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+  .blog-title {
+    font-size: 2rem;
+    line-height: 1.4;
+    color: var(--color-green-light);
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 768px) {
+    .blog-title { font-size: 2.5rem; }
+  }
+  .blog-meta {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+  .blog-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+  
+  /* WordPress Content Styling */
+  .wp-content {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .wp-content :global(h2),
+  .wp-content :global(h3),
+  .wp-content :global(h4) {
+    color: var(--color-green-light);
+    margin: 2rem 0 1rem;
+  }
+  .wp-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  .wp-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+  .wp-content :global(ul),
+  .wp-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .wp-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .wp-content :global(a) {
+    color: var(--color-green-light);
+    text-decoration: underline;
+  }
+  .wp-content :global(blockquote) {
+    border-left: 4px solid var(--color-green);
+    padding-left: 1rem;
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+  .wp-content :global(figure) {
+    margin: 1.5rem 0;
+  }
+  .wp-content :global(figcaption) {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+  }
+</style>

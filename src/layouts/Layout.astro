@@ -2,12 +2,16 @@
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = "บริการดูแลระบบคอมพิวเตอร์ครบวงจร (IT Support Outsource) โดย BizGrow Tech",
   description = "BizGrow Tech ให้บริการดูแลระบบคอมพิวเตอร์ เซิร์ฟเวอร์ และเครือข่ายสำหรับองค์กรแบบรายเดือน ช่วยลดปัญหา Downtime ปกป้องข้อมูล และแก้ไขปัญหาไอทีโดยทีมผู้เชี่ยวชาญ",
+  image,
 } = Astro.props;
+
+const ogImage = image || new URL('/og-image.jpg', Astro.site || Astro.url).toString();
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -50,13 +54,13 @@ const orgSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="th_TH" />
-    <meta property="og:image" content={new URL('/og-image.jpg', Astro.site || Astro.url).toString()} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/og-image.jpg', Astro.site || Astro.url).toString()} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="canonical" href={Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.href} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
