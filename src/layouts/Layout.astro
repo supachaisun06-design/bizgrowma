@@ -64,7 +64,7 @@ const orgSchema = {
     <link rel="canonical" href={Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.href} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
@@ -130,6 +130,7 @@ const orgSchema = {
     --gradient-glow:      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(107,190,40,0.18) 0%, transparent 70%);
 
     /* --- Fonts --- */
+    --font-heading: "Prompt", system-ui, sans-serif;
     --font-th:   "Anuphan", "Noto Sans Thai", system-ui, sans-serif;
     --font-en:   "Poppins", system-ui, sans-serif;
     --font-main: var(--font-th);
@@ -153,8 +154,9 @@ const orgSchema = {
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4 {
-    font-weight: 700;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
     line-height: 1.25;
     letter-spacing: -0.015em;
   }
@@ -187,6 +189,7 @@ const orgSchema = {
   }
 
   .section-title {
+    font-family: var(--font-heading);
     font-size: clamp(1.85rem, 4vw, 2.75rem);
     font-weight: 700;
     margin-bottom: 1rem;
