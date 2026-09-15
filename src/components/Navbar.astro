@@ -40,14 +40,7 @@ const navLinks = [
         </svg>
         092-282-4848
       </a>
-      <button id="shareBtn" class="btn btn-outline navbar__share" aria-label="แชร์เว็บไซต์">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-          <polyline points="16 6 12 2 8 6"></polyline>
-          <line x1="12" y1="2" x2="12" y2="15"></line>
-        </svg>
-        แชร์
-      </button>
+
       <a href="/#contact" class="btn btn-primary navbar__cta">ปรึกษาฟรี</a>
     </div>
 
@@ -62,14 +55,12 @@ const navLinks = [
       <a href={link.href} class="navbar__mobile-link">{link.label}</a>
     ))}
     <div style="display: flex; gap: 0.5rem; margin-top: 1rem; width: 100%;">
-      <button id="shareBtnMobile" class="navbar__share" style="flex: 1; justify-content: center;">
+      <a href="tel:0922824848" class="btn btn-outline" style="flex: 1; justify-content: center; display: flex; align-items: center; gap: 0.5rem;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-          <polyline points="16 6 12 2 8 6"></polyline>
-          <line x1="12" y1="2" x2="12" y2="15"></line>
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 .01h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
         </svg>
-        แชร์
-      </button>
+        โทรเลย
+      </a>
       <a href="/#contact" class="btn btn-primary" style="flex: 1; justify-content: center;">ปรึกษาฟรี</a>
     </div>
   </div>
@@ -108,28 +99,7 @@ const navLinks = [
     }
   });
 
-  // Share Logic
-  const shareData = {
-    title: document.title,
-    text: 'BizGrow Tech - บริการ IT Support ดูแลระบบคอมพิวเตอร์ครบวงจร',
-    url: window.location.href
-  };
 
-  const handleShare = async () => {
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(shareData.url);
-        alert('คัดลอกลิงก์เรียบร้อยแล้ว!');
-      }
-    } catch (err) {
-      console.log('Error sharing:', err);
-    }
-  };
-
-  document.getElementById('shareBtn')?.addEventListener('click', handleShare);
-  document.getElementById('shareBtnMobile')?.addEventListener('click', handleShare);
 </script>
 
 <style>
@@ -229,20 +199,6 @@ const navLinks = [
   }
   .navbar__phone:hover { color: var(--color-green-light); }
 
-  .navbar__share {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.82rem;
-    padding: 0.45rem 0.8rem;
-    background: transparent;
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .navbar__share:hover { background: rgba(255,255,255,0.05); border-color: var(--color-text-muted); }
 
   .navbar__cta { padding: 0.5rem 1.2rem; font-size: 0.875rem; }
 
