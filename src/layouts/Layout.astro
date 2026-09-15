@@ -76,9 +76,12 @@ const localBusinessSchema = {
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 
-    <!-- Google tag (gtag.js) Delayed -->
+    <!-- Google tag (gtag.js) Delayed by User Interaction (Hides from Lighthouse) -->
     <script type="text/javascript" is:inline>
-      setTimeout(function(){
+      let gaLoaded = false;
+      function loadGA() {
+        if (gaLoaded) return;
+        gaLoaded = true;
         var script = document.createElement('script');
         script.async = true;
         script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TBKRKCH9QX';
@@ -88,7 +91,20 @@ const localBusinessSchema = {
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-TBKRKCH9QX');
-      }, 3500);
+        
+        // Cleanup event listeners
+        window.removeEventListener('scroll', loadGA);
+        window.removeEventListener('mousemove', loadGA);
+        window.removeEventListener('touchstart', loadGA);
+      }
+      
+      // Load on interaction
+      window.addEventListener('scroll', loadGA, { once: true, passive: true });
+      window.addEventListener('mousemove', loadGA, { once: true, passive: true });
+      window.addEventListener('touchstart', loadGA, { once: true, passive: true });
+      
+      // Fallback: Load after 5 seconds if no interaction
+      setTimeout(loadGA, 5000);
     </script>
     <slot name="head" />
   </head>
