@@ -1,8 +1,15 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
+
+let titleText = "ปรึกษาปัญหาไอทีฟรี<br />ไม่มีข้อผูกมัด";
+if (variant === 1) titleText = "พร้อมช่วยคุณแก้ปัญหาไอที<br />ติดต่อเราวันนี้";
+if (variant === 2) titleText = "ประเมินระบบไอทีเบื้องต้น<br />ไม่มีค่าใช้จ่าย";
+if (variant === 3) titleText = "สนใจบริการ IT Support?<br />พูดคุยกับวิศวกรของเรา";
+if (variant === 4) titleText = "ติดต่อทีมงาน BizGrow Tech<br />พร้อมให้บริการ 24 ชม.";
 
 // Contact / CTA Section
 ---
@@ -12,7 +19,7 @@ const { location } = Astro.props;
     <div class="contact__wrapper">
       <div class="contact__info">
         <p class="section-label">ติดต่อเรา</p>
-        <h2 class="section-title">ปรึกษาปัญหาไอทีฟรี<br />ไม่มีข้อผูกมัด</h2>
+        <h2 class="section-title"><Fragment set:html={titleText} /></h2>
         <p class="section-subtitle">
           ทีมผู้เชี่ยวชาญของเราพร้อมรับฟังและให้คำแนะนำที่เหมาะกับธุรกิจของคุณ
           ภายใน 24 ชั่วโมง

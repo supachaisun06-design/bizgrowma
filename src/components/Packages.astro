@@ -1,8 +1,26 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
+
+let titleText = "บริการ IT Support รายเดือนมีแพ็กเกจอะไรบ้าง?";
+let subtitleText = "บริการ IT Support รายเดือนของเรามี 3 แพ็กเกจหลัก ได้แก่ Starter (1-5 เครื่อง), Basic (5-15 เครื่อง), และ Pro (15-25 เครื่อง) ซึ่งออกแบบมาให้ครอบคลุมความต้องการของธุรกิจทุกขนาด ตั้งแต่คลินิกขนาดเล็กไปจนถึงองค์กรขนาดกลาง คุณสามารถติดต่อเพื่อรับใบเสนอราคาที่ตรงกับความต้องการของบริษัทคุณได้ทันที";
+
+if (variant === 1) {
+  titleText = "ราคาแพ็กเกจ IT Support รายเดือน";
+  subtitleText = "เลือกแพ็กเกจที่เหมาะสมกับขนาดธุรกิจของคุณ จ่ายคงที่รายเดือน ควบคุมงบประมาณได้ง่าย ไม่มีค่าใช้จ่ายแอบแฝง";
+} else if (variant === 2) {
+  titleText = "เปรียบเทียบแพ็กเกจดูแลระบบคอมพิวเตอร์";
+  subtitleText = "ไม่ว่าจะเป็นคลินิก ออฟฟิศ หรือโรงงาน เรามีแพ็กเกจรองรับการดูแลอุปกรณ์ตั้งแต่ 5 เครื่องไปจนถึง 25+ เครื่อง";
+} else if (variant === 3) {
+  titleText = "แพ็กเกจบริการจาก BizGrow Tech";
+  subtitleText = "เริ่มต้นง่ายๆ ด้วยแพ็กเกจ Starter และสามารถขยายการรองรับเป็น Basic หรือ Pro ได้ตามการเติบโตขององค์กรคุณ";
+} else if (variant === 4) {
+  titleText = "อัตราค่าบริการดูแลระบบเครือข่าย";
+  subtitleText = "บริการครอบคลุมทั้ง Remote และ On-site พร้อมการบำรุงรักษาเชิงรุก (Preventive Maintenance) ประเมินราคาได้ตามจำนวนอุปกรณ์จริง";
+}
 
 // Service Packages - 4 tiers, no pricing, GEO/SEO comparison table
 const packages = [
@@ -94,9 +112,9 @@ const serviceSchema = packages.map(pkg => ({
 
     <div class="packages__header">
       <p class="section-label">แพ็กเกจบริการ</p>
-      <h2 class="section-title">บริการ IT Support รายเดือนมีแพ็กเกจอะไรบ้าง?</h2>
+      <h2 class="section-title">{titleText}</h2>
       <p class="section-subtitle">
-        บริการ IT Support รายเดือนของเรามี 3 แพ็กเกจหลัก ได้แก่ Starter (1-5 เครื่อง), Basic (5-15 เครื่อง), และ Pro (15-25 เครื่อง) ซึ่งออกแบบมาให้ครอบคลุมความต้องการของธุรกิจทุกขนาด ตั้งแต่คลินิกขนาดเล็กไปจนถึงองค์กรขนาดกลาง คุณสามารถติดต่อเพื่อรับใบเสนอราคาที่ตรงกับความต้องการของบริษัทคุณได้ทันที
+        {subtitleText}
       </p>
       <div class="packages__note">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">

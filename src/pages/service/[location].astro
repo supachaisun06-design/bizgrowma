@@ -21,6 +21,8 @@ export function getStaticPaths() {
         locationName: "ไทรน้อย",
         title: "รับดูแลระบบคอมพิวเตอร์ ไทรน้อย IT Support รายเดือน | BizGrow Tech",
         description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนไทรน้อย นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+        variant: 1,
+        layoutOrder: ["PainPoints", "Services", "Packages", "Process", "TeamAction", "Trust", "FAQ"]
       },
     },
     {
@@ -28,7 +30,9 @@ export function getStaticPaths() {
       props: {
         locationName: "บางบัวทอง",
         title: "รับดูแลระบบคอมพิวเตอร์ บางบัวทอง IT Support รายเดือน | BizGrow Tech",
-        description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนบางบัวทอง นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+        description: "บริการ IT Support รับดูแลระบบคอมพิวเตอร์แบบรายเดือน ในพื้นที่บางบัวทอง นนทบุรี ป้องกันระบบล่ม ดูแลข้อมูลองค์กรอย่างมืออาชีพ",
+        variant: 2,
+        layoutOrder: ["Services", "PainPoints", "Process", "Packages", "FAQ", "Trust", "TeamAction"]
       },
     },
     {
@@ -36,7 +40,9 @@ export function getStaticPaths() {
       props: {
         locationName: "บางใหญ่",
         title: "รับดูแลระบบคอมพิวเตอร์ บางใหญ่ IT Support รายเดือน | BizGrow Tech",
-        description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนบางใหญ่ นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+        description: "หาทีมงาน IT Support ดูแลระบบคอมพิวเตอร์ โซนบางใหญ่ นนทบุรี แบบรายเดือน บริการรวดเร็ว แก้ปัญหาตรงจุด ไม่ต้องจ้างพนักงานประจำ",
+        variant: 3,
+        layoutOrder: ["Packages", "Services", "Process", "PainPoints", "Trust", "FAQ", "TeamAction"]
       },
     },
     {
@@ -44,28 +50,39 @@ export function getStaticPaths() {
       props: {
         locationName: "บางกรวย",
         title: "รับดูแลระบบคอมพิวเตอร์ บางกรวย IT Support รายเดือน | BizGrow Tech",
-        description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนบางกรวย นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+        description: "รับดูแลระบบเครือข่ายและคอมพิวเตอร์สำหรับองค์กร โซนบางกรวย นนทบุรี บริการไอทีครบวงจร ลดต้นทุน เพิ่มประสิทธิภาพการทำงาน",
+        variant: 4,
+        layoutOrder: ["Services", "Packages", "PainPoints", "Trust", "Process", "TeamAction", "FAQ"]
       },
     },
   ];
 }
 
-const { locationName, title, description } = Astro.props;
+const { locationName, title, description, variant, layoutOrder } = Astro.props;
+
+const componentsMap: Record<string, any> = {
+  PainPoints,
+  Services,
+  Packages,
+  Process,
+  TeamAction,
+  Trust,
+  FAQ
+};
 ---
 
 <Layout title={title} description={description}>
   <Navbar />
   <main id="main-content">
-    <Hero location={locationName} />
-    <PainPoints location={locationName} />
-    <Services location={locationName} />
-    <Packages location={locationName} />
-    <Process location={locationName} />
-    <TeamAction location={locationName} />
-    <Trust location={locationName} />
-    <FAQ location={locationName} />
+    <Hero location={locationName} variant={variant} />
+    
+    {layoutOrder.map((compName: string) => {
+      const Component = componentsMap[compName];
+      return Component ? <Component location={locationName} variant={variant} /> : null;
+    })}
+
     <BlogHome />
-    <Contact location={locationName} />
+    <Contact location={locationName} variant={variant} />
   </main>
   <Footer />
 </Layout>

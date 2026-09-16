@@ -1,8 +1,15 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
+
+let titleText = "คำถามที่พบบ่อย";
+if (variant === 1) titleText = "คลายข้อสงสัย (FAQ)";
+if (variant === 2) titleText = "คำถามที่ลูกค้าถามบ่อย";
+if (variant === 3) titleText = "Q&A เกี่ยวกับบริการของเรา";
+if (variant === 4) titleText = "ข้อสงสัยเรื่องรับทำ IT Support";
 
 // FAQ Section - AEO (Answer Engine Optimization) + FAQ Schema
 // คำถามเขียนในรูปแบบ Voice Search / Natural Language
@@ -56,7 +63,7 @@ const faqSchema = {
   <div class="container">
     <div class="faq__header">
       <p class="section-label">FAQ</p>
-      <h2 class="section-title">คำถามที่พบบ่อย</h2>
+      <h2 class="section-title">{titleText}</h2>
       <p class="section-subtitle">คำตอบตรงประเด็น ไม่ต้องเดา ไม่ต้องรอ</p>
     </div>
 

@@ -1,8 +1,26 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
+
+let titleText = `ทีมไอที <span class="team-action__highlight">มืออาชีพ</span><br />พร้อมทุกเวลา`;
+let subtitleText = "ทีมงานของเรามีประสบการณ์ดูแลระบบมากกว่า 10 ปี และใช้เครื่องมือ Monitoring ระดับ Enterprise ตรวจสอบระบบของคุณตลอด 24 ชั่วโมง";
+
+if (variant === 1) {
+  titleText = `บุคลากรไอที <span class="team-action__highlight">คุณภาพ</span><br />ที่ไว้ใจได้`;
+  subtitleText = "วิศวกรผู้เชี่ยวชาญพร้อมรับมือกับทุกปัญหาไอที ทั้งปัญหาทั่วไปจนถึงการกู้คืนระบบฉุกเฉิน (Disaster Recovery)";
+} else if (variant === 2) {
+  titleText = `ทำงานเป็นทีม<br />เพื่อผลลัพธ์ <span class="team-action__highlight">ที่ดีที่สุด</span>`;
+  subtitleText = "เราไม่ได้ทำงานแบบ One-man show แต่เรามีทีมวิศวกรที่คอยสนับสนุนและตรวจสอบ (Cross-check) เพื่อให้ระบบของคุณเสถียรที่สุด";
+} else if (variant === 3) {
+  titleText = `ทีมผู้เชี่ยวชาญ<br /><span class="team-action__highlight">Standby ตลอดเวลา</span>`;
+  subtitleText = "ไม่ต้องรอคิวข้ามวัน ทีมงานของเราพร้อมแก้ปัญหาผ่าน Remote ทันที และมีทีม On-site เข้าพื้นที่เมื่อเกิดเหตุฉุกเฉิน";
+} else if (variant === 4) {
+  titleText = `เครื่องมือระดับ <span class="team-action__highlight">Enterprise</span>`;
+  subtitleText = "เราประยุกต์ใช้เทคโนโลยี Monitoring ที่ทันสมัย เพื่อตรวจพบความผิดปกติและแก้ไขก่อนที่คุณจะรู้ตัวว่ามีปัญหา";
+}
 
 // Team In Action Section - shows real team working
 ---
@@ -42,12 +60,10 @@ const { location } = Astro.props;
       <div class="team-action__content">
         <p class="section-label">ทีมผู้เชี่ยวชาญ</p>
         <h2 class="section-title">
-          ทีมไอที <span class="team-action__highlight">มืออาชีพ</span><br />
-          พร้อมทุกเวลา
+          <Fragment set:html={titleText} />
         </h2>
         <p class="section-subtitle">
-          ทีมงานของเรามีประสบการณ์ดูแลระบบมากกว่า 10 ปี 
-          และใช้เครื่องมือ Monitoring ระดับ Enterprise ตรวจสอบระบบของคุณตลอด 24 ชั่วโมง
+          {subtitleText}
         </p>
 
         <ul class="team-action__features">

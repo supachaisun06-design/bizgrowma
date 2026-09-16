@@ -1,8 +1,26 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
+
+let titleText = "ปัญหา IT ที่คุณอาจกำลังเผชิญอยู่?";
+let subtitleText = "ปัญหาเหล่านี้คือสิ่งที่ธุรกิจส่วนใหญ่เผชิญอยู่ทุกวัน — BizGrow Tech ช่วยแก้ได้ครบในที่เดียว";
+
+if (variant === 1) {
+  titleText = "คุณกำลังเจอกับปัญหาเหล่านี้อยู่ใช่ไหม?";
+  subtitleText = "อุปสรรคทางด้านไอทีทำให้ธุรกิจสะดุด เราพร้อมเข้าไปจัดการให้ทุกอย่างราบรื่น";
+} else if (variant === 2) {
+  titleText = "ทำไมต้องหาทีมงานดูแลระบบคอมพิวเตอร์?";
+  subtitleText = "อย่าปล่อยให้ระบบล่มทำลายโอกาสทางธุรกิจของคุณ ให้ผู้เชี่ยวชาญดูแลระบบไอทีแทน";
+} else if (variant === 3) {
+  titleText = "หยุดปวดหัวกับปัญหาไอทีรายวัน";
+  subtitleText = "ประหยัดต้นทุน ลดปัญหาจุกจิก ด้วยบริการ IT Support จาก BizGrow Tech";
+} else if (variant === 4) {
+  titleText = "ความเสี่ยงที่คุณต้องเจอถ้าไม่มี IT ดูแล";
+  subtitleText = "ข้อมูลสูญหาย หรือระบบถูกโจมตี? ป้องกันก่อนเกิดเหตุด้วยบริการแบบครบวงจร";
+}
 
 const problems = [
   {
@@ -36,9 +54,11 @@ const problems = [
   <div class="container">
     <div class="pain__header">
       <p class="section-label">ปัญหาที่พบบ่อย</p>
-      <h2 class="section-title">ทำไมองค์กรถึงต้องใช้บริการ IT Outsource?</h2>
+      <h2 class="section-title">
+        {titleText}
+      </h2>
       <p class="section-subtitle">
-        ปัญหาเหล่านี้คือสิ่งที่ธุรกิจส่วนใหญ่เผชิญอยู่ทุกวัน — BizGrow Tech ช่วยแก้ได้ครบในที่เดียว
+        {subtitleText}
       </p>
     </div>
 

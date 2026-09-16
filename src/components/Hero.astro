@@ -1,11 +1,17 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
 
 const mainAreaText = location ? location : "ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย";
-const seoTitle = location ? `รับดูแลระบบคอมพิวเตอร์<br />\n        <span class="hero__title-green">${location}</span>` : `บริการดูแลระบบ<br />\n        <span class="hero__title-green">คอมพิวเตอร์ครบวงจร</span>`;
+let seoTitle = location ? `รับดูแลระบบคอมพิวเตอร์<br />\n        <span class="hero__title-green">${location}</span>` : `บริการดูแลระบบ<br />\n        <span class="hero__title-green">คอมพิวเตอร์ครบวงจร</span>`;
+
+if (location && variant === 1) seoTitle = `IT Support รายเดือน<br />\n        <span class="hero__title-green">พื้นที่${location}</span>`;
+if (location && variant === 2) seoTitle = `บริการ IT Outsource<br />\n        <span class="hero__title-green">เขต${location}</span>`;
+if (location && variant === 3) seoTitle = `ดูแลระบบเครือข่ายและเซิร์ฟเวอร์<br />\n        <span class="hero__title-green">ใน${location}</span>`;
+if (location && variant === 4) seoTitle = `บริษัทรับดูแลคอมพิวเตอร์<br />\n        <span class="hero__title-green">โซน${location}</span>`;
 ---
 
 <section class="hero" id="hero" aria-label="Hero Banner">

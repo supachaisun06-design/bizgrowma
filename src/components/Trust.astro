@@ -1,8 +1,26 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
+
+let titleText = `บริการ IT Outsource เฉพาะโซน<br /><span class="trust__area-highlight">นนทบุรี ฝั่งตะวันตก</span>`;
+let subtitleText = "BizGrow Tech เชี่ยวชาญพื้นที่นนทบุรีโดยเฉพาะ ทีม On-site สามารถเข้าถึงได้รวดเร็ว ภายใน 2–4 ชั่วโมง ไม่ว่าจะเป็นเหตุฉุกเฉินหรือ Preventive Maintenance";
+
+if (variant === 1) {
+  titleText = `เราดูแลพื้นที่<br /><span class="trust__area-highlight">นนทบุรีอย่างใกล้ชิด</span>`;
+  subtitleText = "ให้บริการดูแลระบบคอมพิวเตอร์อย่างครอบคลุมในเขตนนทบุรี เข้าช่วยเหลือ On-site ได้รวดเร็วกว่า";
+} else if (variant === 2) {
+  titleText = `IT Support ใกล้คุณ<br /><span class="trust__area-highlight">ให้บริการรวดเร็ว</span>`;
+  subtitleText = "ด้วยความเชี่ยวชาญในพื้นที่เฉพาะ ทำให้เราสามารถส่งวิศวกรเข้าแก้ไขปัญหาระบบไอทีได้ทันท่วงที";
+} else if (variant === 3) {
+  titleText = `ดูแลระบบเครือข่ายโซน<br /><span class="trust__area-highlight">ไทรน้อย-บางบัวทอง-บางใหญ่</span>`;
+  subtitleText = "ไม่ว่าจะเป็นคลินิก ออฟฟิศ หรือโรงงาน เรามีทีมซัพพอร์ตครอบคลุมพื้นที่ฝั่งตะวันตกของนนทบุรีทั้งหมด";
+} else if (variant === 4) {
+  titleText = `พื้นที่ให้บริการหลักของเรา<br /><span class="trust__area-highlight">รวดเร็ว มั่นใจได้</span>`;
+  subtitleText = "การอยู่ใกล้ลูกค้าคือข้อได้เปรียบของเรา ลดเวลาเดินทางและแก้ปัญหา Downtime ให้คุณได้เร็วที่สุด";
+}
 
 // Trust Signals Section - GEO/AIO Local Area Focus + Testimonials
 const testimonials = [
@@ -75,12 +93,10 @@ const reviewSchema = {
       <div class="trust__area-header">
         <p class="section-label">พื้นที่ให้บริการ</p>
         <h2 class="section-title">
-          บริการ IT Outsource เฉพาะโซน<br />
-          <span class="trust__area-highlight">นนทบุรี ฝั่งตะวันตก</span>
+          <Fragment set:html={titleText} />
         </h2>
         <p class="section-subtitle">
-          BizGrow Tech เชี่ยวชาญพื้นที่นนทบุรีโดยเฉพาะ ทีม On-site สามารถเข้าถึงได้รวดเร็ว
-          ภายใน 2–4 ชั่วโมง ไม่ว่าจะเป็นเหตุฉุกเฉินหรือ Preventive Maintenance
+          {subtitleText}
         </p>
       </div>
 

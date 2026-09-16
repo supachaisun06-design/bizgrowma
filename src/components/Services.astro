@@ -1,8 +1,26 @@
 ---
 interface Props {
   location?: string;
+  variant?: number;
 }
-const { location } = Astro.props;
+const { location, variant } = Astro.props;
+
+let titleText = "บริการดูแลระบบ IT ครบวงจร<br />สำหรับองค์กรทุกขนาด";
+let subtitleText = "BizGrow Tech ให้บริการ IT Outsource แบบครอบคลุม ตั้งแต่อุปกรณ์ปลายทาง เซิร์ฟเวอร์ เครือข่าย จนถึงการวางกลยุทธ์ IT ระยะยาว — ทีมเดียว ดูแลครบ";
+
+if (variant === 1) {
+  titleText = `เราช่วยดูแลอะไรในบริษัทคุณบ้าง?`;
+  subtitleText = "บริการแบบครอบคลุม หมดกังวลเรื่องไอที ให้คุณโฟกัสกับการบริหารธุรกิจได้อย่างเต็มที่";
+} else if (variant === 2) {
+  titleText = `บริการ IT Support ครบวงจร<br /><span class="text-green">จบทุกปัญหาในทีมเดียว</span>`;
+  subtitleText = "ตั้งแต่ซ่อมคอมพิวเตอร์ทั่วไป ไปจนถึงวางระบบ Server และ Network ความปลอดภัยระดับองค์กร";
+} else if (variant === 3) {
+  titleText = `ขอบเขตการทำงานของ BizGrow Tech`;
+  subtitleText = "พร้อมให้คำปรึกษาและลงมือปฏิบัติจริง ประหนึ่งมีแผนก IT มืออาชีพนั่งอยู่ในบริษัท";
+} else if (variant === 4) {
+  titleText = `ครบจบเรื่อง IT ให้เราเป็นผู้ดูแล`;
+  subtitleText = "เรามีวิศวกรผู้เชี่ยวชาญครอบคลุมทุกสายงาน ไม่ว่าจะเป็น System, Network หรือ Security";
+}
 
 // Services Section - 5 main service categories (based on gentechit.co.th structure)
 const services = [
@@ -72,10 +90,11 @@ const services = [
   <div class="container">
     <div class="services__header">
       <p class="section-label">ขอบเขตบริการ</p>
-      <h2 class="section-title">บริการดูแลระบบ IT ครบวงจร<br />สำหรับองค์กรทุกขนาด</h2>
+      <h2 class="section-title">
+        <Fragment set:html={titleText} />
+      </h2>
       <p class="section-subtitle">
-        BizGrow Tech ให้บริการ IT Outsource แบบครอบคลุม ตั้งแต่อุปกรณ์ปลายทาง เซิร์ฟเวอร์ เครือข่าย
-        จนถึงการวางกลยุทธ์ IT ระยะยาว — ทีมเดียว ดูแลครบ
+        {subtitleText}
       </p>
     </div>
 
