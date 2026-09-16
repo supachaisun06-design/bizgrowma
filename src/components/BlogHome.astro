@@ -2,7 +2,7 @@
 // src/components/BlogHome.astro
 let posts = [];
 try {
-  const res = await fetch('https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60&per_page=3&_embed');
+  const res = await fetch(`https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60&per_page=3&_embed&_t=${Date.now()}`);
   if (res.ok) {
     posts = await res.json();
   }
