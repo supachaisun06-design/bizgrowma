@@ -1,4 +1,11 @@
 ---
+interface Props {
+  location?: string;
+}
+const { location } = Astro.props;
+
+const mainAreaText = location ? location : "ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย";
+const seoTitle = location ? `รับดูแลระบบคอมพิวเตอร์<br />\n        <span class="hero__title-green">${location}</span>` : `บริการดูแลระบบ<br />\n        <span class="hero__title-green">คอมพิวเตอร์ครบวงจร</span>`;
 ---
 
 <section class="hero" id="hero" aria-label="Hero Banner">
@@ -19,13 +26,12 @@
       </div>
 
       <h1 class="hero__title">
-        บริการดูแลระบบ<br />
-        <span class="hero__title-green">คอมพิวเตอร์ครบวงจร</span><br />
-        <span class="hero__title-thai">ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย</span>
+        <Fragment set:html={seoTitle} /><br />
+        {!location && <span class="hero__title-thai">{mainAreaText}</span>}
       </h1>
 
       <p class="hero__desc">
-        <strong>BizGrow Tech คือ ผู้ให้บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบครบวงจร (IT Support Outsource) รายเดือน</strong> เหมาะสำหรับคลินิก ออฟฟิศ และโรงงานในพื้นที่ นนทบุรี (ไทรน้อย บางบัวทอง บางใหญ่ บางกรวย) ที่ต้องการลดปัญหา Downtime ปกป้องข้อมูล และแก้ไขปัญหาไอทีโดยทีมผู้เชี่ยวชาญ ทดแทนการจ้างพนักงานไอทีประจำ
+        <strong>BizGrow Tech คือ ผู้ให้บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบครบวงจร (IT Support Outsource) รายเดือน</strong> เหมาะสำหรับคลินิก ออฟฟิศ และโรงงานในพื้นที่ นนทบุรี ({mainAreaText}) ที่ต้องการลดปัญหา Downtime ปกป้องข้อมูล และแก้ไขปัญหาไอทีโดยทีมผู้เชี่ยวชาญ ทดแทนการจ้างพนักงานไอทีประจำ
       </p>
 
       <ul class="hero__stats">
@@ -64,7 +70,7 @@
       <div class="hero__trust">
         <span class="hero__area-icon" aria-hidden="true">📍</span>
         <p class="hero__trust-text">
-          บริการ On-site เฉพาะโซน <strong>ไทรน้อย · บางบัวทอง · บางใหญ่ · บางกรวย</strong>
+          บริการ On-site เฉพาะโซน <strong>{location ? location : 'ไทรน้อย · บางบัวทอง · บางใหญ่ · บางกรวย'}</strong>
         </p>
       </div>
     </div>

@@ -12,6 +12,7 @@ export async function GET({ site }) {
   }
 
   const base = 'https://it-outsource.bizgrowtech.com';
+  const locations = ['sainoi', 'bangbuathong', 'bangyai', 'bangkruai'];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -21,6 +22,13 @@ export async function GET({ site }) {
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  ${locations.map(loc => `
+  <url>
+    <loc>${base}/service/${loc}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('')}
   <url>
     <loc>${base}/blog</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>

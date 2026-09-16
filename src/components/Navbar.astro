@@ -28,9 +28,29 @@ const navLinks = [
     </a>
 
     <nav class="navbar__nav" aria-label="Main navigation">
-      {navLinks.map((link) => (
-        <a href={link.href} class="navbar__link">{link.label}</a>
-      ))}
+      <a href="/#why-outsource" class="navbar__link">ทำไมต้อง Outsource</a>
+      
+      <!-- Dropdown บริการ -->
+      <div class="navbar__dropdown">
+        <button class="navbar__link navbar__dropdown-btn" aria-expanded="false">
+          บริการ
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="navbar__dropdown-content">
+          <a href="/service/sainoi" class="navbar__dropdown-link">ดูแลระบบคอมพิวเตอร์ ไทรน้อย</a>
+          <a href="/service/bangbuathong" class="navbar__dropdown-link">ดูแลระบบคอมพิวเตอร์ บางบัวทอง</a>
+          <a href="/service/bangyai" class="navbar__dropdown-link">ดูแลระบบคอมพิวเตอร์ บางใหญ่</a>
+          <a href="/service/bangkruai" class="navbar__dropdown-link">ดูแลระบบคอมพิวเตอร์ บางกรวย</a>
+        </div>
+      </div>
+
+      <a href="/#packages" class="navbar__link">แพ็กเกจ</a>
+      <a href="/#process" class="navbar__link">ขั้นตอน</a>
+      <a href="/#faq" class="navbar__link">FAQ</a>
+      <a href="/#trust" class="navbar__link">รีวิว</a>
+      <a href="/blog" class="navbar__link">บทความ</a>
     </nav>
 
     <div class="navbar__actions">
@@ -58,9 +78,27 @@ const navLinks = [
 
   <!-- Mobile Menu -->
   <div class="navbar__mobile" id="mobile-menu" aria-label="Mobile navigation">
-    {navLinks.map((link) => (
-      <a href={link.href} class="navbar__mobile-link">{link.label}</a>
-    ))}
+    <a href="/#why-outsource" class="navbar__mobile-link">ทำไมต้อง Outsource</a>
+    
+    <!-- Mobile Dropdown บริการ -->
+    <button class="navbar__mobile-link navbar__mobile-dropdown-btn" aria-expanded="false" style="width: 100%; display: flex; justify-content: space-between; align-items: center; border: none; background: none; font-family: inherit;">
+      บริการ
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+    <div class="navbar__mobile-dropdown-content" style="display: none; flex-direction: column; padding-left: 1rem; border-left: 2px solid rgba(107,190,40,0.2); margin-left: 0.5rem; gap: 0.5rem;">
+      <a href="/service/sainoi" class="navbar__mobile-link" style="font-size: 0.95rem; padding: 0.5rem 0;">ดูแลระบบคอมพิวเตอร์ ไทรน้อย</a>
+      <a href="/service/bangbuathong" class="navbar__mobile-link" style="font-size: 0.95rem; padding: 0.5rem 0;">ดูแลระบบคอมพิวเตอร์ บางบัวทอง</a>
+      <a href="/service/bangyai" class="navbar__mobile-link" style="font-size: 0.95rem; padding: 0.5rem 0;">ดูแลระบบคอมพิวเตอร์ บางใหญ่</a>
+      <a href="/service/bangkruai" class="navbar__mobile-link" style="font-size: 0.95rem; padding: 0.5rem 0;">ดูแลระบบคอมพิวเตอร์ บางกรวย</a>
+    </div>
+
+    <a href="/#packages" class="navbar__mobile-link">แพ็กเกจ</a>
+    <a href="/#process" class="navbar__mobile-link">ขั้นตอน</a>
+    <a href="/#faq" class="navbar__mobile-link">FAQ</a>
+    <a href="/#trust" class="navbar__mobile-link">รีวิว</a>
+    <a href="/blog" class="navbar__mobile-link">บทความ</a>
     <div style="display: flex; gap: 0.5rem; margin-top: 1rem; width: 100%;">
       <a href="tel:0922824848" class="btn btn-outline" style="flex: 1; justify-content: center; display: flex; align-items: center; gap: 0.5rem;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -88,12 +126,25 @@ const navLinks = [
     });
 
     mobileLinks.forEach((link) => {
+      // Don't close menu if clicking the dropdown button
+      if (link.classList.contains("navbar__mobile-dropdown-btn")) return;
       link.addEventListener("click", () => {
         hamburger.setAttribute("aria-expanded", "false");
         hamburger.classList.remove("is-active");
         mobileMenu.classList.remove("is-open");
       });
     });
+
+    const mobileDropdownBtn = document.querySelector(".navbar__mobile-dropdown-btn");
+    const mobileDropdownContent = document.querySelector(".navbar__mobile-dropdown-content") as HTMLElement;
+    if (mobileDropdownBtn && mobileDropdownContent) {
+      mobileDropdownBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const isExpanded = mobileDropdownBtn.getAttribute("aria-expanded") === "true";
+        mobileDropdownBtn.setAttribute("aria-expanded", String(!isExpanded));
+        mobileDropdownContent.style.display = isExpanded ? "none" : "flex";
+      });
+    }
   }
 
   // Navbar Scroll Effect
@@ -203,6 +254,58 @@ const navLinks = [
     color: var(--color-text);
     background: rgba(107,190,40,0.08);
   }
+
+  /* Dropdown Styles */
+  .navbar__dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .navbar__dropdown-btn {
+    border: none;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  .navbar__dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(12, 14, 9, 0.96);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(107,190,40,0.15);
+    min-width: 260px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    padding: 0.5rem;
+    z-index: 1000;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .navbar__dropdown:hover .navbar__dropdown-content,
+  .navbar__dropdown:focus-within .navbar__dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .navbar__dropdown-link {
+    display: block;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+  }
+  .navbar__dropdown-link:hover {
+    color: var(--color-text);
+    background: rgba(107,190,40,0.12);
+  }
+
 
   /* --- Actions --- */
   .navbar__actions {

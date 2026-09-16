@@ -1,0 +1,71 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Hero from "../../components/Hero.astro";
+import PainPoints from "../../components/PainPoints.astro";
+import Services from "../../components/Services.astro";
+import Packages from "../../components/Packages.astro";
+import Process from "../../components/Process.astro";
+import TeamAction from "../../components/TeamAction.astro";
+import FAQ from "../../components/FAQ.astro";
+import Trust from "../../components/Trust.astro";
+import BlogHome from "../../components/BlogHome.astro";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { location: "sainoi" },
+      props: {
+        locationName: "ไทรน้อย",
+        title: "รับดูแลระบบคอมพิวเตอร์ ไทรน้อย IT Support รายเดือน | BizGrow Tech",
+        description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนไทรน้อย นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+      },
+    },
+    {
+      params: { location: "bangbuathong" },
+      props: {
+        locationName: "บางบัวทอง",
+        title: "รับดูแลระบบคอมพิวเตอร์ บางบัวทอง IT Support รายเดือน | BizGrow Tech",
+        description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนบางบัวทอง นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+      },
+    },
+    {
+      params: { location: "bangyai" },
+      props: {
+        locationName: "บางใหญ่",
+        title: "รับดูแลระบบคอมพิวเตอร์ บางใหญ่ IT Support รายเดือน | BizGrow Tech",
+        description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนบางใหญ่ นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+      },
+    },
+    {
+      params: { location: "bangkruai" },
+      props: {
+        locationName: "บางกรวย",
+        title: "รับดูแลระบบคอมพิวเตอร์ บางกรวย IT Support รายเดือน | BizGrow Tech",
+        description: "บริการรับดูแลระบบคอมพิวเตอร์และเครือข่ายสำหรับองค์กรแบบรายเดือน โซนบางกรวย นนทบุรี แก้ไขปัญหาไอที รวดเร็ว ลด Downtime โดยทีมงานมืออาชีพ",
+      },
+    },
+  ];
+}
+
+const { locationName, title, description } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Navbar />
+  <main id="main-content">
+    <Hero location={locationName} />
+    <PainPoints location={locationName} />
+    <Services location={locationName} />
+    <Packages location={locationName} />
+    <Process location={locationName} />
+    <TeamAction location={locationName} />
+    <Trust location={locationName} />
+    <FAQ location={locationName} />
+    <BlogHome />
+    <Contact location={locationName} />
+  </main>
+  <Footer />
+</Layout>
