@@ -6,7 +6,9 @@ import Footer from "../../components/Footer.astro";
 export async function getStaticPaths() {
   let posts = [];
   try {
-    const res = await fetch(`https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60&_embed&per_page=100&_t=${Date.now()}`);
+    const res = await fetch('https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60&_embed&per_page=100', {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
+    });
     if (res.ok) {
       posts = await res.json();
     }
