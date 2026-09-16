@@ -1,4 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
+import heroImage from '../assets/hero-server.webp';
+
 interface Props {
   location?: string;
   variant?: number;
@@ -85,12 +88,12 @@ if (location && variant === 4) seoTitle = `บริษัทรับดูแ�
     <div class="hero__visual">
       <!-- Main hero image -->
       <div class="hero__img-main-wrap">
-        <img
-          src="/hero-server.webp"
+        <Picture
+          src={heroImage}
           alt="วิศวกรไอที BizGrow Tech กำลังดูแลระบบ Server ใน Data Center"
+          widths={[400, 900]}
+          sizes="(max-width: 600px) 400px, 900px"
           class="hero__img-main"
-          width="900"
-          height="600"
           loading="eager"
           fetchpriority="high"
           decoding="async"
