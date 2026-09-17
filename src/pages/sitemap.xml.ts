@@ -1,14 +1,20 @@
+import fallbackPosts from "../data/posts.json";
+
 export async function GET({ site }) {
   let posts = [];
   try {
     const res = await fetch('https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60&_embed&per_page=100', {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      signal: AbortSignal.timeout(5000)
     });
     if (res.ok) {
       posts = await res.json();
+    } else {
+      throw new Error('WP API returned ' + res.status);
     }
   } catch (e) {
-    console.error("Error fetching WP posts for sitemap", e);
+    console.error("Error fetching WP posts for sitemap", e.message);
+    posts = fallbackPosts;
   }
 
   const base = 'https://it-outsource.bizgrowtech.com';

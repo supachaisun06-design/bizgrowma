@@ -1,0 +1,2058 @@
+[
+  {
+    "id": 4029,
+    "date": "2026-09-16T20:39:16",
+    "date_gmt": "2026-09-16T13:39:16",
+    "guid": {
+      "rendered": "https://www.bizgrowtech.com/?p=4029"
+    },
+    "modified": "2026-09-16T20:39:25",
+    "modified_gmt": "2026-09-16T13:39:25",
+    "slug": "ip-conflict",
+    "status": "publish",
+    "type": "post",
+    "link": "https://www.bizgrowtech.com/ip-conflict/",
+    "title": {
+      "rendered": "ตรวจสอบและแก้ไขไอพีชนกันใน 1 นาที (ฉบับเจาะลึก)"
+    },
+    "content": {
+      "rendered": "\n<p class=\"wp-block-paragraph\">ปัญหา <strong>IP Conflict</strong> เกิดขึ้นเมื่ออุปกรณ์ตั้งแต่ 2 เครื่องขึ้นไปในเครือข่ายได้รับหมายเลข IP Address เดียวกัน ทำให้เร้าเตอร์สับสนและส่งข้อมูลผิดพลาด ส่งผลให้อินเทอร์เน็ตหลุดบ่อย การเข้าใจกระบวนการแก้ไขที่ถูกต้องจะช่วยให้ระบบกลับมาเสถียรได้อย่างรวดเร็ว</p>\n\n\n\n<h3 class=\"wp-block-heading\">ขั้นตอนการแก้ปัญหาและตรวจสอบ</h3>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>1. วิธีแก้ไขเฉพาะหน้า (Release &amp; Renew)</strong> วิธีนี้ปลอดภัยและส่งผลกระทบน้อยที่สุด โดยสั่งให้ระบบปฏิบัติการคืนหมายเลขเดิมและขอใหม่จาก DHCP Server</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>เปิด Command Prompt (พิมพ์ <code>cmd</code> ในแถบค้นหา)</li>\n\n\n\n<li>รันคำสั่งด้านล่างเพื่อล้างค่า IP เดิม:</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">DOS</p>\n\n\n\n<pre class=\"wp-block-code\"><code>ipconfig /release\n</code></pre>\n\n\n\n<ul class=\"wp-block-list\">\n<li>จากนั้นรันคำสั่งด้านล่างเพื่อขอ IP ใหม่:</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">DOS</p>\n\n\n\n<pre class=\"wp-block-code\"><code>ipconfig /renew\n</code></pre>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีตรวจสอบ:</strong> พิมพ์ <code>ipconfig</code> อีกครั้ง หากสำเร็จจะเห็น IPv4 Address ชุดใหม่ปรากฏขึ้น</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>2. วิธีสืบสวนหาต้นตอด้วย ARP</strong> หากแก้ปัญหาเบื้องต้นแล้วยังพบอาการเดิม ให้ตรวจสอบตารางจับคู่ฮาร์ดแวร์ด้วย ARP Cache</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>ในหน้าต่าง Command Prompt ให้รันคำสั่ง:</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">DOS</p>\n\n\n\n<pre class=\"wp-block-code\"><code>arp -a\n</code></pre>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีตรวจสอบ:</strong> ดูรายการ IP ที่แสดง หากพบ IP เดียวกันถูกผูกไว้กับ Physical Address (MAC Address) 2 บรรทัดที่แตกต่างกัน แสดงว่ามีการตั้งค่า IP ซ้ำซ้อน</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>3. ตรวจสอบประวัติระบบ (Event Viewer)</strong> Windows จะบันทึกเหตุการณ์เครือข่ายผิดปกติไว้เสมอ เพื่อใช้เป็นหลักฐานยืนยันความผิดพลาด</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>กด <code>Windows + R</code> พิมพ์ <code>eventvwr.msc</code> เพื่อเปิดระบบ</li>\n\n\n\n<li>เข้าไปที่ <strong>Windows Logs > System</strong> ค้นหา Event ID <strong>4199</strong> ที่มาจาก <strong>Tcpip</strong></li>\n\n\n\n<li><strong>วิธีตรวจสอบ:</strong> ดับเบิลคลิกที่เหตุการณ์ จะพบข้อความแจ้งเตือนพร้อมระบุ MAC Address ของอุปกรณ์คู่กรณีที่ทำให้ IP ชนกัน</li>\n</ul>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\">\n<p class=\"wp-block-paragraph\"><strong>ข้อควรระวัง:</strong> สาเหตุหลักของปัญหานี้มักมาจากการตั้งค่า Static IP ให้อุปกรณ์เฉพาะทาง (เช่น ปริ้นเตอร์ หรือเซิร์ฟเวอร์) ให้อยู่ภายในช่วงหมายเลขที่ Router ใช้แจกอัตโนมัติ (DHCP Pool) คุณควรตั้งค่าอุปกรณ์เหล่านี้ให้อยู่นอกช่วงดังกล่าวเสมอเพื่อความเสถียรของระบบ</p>\n</blockquote>\n\n\n\n<h3 class=\"wp-block-heading\">แหล่งอ้างอิงเชิงเทคนิค</h3>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>RFC 5227:</strong> มาตรฐาน IETF กลไก IPv4 Address Conflict Detection</li>\n\n\n\n<li><strong>Microsoft Support:</strong> เอกสารอ้างอิง Event ID 4199 บนโครงสร้าง TCP/IP</li>\n\n\n\n<li><strong>Cisco Guidelines:</strong> คู่มือการวิเคราะห์ตาราง ARP Cache</li>\n</ul>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>ปัญหา IP Conflict เกิดขึ้นเมื่ออุปกรณ์ตั้งแต่ 2 เครื่องขึ้นไปในเครือข่ายได้รับหมายเลข IP Address เดียวกัน ทำให้เร้าเตอร์สับสนและส่งข้อมูลผิดพลาด ส่งผลให้อินเทอร์เน็ตหลุดบ่อย การเข้าใจกระบวนการแก้ไขที่ถูกต้องจะช่วยให้ระบบกลับมาเสถียรได้อย่างรวดเร็ว ขั้นตอนการแก้ปัญหาและตรวจสอบ 1. วิธีแก้ไขเฉพาะหน้า (Release &amp; Renew) วิธีนี้ปลอดภัยและส่งผลกระทบน้อยที่สุด โดยสั่งให้ระบบปฏิบัติการคืนหมายเลขเดิมและขอใหม่จาก DHCP Server DOS DOS 2. วิธีสืบสวนหาต้นตอด้วย ARP หากแก้ปัญหาเบื้องต้นแล้วยังพบอาการเดิม ให้ตรวจสอบตารางจับคู่ฮาร์ดแวร์ด้วย ARP Cache DOS 3. ตรวจสอบประวัติระบบ (Event Viewer) Windows จะบันทึกเหตุการณ์เครือข่ายผิดปกติไว้เสมอ เพื่อใช้เป็นหลักฐานยืนยันความผิดพลาด ข้อควรระวัง: สาเหตุหลักของปัญหานี้มักมาจากการตั้งค่า Static IP ให้อุปกรณ์เฉพาะทาง (เช่น ปริ้นเตอร์ หรือเซิร์ฟเวอร์) ให้อยู่ภายในช่วงหมายเลขที่ Router ใช้แจกอัตโนมัติ (DHCP Pool) คุณควรตั้งค่าอุปกรณ์เหล่านี้ให้อยู่นอกช่วงดังกล่าวเสมอเพื่อความเสถียรของระบบ แหล่งอ้างอิงเชิงเทคนิค</p>\n",
+      "protected": false
+    },
+    "author": 2,
+    "featured_media": 4030,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "inline_featured_image": false,
+      "_kb_optimizer_status": 0,
+      "_kad_blocks_custom_css": "",
+      "_kad_blocks_head_custom_js": "",
+      "_kad_blocks_body_custom_js": "",
+      "_kad_blocks_footer_custom_js": "",
+      "_kadence_starter_templates_imported_post": false,
+      "_kad_post_transparent": "",
+      "_kad_post_title": "",
+      "_kad_post_layout": "",
+      "_kad_post_sidebar_id": "",
+      "_kad_post_content_style": "",
+      "_kad_post_vertical_padding": "",
+      "_kad_post_feature": "",
+      "_kad_post_feature_position": "",
+      "_kad_post_header": false,
+      "_kad_post_footer": false,
+      "_kad_post_classname": "",
+      "footnotes": ""
+    },
+    "categories": [
+      60
+    ],
+    "tags": [],
+    "class_list": [
+      "post-4029",
+      "post",
+      "type-post",
+      "status-publish",
+      "format-standard",
+      "has-post-thumbnail",
+      "hentry",
+      "category-maintain-computer-systems"
+    ],
+    "taxonomy_info": {
+      "category": [
+        {
+          "value": 60,
+          "label": "ดูแลระบบคอมพิวเตอร์"
+        }
+      ]
+    },
+    "featured_image_src_large": [
+      "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-1024x559.webp",
+      1024,
+      559,
+      true
+    ],
+    "author_info": {
+      "display_name": "สุภชัย สุนทรชื่น",
+      "author_link": "https://www.bizgrowtech.com/author/supachai/"
+    },
+    "comment_info": 0,
+    "category_info": [
+      {
+        "term_id": 60,
+        "name": "ดูแลระบบคอมพิวเตอร์",
+        "slug": "maintain-computer-systems",
+        "term_group": 0,
+        "term_taxonomy_id": 60,
+        "taxonomy": "category",
+        "description": "",
+        "parent": 0,
+        "count": 5,
+        "filter": "raw",
+        "cat_ID": 60,
+        "category_count": 5,
+        "category_description": "",
+        "cat_name": "ดูแลระบบคอมพิวเตอร์",
+        "category_nicename": "maintain-computer-systems",
+        "category_parent": 0
+      }
+    ],
+    "tag_info": false,
+    "_links": {
+      "self": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4029",
+          "targetHints": {
+            "allow": [
+              "GET"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4029"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 1,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4029/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 4031,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4029/revisions/4031"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4030"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media?parent=4029"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories?post=4029"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/tags?post=4029"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 2,
+          "name": "สุภชัย สุนทรชื่น",
+          "url": "https://www.bizgrowtech.com/",
+          "description": "",
+          "link": "https://www.bizgrowtech.com/author/supachai/",
+          "slug": "supachai",
+          "avatar_urls": {
+            "24": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "48": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "96": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp"
+          },
+          "kb": {
+            "avatar": "https://secure.gravatar.com/avatar/?s=300&d=mm&r=g",
+            "registered": "January 1, 1970"
+          },
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 4030,
+          "date": "2026-09-16T20:38:42",
+          "slug": "ip-conflict",
+          "type": "attachment",
+          "link": "https://www.bizgrowtech.com/ip-conflict/ip-conflict/",
+          "title": {
+            "rendered": "IP Conflict"
+          },
+          "author": 2,
+          "featured_media": 0,
+          "caption": {
+            "rendered": ""
+          },
+          "alt_text": "เจาะลึกปัญหา IP Conflict",
+          "media_type": "image",
+          "mime_type": "image/webp",
+          "media_details": {
+            "width": 2560,
+            "height": 1396,
+            "file": "2026/09/IP-Conflict-scaled.webp",
+            "filesize": "191746",
+            "sizes": {
+              "medium": {
+                "file": "IP-Conflict-300x164.webp",
+                "width": 300,
+                "height": 164,
+                "filesize": "8742",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-300x164.webp"
+              },
+              "large": {
+                "file": "IP-Conflict-1024x559.webp",
+                "width": 1024,
+                "height": 559,
+                "filesize": "55368",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-1024x559.webp"
+              },
+              "thumbnail": {
+                "file": "IP-Conflict-150x150.webp",
+                "width": 150,
+                "height": 150,
+                "filesize": "4870",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-150x150.webp"
+              },
+              "medium_large": {
+                "file": "IP-Conflict-768x419.webp",
+                "width": 768,
+                "height": 419,
+                "filesize": "37014",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-768x419.webp"
+              },
+              "1536x1536": {
+                "file": "IP-Conflict-1536x838.webp",
+                "width": 1536,
+                "height": 838,
+                "filesize": "95504",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-1536x838.webp"
+              },
+              "2048x2048": {
+                "file": "IP-Conflict-2048x1117.webp",
+                "width": 2048,
+                "height": 1117,
+                "filesize": "140676",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-2048x1117.webp"
+              },
+              "full": {
+                "file": "IP-Conflict-scaled.webp",
+                "width": 2560,
+                "height": 1396,
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-scaled.webp"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": [],
+              "alt": ""
+            },
+            "original_image": "IP-Conflict.jpg"
+          },
+          "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/IP-Conflict-scaled.webp",
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4030",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4030"
+              }
+            ],
+            "wp:attached-to": [
+              {
+                "embeddable": true,
+                "post_type": "post",
+                "id": 4029,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4029"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 60,
+            "link": "https://www.bizgrowtech.com/category/maintain-computer-systems/",
+            "name": "ดูแลระบบคอมพิวเตอร์",
+            "slug": "maintain-computer-systems",
+            "taxonomy": "category",
+            "_links": {
+              "self": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories/60",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        []
+      ]
+    }
+  },
+  {
+    "id": 4022,
+    "date": "2026-09-16T09:34:32",
+    "date_gmt": "2026-09-16T02:34:32",
+    "guid": {
+      "rendered": "https://www.bizgrowtech.com/?p=4022"
+    },
+    "modified": "2026-09-16T10:12:35",
+    "modified_gmt": "2026-09-16T03:12:35",
+    "slug": "forgot-windows-password",
+    "status": "publish",
+    "type": "post",
+    "link": "https://www.bizgrowtech.com/forgot-windows-password/",
+    "title": {
+      "rendered": "ลืมรหัสผ่าน Windows แก้ไขอย่างไร? (อัปเดตล่าสุดพร้อมแหล่งอ้างอิง)"
+    },
+    "content": {
+      "rendered": "\n<p class=\"wp-block-paragraph\">การลืมรหัสผ่าน Windows เป็นปัญหาที่สร้างความหงุดหงิดและกังวลใจเป็นอย่างมาก บทความนี้จะพาทุกคนไปเรียนรู้วิธีการแก้ไขปัญหาที่หลากหลาย ตั้งแต่ระดับพื้นฐานไปจนถึงขั้นสูง โดยจะเน้นความถูกต้องเชิงเทคนิค, ความปลอดภัย, และความเหมาะสมกับบริบทการใช้งานในไทย</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>สำคัญ:</strong> ความปลอดภัยคือสิ่งแรกที่ต้องคำนึงถึง วิธีการบางอย่างมีความเสี่ยงและควรใช้ด้วยความระมัดระวังสูงสุด บทความนี้จะระบุคำเตือนและข้อควรระวังไว้อย่างชัดเจน และข้อมูลทั้งหมดอิงจากแหล่งอ้างอิงเชิงเทคนิคที่ตรวจสอบได้โดยตรง ไม่มีการคาดเดา</p>\n\n\n\n<h2 class=\"wp-block-heading\">ส่วนที่ 1: ทำความเข้าใจเกี่ยวกับบัญชีผู้ใช้ใน Windows (Microsoft Account vs. Local Account)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ก่อนที่จะเริ่มแก้ไขปัญหา คุณจำเป็นต้องทราบก่อนว่าบัญชีผู้ใช้ที่คุณใช้เป็นประเภทใด เนื่องจากมีวิธีการกู้คืนที่แตกต่างกันอย่างมาก</p>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li><strong>Microsoft Account (บัญชี Microsoft):</strong>\n<ul class=\"wp-block-list\">\n<li>เป็นบัญชีที่ผูกกับอีเมล (เช่น @outlook.com, @hotmail.com, หรืออีเมลอื่นๆ ที่สมัครเป็นบัญชี Microsoft)</li>\n\n\n\n<li><strong>ข้อดี:</strong> สามารถกู้คืนและรีเซ็ตรหัสผ่านออนไลน์ได้จากอุปกรณ์อื่นทันที</li>\n\n\n\n<li><strong>ข้อสังเกต:</strong> ต้องมีการเชื่อมต่ออินเทอร์เน็ตในการ Log-in หากมีการเปลี่ยนรหัสผ่าน</li>\n</ul>\n</li>\n\n\n\n<li><strong>Local Account (บัญชีผู้ใช้โลคัล):</strong>\n<ul class=\"wp-block-list\">\n<li>เป็นบัญชีที่สร้างขึ้นเฉพาะบนเครื่องคอมพิวเตอร์เครื่องนั้นๆ</li>\n\n\n\n<li><strong>ข้อดี:</strong> สามารถ Log-in ได้โดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต</li>\n\n\n\n<li><strong>ข้อสังเกต:</strong> การกู้คืนรหัสผ่านจะทำได้ยากกว่า และต้องใช้เครื่องมือหรือวิธีการเฉพาะหากไม่ได้ทำ &#8220;แผ่นรีเซ็ตรหัสผ่าน&#8221; หรือตั้ง &#8220;คำถามความปลอดภัย&#8221; ไว้ก่อน</li>\n</ul>\n</li>\n</ol>\n\n\n\n<h3 class=\"wp-block-heading\">📚 แหล่งอ้างอิงเชิงเทคนิค (บัญชีผู้ใช้ Windows):</h3>\n\n\n\n<ul class=\"wp-block-list\">\n<li><a href=\"https://www.google.com/search?q=https://support.microsoft.com/en-us/windows/change-or-reset-your-password-in-windows-f0b3f680-77a8-3a21-4f18-f6804a919010\" target=\"_blank\" rel=\"noopener\"><strong>Microsoft Support:</strong> Change or reset your password in Windows</a> &#8211; (อธิบายความแตกต่างและการแก้ไขเบื้องต้น)</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">ส่วนที่ 2: วิธีการกู้คืนและรีเซ็ตรหัสผ่าน (Step-by-Step)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ขอแนะนำให้คุณลองทำตามวิธีการจากระดับที่ง่ายที่สุดและมีความเสี่ยงต่ำที่สุดก่อน</p>\n\n\n\n<h3 class=\"wp-block-heading\">วิธีที่ 2.1: การรีเซ็ตรหัสผ่าน Microsoft Account (ออนไลน์)</h3>\n\n\n\n<p class=\"wp-block-paragraph\">หากคุณใช้บัญชี Microsoft คุณสามารถทำตามขั้นตอนดังนี้</p>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li><strong>ใช้อุปกรณ์อื่น:</strong> ไปที่หน้าเว็บสำหรับรีเซ็ตรหัสผ่านของ Microsoft (เช่น จากมือถือหรือคอมพิวเตอร์เครื่องอื่น)\n<ul class=\"wp-block-list\">\n<li>🌐 <strong>URL สำหรับรีเซ็ต:</strong> <code>[account.live.com/password/reset](https://account.live.com/password/reset)</code></li>\n</ul>\n</li>\n\n\n\n<li><strong>ระบุข้อมูล:</strong> ป้อนอีเมล, เบอร์โทรศัพท์, หรือชื่อ Skype ที่ผูกกับบัญชี</li>\n\n\n\n<li><strong>ยืนยันตัวตน:</strong> เลือกวิธีการรับรหัสยืนยัน (เช่น ผ่านอีเมลสำรองหรือเบอร์โทรศัพท์ที่ตั้งไว้)</li>\n\n\n\n<li><strong>ตั้งรหัสผ่านใหม่:</strong> เมื่อได้รับรหัสยืนยันแล้ว ป้อนรหัสและตั้งรหัสผ่านใหม่ที่ปลอดภัย</li>\n\n\n\n<li><strong>Log-in ใหม่:</strong> หลังจากรีเซ็ตแล้ว ให้กลับไป Log-in ที่ Windows (ต้องมั่นใจว่าเครื่องมีการเชื่อมต่ออินเทอร์เน็ต)</li>\n</ol>\n\n\n\n<h3 class=\"wp-block-heading\">วิธีที่ 2.2: การใช้คำถามความปลอดภัย (Security Questions) &#8211; สำหรับ Local Account</h3>\n\n\n\n<p class=\"wp-block-paragraph\">หากคุณใช้ Local Account ใน Windows 10/11 และได้ตั้งคำถามความปลอดภัยไว้ คุณสามารถใช้วิธีนี้ได้</p>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li><strong>ป้อนรหัสผ่านผิด:</strong> ที่หน้า Log-in ลองป้อนรหัสผ่านที่ผิดหนึ่งครั้ง</li>\n\n\n\n<li><strong>คลิก &#8220;Reset password&#8221;:</strong> จะมีลิงก์ &#8220;Reset password&#8221; (รีเซ็ตรหัสผ่าน) ปรากฏขึ้นมาด้านล่างช่องป้อนรหัสผ่าน</li>\n\n\n\n<li><strong>ตอบคำถาม:</strong> ตอบคำถามความปลอดภัยทั้ง 3 ข้อให้ถูกต้อง</li>\n\n\n\n<li><strong>ตั้งรหัสผ่านใหม่:</strong> หากคำตอบถูกต้อง Windows จะให้คุณตั้งรหัสผ่านใหม่</li>\n</ol>\n\n\n\n<h3 class=\"wp-block-heading\">วิธีที่ 2.3: การใช้บัญชีผู้ดูแลระบบอื่น (Other Administrator Account) &#8211; สำหรับ Local Account</h3>\n\n\n\n<p class=\"wp-block-paragraph\">หากในเครื่องคอมพิวเตอร์ของคุณมีบัญชีผู้ใช้ประเภท Administrator (ผู้ดูแลระบบ) บัญชีอื่นที่ยังจำรหัสผ่านได้ คุณสามารถใช้วิธีนี้เพื่อเปลี่ยนรหัสผ่านให้บัญชีที่ลืม</p>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li><strong>Log-in ด้วยบัญชี Admin อื่น:</strong> Log-in เข้าเครื่องด้วยบัญชีผู้ดูแลระบบที่ยังใช้งานได้</li>\n\n\n\n<li><strong>เปิด Command Prompt ในฐานะ Admin:</strong>\n<ul class=\"wp-block-list\">\n<li>กดปุ่ม <code>Windows + X</code> และเลือก &#8220;Command Prompt (Admin)&#8221; หรือ &#8220;Windows PowerShell (Admin)&#8221;</li>\n\n\n\n<li>หาก Windows ตรวจสอบสิทธิ์ (UAC) ให้ตอบ Yes</li>\n</ul>\n</li>\n\n\n\n<li><strong>เปลี่ยนรหัสผ่าน:</strong> ป้อนคำสั่งดังนี้ (โดยเปลี่ยน <strong>[ชื่อผู้ใช้]</strong> เป็นชื่อบัญชีที่ลืมรหัสผ่าน และ <strong>[รหัสผ่านใหม่]</strong> เป็นรหัสผ่านที่ต้องการตั้งใหม่)<br>DOS<code>net user \"[ชื่อผู้ใช้]\" \"[รหัสผ่านใหม่]\"</code>\n<ul class=\"wp-block-list\">\n<li><strong>ตัวอย่าง:</strong> <code>net user \"Somchai\" \"MyNewPass123\"</code></li>\n</ul>\n</li>\n\n\n\n<li><strong>ตรวจสอบผล:</strong> หากสำเร็จจะขึ้นข้อความ &#8220;The command completed successfully.&#8221;</li>\n</ol>\n\n\n\n<h3 class=\"wp-block-heading\">วิธีที่ 2.4: การใช้ &#8220;แผ่นรีเซ็ตรหัสผ่าน&#8221; (Password Reset Disk) &#8211; วิธีการเตรียมการในอดีต</h3>\n\n\n\n<p class=\"wp-block-paragraph\">เป็นวิธีการที่ <em>ต้องทำไว้ล่วงหน้า</em> ขณะที่ยังจำรหัสผ่านได้ หากคุณไม่เคยทำไว้ก่อน วิธีนี้จะใช้งานไม่ได้</p>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li><strong>คลิก &#8220;Reset password&#8221;:</strong> ที่หน้า Log-in ลองป้อนรหัสผ่านที่ผิดหนึ่งครั้ง</li>\n\n\n\n<li><strong>插入 แผ่น/USB:</strong> เสียบ USB Flash Drive ที่คุณได้ทำ &#8220;แผ่นรีเซ็ตรหัสผ่าน&#8221; ไว้</li>\n\n\n\n<li><strong>ทำตามตัวช่วย:</strong> ระบบจะเปิด &#8220;Password Reset Wizard&#8221; (ตัวช่วยสร้างการรีเซ็ตรหัสผ่าน) ให้คลิก Next และทำตามขั้นตอนเพื่อตั้งรหัสผ่านใหม่</li>\n</ol>\n\n\n\n<h2 class=\"wp-block-heading\">ส่วนที่ 3: วิธีการขั้นสูงและมีความเสี่ยง (Utilman/Command Prompt) &#8211; <strong>โปรดอ่านคำเตือนอย่างละเอียด</strong></h2>\n\n\n\n<p class=\"wp-block-paragraph\">หากคุณใช้วิธีการทั้งหมดในส่วนที่ 2 แล้วยังไม่สามารถกู้คืนรหัสผ่านได้ นี่คือวิธีการขั้นสูงที่ใช้เพื่อแก้ไขไฟล์ระบบเพื่อให้สามารถเข้าถึง Command Prompt ได้ที่หน้า Log-in</p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>คำเตือนที่สำคัญที่สุด:</strong></p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ความเสี่ยงต่อระบบ:</strong> การแก้ไขไฟล์ระบบ (<code>utilman.exe</code> และ <code>cmd.exe</code>) หากทำผิดพลาดอาจทำให้ Windows เสียหายและบูตเครื่องไม่ขึ้น</li>\n\n\n\n<li><strong>สร้างประตูลับ (Backdoor):</strong> การใช้วิธีนี้คือการสร้างช่องโหว่ความปลอดภัยระดับ SYSTEM บนหน้า Log-in <strong>ต้องมั่นใจว่าคุณจะแก้ไขกลับเป็นเหมือนเดิมทันทีหลังจากเปลี่ยนรหัสผ่านเสร็จ</strong></li>\n\n\n\n<li><strong>Domain Accounts:</strong> วิธีนี้จะ <em>ใช้ไม่ได้</em> กับบัญชีผู้ใช้ในระบบ Domain (Active Directory)</li>\n</ul>\n\n\n\n<h3 class=\"wp-block-heading\"><strong>สำคัญ: ผลกระทบของ BitLocker (encryption)</strong></h3>\n\n\n\n<p class=\"wp-block-paragraph\">หากเครื่องของคุณมีการเปิดใช้งานการเข้ารหัสลับดิสก์ด้วย BitLocker (Microsoft&#8217;s full-disk encryption) <strong>วิธีการขั้นสูงนี้จะไม่สามารถทำได้ทันที</strong></p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ต้องมี Recovery Key:</strong> คุณจะต้องได้รับ 48-digit Recovery Key (รหัสกู้คืน 48 หลัก) ก่อนเพื่อปลดล็อกดิสก์</li>\n\n\n\n<li><strong>ไม่มี Recovery Key = ไม่มีสิทธิ์เข้าถึง:</strong> หากคุณไม่มี Recovery Key คุณจะไม่สามารถเข้าถึงพาร์ติชันระบบเพื่อแก้ไขไฟล์ได้เลย ข้อมูลทั้งหมดจะไม่สามารถเข้าถึงได้</li>\n</ul>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li><strong>เข้าสู่ระบบ Command Prompt ก่อนLog-in:</strong>\n<ul class=\"wp-block-list\">\n<li>คุณต้องบูตเครื่องด้วย &#8220;สื่อการติดตั้ง Windows (Installation Media)&#8221; (เช่น USB หรือแผ่นติดตั้ง Windows) หรือเข้าสู่ &#8220;Windows Recovery Environment (WinRE)&#8221; โดยการบังคับปิดเครื่องหลายๆ ครั้งขณะบูตเครื่อง จนกว่าจะขึ้นหน้าจอ &#8220;Preparing Automatic Repair&#8221; -> &#8220;Advanced options&#8221; -> &#8220;Troubleshoot&#8221; -> &#8220;Advanced options&#8221; -> &#8220;Command Prompt&#8221;</li>\n</ul>\n</li>\n\n\n\n<li><strong>ตรวจสอบตัวอักษรของไดรฟ์:</strong><ul><li>ใน Command Prompt, ไดรฟ์ที่ติดตั้ง Windows อาจไม่ใช่ C: เสมอไป คุณสามารถใช้คำสั่งเพื่อตรวจสอบไดรฟ์ที่ติดตั้งระบบไว้:</li></ul>DOS<code>bcdedit | find \"osdevice\"</code>\n<ul class=\"wp-block-list\">\n<li>(หากผลลัพธ์เป็น <code>partition=C:</code>, <code>partition=D:</code>, หรืออักษรอื่น ให้จำอักษรนั้นไว้)</li>\n</ul>\n</li>\n\n\n\n<li><strong>สำรองและแทนที่ไฟล์:</strong> (สมมติว่า Windows ติดตั้งอยู่ที่ D: ดังตัวอย่าง) ป้อนคำสั่งดังนี้เพื่อสำรองไฟล์เดิมและแทนที่ไฟล์เดิมด้วย Command Prompt (ขั้นตอนนี้คือการสร้างช่องโหว่)<br>DOS<code>copy D:\\Windows\\System32\\utilman.exe D:\\Windows\\System32\\utilman.bak copy D:\\Windows\\System32\\cmd.exe D:\\Windows\\System32\\utilman.exe</code><ul><li>(ตอบ Yes หรือ overwrite หากระบบถาม)</li></ul>DOS<code>exit</code></li>\n\n\n\n<li><strong>บูตเครื่องใหม่:</strong> ปิดเครื่องและบูตเครื่องกลับเข้าสู่หน้า Log-in ปกติ</li>\n\n\n\n<li><strong>เปิด Command Prompt ที่หน้า Log-in:</strong>\n<ul class=\"wp-block-list\">\n<li>ที่หน้า Log-in, คลิกที่ไอคอน &#8220;Ease of Access&#8221; (หรือ &#8220;Accessibility&#8221; ที่มีลักษณะเป็นรูปวงกลม) ที่มุมขวาล่าง แทนที่จะขึ้นเครื่องมือช่วยเหลือ จะขึ้นหน้าจอ Command Prompt ในฐานะ SYSTEM แทน</li>\n</ul>\n</li>\n\n\n\n<li><strong>เปลี่ยนรหัสผ่าน:</strong> ป้อนคำสั่งดังนี้ (โดยเปลี่ยน <strong>[ชื่อผู้ใช้]</strong> และ <strong>[รหัสผ่านใหม่]</strong>)<br>DOS<code>net user net user \"[ชื่อผู้ใช้]\" \"[รหัสผ่านใหม่]\"</code><br>\n<ul class=\"wp-block-list\">\n<li><strong>(แนะนำ: ใช้คำสั่ง <code>net user</code> เพื่อดูชื่อผู้ใช้ทั้งหมดในเครื่องก่อนเพื่อความถูกต้อง)</strong></li>\n</ul>\n</li>\n\n\n\n<li><strong>กู้คืนไฟล์ระบบ (ต้องทำทันที):</strong> เพื่อปิดประตูลับที่คุณสร้างขึ้น ให้ Log-in ด้วยรหัสผ่านใหม่ เปิด Command Prompt ในฐานะ Admin <em>จากภายใน Windows</em> และป้อนคำสั่งดังนี้ (ตอบ Yes เพื่อ overwrite)</li>\n</ol>\n\n\n\n<p class=\"wp-block-paragraph\"><em>(หมายเหตุ: ไดรฟ์ <code>D:\\</code> ในตัวอย่างอาจเป็น <code>C:\\</code> หรือไดรฟ์อื่น ขึ้นอยู่กับว่าระบบของคุณติดตั้ง Windows ไว้ที่ไดรฟ์ใด หากระบบถามยืนยันการเขียนทับ หรือ Overwrite ให้พิมพ์ <code>Y</code> แล้วกด Enter)</em></p>\n\n\n\n<p class=\"wp-block-paragraph\"><strong>ข้อควรระวังเพิ่มเติม:</strong> ในบางกรณี Windows อาจไม่อนุญาตให้แก้ไขไฟล์ <code>utilman.exe</code> ในขณะที่ระบบกำลังทำงานอยู่ (Access Denied) หากเกิดปัญหานี้ คุณจำเป็นต้องบูตเครื่องกลับเข้าไปที่หน้าจอ &#8220;Command Prompt&#8221; ผ่านแผ่นติดตั้ง Windows (WinRE) อีกครั้ง แล้วจึงพิมพ์คำสั่งกู้คืนไฟล์ด้านบนครับ</p>\n\n\n\n<h2 class=\"wp-block-heading\">ส่วนที่ 4: การใช้เครื่องมือของบุคคลที่สาม (Third-Party Tools)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">หากวิธีการข้างต้นดูซับซ้อนเกินไป ช่างไอทีส่วนใหญ่มักจะใช้เครื่องมือเฉพาะทางในการบูตเครื่องเพื่อล้างรหัสผ่าน (Bypass) ซึ่งเครื่องมือเหล่านี้มักจะมาในรูปแบบของแผ่นบูต (Bootable USB)</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>Hiren’s BootCD PE:</strong> เป็นชุดเครื่องมือช่วยเหลือฉุกเฉินยอดนิยม ภายในจะมีโปรแกรมอย่าง <em>NT Password Edit</em> หรือ <em>Lazesoft Password Recovery</em> ที่ช่วยให้คุณสามารถเลือกลบบัญชีรหัสผ่านของ Local Account ออกได้ง่ายๆ ผ่านหน้าต่างโปรแกรม (GUI) โดยไม่ต้องพิมพ์คำสั่งเอง</li>\n\n\n\n<li><strong>ข้อควรระวัง:</strong> ควรดาวน์โหลดเครื่องมือเหล่านี้จากเว็บไซต์ผู้พัฒนาอย่างเป็นทางการเท่านั้น เพื่อป้องกันมัลแวร์หรือไวรัสที่แฝงมากับไฟล์ ISO</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">ส่วนที่ 5: วิธีป้องกันการลืมรหัสผ่านในอนาคต (Best Practices)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">เพื่อไม่ให้เกิดปัญหานี้ซ้ำรอย นี่คือแนวทางปฏิบัติที่ Microsoft และผู้เชี่ยวชาญด้านความปลอดภัยแนะนำครับ:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>เปิดใช้งาน Windows Hello (แนะนำที่สุด):</strong> การเปลี่ยนจากการใช้รหัสผ่านแบบเดิมมาเป็นการตั้ง <strong>PIN (ตัวเลข 4-6 หลัก)</strong> จะช่วยให้จดจำได้ง่ายกว่ามาก และหากอุปกรณ์ของคุณรองรับ ควรเปิดใช้การสแกนลายนิ้วมือ (Fingerprint) หรือการสแกนใบหน้า (Face Recognition) เพื่อลดภาระการจำรหัสผ่าน</li>\n\n\n\n<li><strong>เปลี่ยนไปใช้ Microsoft Account:</strong> ดังที่กล่าวไปในส่วนแรก หากคุณผูกบัญชีเข้ากับอีเมล คุณจะสามารถกด &#8220;ลืมรหัสผ่าน&#8221; และกู้คืนผ่านสมาร์ทโฟนได้ด้วยตัวเองภายในไม่กี่นาที</li>\n\n\n\n<li><strong>สร้างคำถามความปลอดภัย (Security Questions):</strong> หากคุณจำเป็นต้องใช้ Local Account จริงๆ ให้ไปที่ <code>Settings</code> > <code>Accounts</code> > <code>Sign-in options</code> > <code>Password</code> และเลือก <code>Update your security questions</code> เพื่อตั้งคำถาม-คำตอบกันเหนียวไว้</li>\n\n\n\n<li><strong>ใช้ Password Manager:</strong> หากคุณมีรหัสผ่านหลายชุดที่ต้องจำ แนะนำให้ใช้แอปพลิเคชันจัดการรหัสผ่าน (เช่น Bitwarden, 1Password, หรือฟีเจอร์ในเบราว์เซอร์) เพื่อช่วยจัดเก็บข้อมูลสำคัญเหล่านี้อย่างปลอดภัย</li>\n</ul>\n\n\n\n<p class=\"wp-block-paragraph\">หวังว่ารายละเอียดเหล่านี้จะช่วยให้คุณกู้คืนการเข้าถึงคอมพิวเตอร์ของคุณได้สำเร็จนะครับ! ตอนนี้คุณสามารถ Log-in เข้าสู่หน้าจอ Desktop ได้เรียบร้อยแล้วหรือยังครับ?</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>การลืมรหัสผ่าน Windows เป็นปัญหาที่สร้างความหงุดหงิดและกังวลใจเป็นอย่างมาก บทความนี้จะพาทุกคนไปเรียนรู้วิธีการแก้ไขปัญหาที่หลากหลาย ตั้งแต่ระดับพื้นฐานไปจนถึงขั้นสูง โดยจะเน้นความถูกต้องเชิงเทคนิค, ความปลอดภัย, และความเหมาะสมกับบริบทการใช้งานในไทย สำคัญ: ความปลอดภัยคือสิ่งแรกที่ต้องคำนึงถึง วิธีการบางอย่างมีความเสี่ยงและควรใช้ด้วยความระมัดระวังสูงสุด บทความนี้จะระบุคำเตือนและข้อควรระวังไว้อย่างชัดเจน และข้อมูลทั้งหมดอิงจากแหล่งอ้างอิงเชิงเทคนิคที่ตรวจสอบได้โดยตรง ไม่มีการคาดเดา ส่วนที่ 1: ทำความเข้าใจเกี่ยวกับบัญชีผู้ใช้ใน Windows (Microsoft Account vs. Local Account) ก่อนที่จะเริ่มแก้ไขปัญหา คุณจำเป็นต้องทราบก่อนว่าบัญชีผู้ใช้ที่คุณใช้เป็นประเภทใด เนื่องจากมีวิธีการกู้คืนที่แตกต่างกันอย่างมาก 📚 แหล่งอ้างอิงเชิงเทคนิค (บัญชีผู้ใช้ Windows): ส่วนที่ 2: วิธีการกู้คืนและรีเซ็ตรหัสผ่าน (Step-by-Step) ขอแนะนำให้คุณลองทำตามวิธีการจากระดับที่ง่ายที่สุดและมีความเสี่ยงต่ำที่สุดก่อน วิธีที่ 2.1: การรีเซ็ตรหัสผ่าน Microsoft Account (ออนไลน์) หากคุณใช้บัญชี Microsoft คุณสามารถทำตามขั้นตอนดังนี้ วิธีที่ 2.2: การใช้คำถามความปลอดภัย (Security Questions) &#8211; สำหรับ Local Account หากคุณใช้ Local&#8230;</p>\n",
+      "protected": false
+    },
+    "author": 2,
+    "featured_media": 4023,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "inline_featured_image": false,
+      "_kb_optimizer_status": 0,
+      "_kad_blocks_custom_css": "",
+      "_kad_blocks_head_custom_js": "",
+      "_kad_blocks_body_custom_js": "",
+      "_kad_blocks_footer_custom_js": "",
+      "_kadence_starter_templates_imported_post": false,
+      "_kad_post_transparent": "",
+      "_kad_post_title": "",
+      "_kad_post_layout": "",
+      "_kad_post_sidebar_id": "",
+      "_kad_post_content_style": "",
+      "_kad_post_vertical_padding": "",
+      "_kad_post_feature": "",
+      "_kad_post_feature_position": "",
+      "_kad_post_header": false,
+      "_kad_post_footer": false,
+      "_kad_post_classname": "",
+      "footnotes": ""
+    },
+    "categories": [
+      60
+    ],
+    "tags": [],
+    "class_list": [
+      "post-4022",
+      "post",
+      "type-post",
+      "status-publish",
+      "format-standard",
+      "has-post-thumbnail",
+      "hentry",
+      "category-maintain-computer-systems"
+    ],
+    "taxonomy_info": {
+      "category": [
+        {
+          "value": 60,
+          "label": "ดูแลระบบคอมพิวเตอร์"
+        }
+      ]
+    },
+    "featured_image_src_large": [
+      "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-1024x559.webp",
+      1024,
+      559,
+      true
+    ],
+    "author_info": {
+      "display_name": "สุภชัย สุนทรชื่น",
+      "author_link": "https://www.bizgrowtech.com/author/supachai/"
+    },
+    "comment_info": 0,
+    "category_info": [
+      {
+        "term_id": 60,
+        "name": "ดูแลระบบคอมพิวเตอร์",
+        "slug": "maintain-computer-systems",
+        "term_group": 0,
+        "term_taxonomy_id": 60,
+        "taxonomy": "category",
+        "description": "",
+        "parent": 0,
+        "count": 5,
+        "filter": "raw",
+        "cat_ID": 60,
+        "category_count": 5,
+        "category_description": "",
+        "cat_name": "ดูแลระบบคอมพิวเตอร์",
+        "category_nicename": "maintain-computer-systems",
+        "category_parent": 0
+      }
+    ],
+    "tag_info": false,
+    "_links": {
+      "self": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4022",
+          "targetHints": {
+            "allow": [
+              "GET"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4022"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 0,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4022/revisions"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4023"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media?parent=4022"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories?post=4022"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/tags?post=4022"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 2,
+          "name": "สุภชัย สุนทรชื่น",
+          "url": "https://www.bizgrowtech.com/",
+          "description": "",
+          "link": "https://www.bizgrowtech.com/author/supachai/",
+          "slug": "supachai",
+          "avatar_urls": {
+            "24": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "48": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "96": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp"
+          },
+          "kb": {
+            "avatar": "https://secure.gravatar.com/avatar/?s=300&d=mm&r=g",
+            "registered": "January 1, 1970"
+          },
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 4023,
+          "date": "2026-09-16T09:33:36",
+          "slug": "forgot-windows-password",
+          "type": "attachment",
+          "link": "https://www.bizgrowtech.com/forgot-windows-password/forgot-windows-password/",
+          "title": {
+            "rendered": "Forgot Windows password"
+          },
+          "author": 2,
+          "featured_media": 0,
+          "caption": {
+            "rendered": ""
+          },
+          "alt_text": "ลืมรหัสผ่าน Windows กำลังแก้ไข",
+          "media_type": "image",
+          "mime_type": "image/webp",
+          "media_details": {
+            "width": 2560,
+            "height": 1396,
+            "file": "2026/09/Forgot-Windows-password-scaled.webp",
+            "filesize": "88482",
+            "sizes": {
+              "medium": {
+                "file": "Forgot-Windows-password-300x164.webp",
+                "width": 300,
+                "height": 164,
+                "filesize": "6100",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-300x164.webp"
+              },
+              "large": {
+                "file": "Forgot-Windows-password-1024x559.webp",
+                "width": 1024,
+                "height": 559,
+                "filesize": "27816",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-1024x559.webp"
+              },
+              "thumbnail": {
+                "file": "Forgot-Windows-password-150x150.webp",
+                "width": 150,
+                "height": 150,
+                "filesize": "3892",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-150x150.webp"
+              },
+              "medium_large": {
+                "file": "Forgot-Windows-password-768x419.webp",
+                "width": 768,
+                "height": 419,
+                "filesize": "19538",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-768x419.webp"
+              },
+              "1536x1536": {
+                "file": "Forgot-Windows-password-1536x838.webp",
+                "width": 1536,
+                "height": 838,
+                "filesize": "45932",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-1536x838.webp"
+              },
+              "2048x2048": {
+                "file": "Forgot-Windows-password-2048x1117.webp",
+                "width": 2048,
+                "height": 1117,
+                "filesize": "66502",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-2048x1117.webp"
+              },
+              "full": {
+                "file": "Forgot-Windows-password-scaled.webp",
+                "width": 2560,
+                "height": 1396,
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-scaled.webp"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": [],
+              "alt": ""
+            },
+            "original_image": "Forgot-Windows-password.jpg"
+          },
+          "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/Forgot-Windows-password-scaled.webp",
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4023",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4023"
+              }
+            ],
+            "wp:attached-to": [
+              {
+                "embeddable": true,
+                "post_type": "post",
+                "id": 4022,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4022"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 60,
+            "link": "https://www.bizgrowtech.com/category/maintain-computer-systems/",
+            "name": "ดูแลระบบคอมพิวเตอร์",
+            "slug": "maintain-computer-systems",
+            "taxonomy": "category",
+            "_links": {
+              "self": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories/60",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        []
+      ]
+    }
+  },
+  {
+    "id": 4015,
+    "date": "2026-09-15T11:06:39",
+    "date_gmt": "2026-09-15T04:06:39",
+    "guid": {
+      "rendered": "https://www.bizgrowtech.com/?p=4015"
+    },
+    "modified": "2026-09-16T10:00:14",
+    "modified_gmt": "2026-09-16T03:00:14",
+    "slug": "what-should-i-do-if-my-internet-is-slow",
+    "status": "publish",
+    "type": "post",
+    "link": "https://www.bizgrowtech.com/what-should-i-do-if-my-internet-is-slow/",
+    "title": {
+      "rendered": "เน็ตช้าทำไงดี? คู่มือแก้ปัญหาอินเทอร์เน็ตช้าแบบ Step-by-Step ฉบับเจาะลึก (อัปเดตล่าสุด)"
+    },
+    "content": {
+      "rendered": "\n<p class=\"wp-block-paragraph\">ปัญหา <strong>&#8220;เน็ตช้า&#8221;</strong> หรือ <strong>&#8220;อินเทอร์เน็ตหน่วง&#8221;</strong> เป็นปัญหาที่ชวนหงุดหงิดที่สุดในการทำงานยุคดิจิทัล หลายคนเมื่อเจออาการเว็บหมุนติ้ว โหลดหน้าเพจไม่ขึ้น หรือปิง (Ping) พุ่งกระฉูด ก็มักจะรีบยกหูโทรหาผู้ให้บริการอินเทอร์เน็ต (ISP) ทันที แต่ในความเป็นจริง ปัญหากว่า 70% มักเกิดจากปัจจัยภายในระบบเครือข่ายของเราเอง</p>\n\n\n\n<p class=\"wp-block-paragraph\">เพื่อให้การแก้ปัญหาเป็นไปอย่างรวดเร็วและตรงจุด บทความนี้จะพาคุณไปไล่เช็กสาเหตุของอินเทอร์เน็ตช้าแบบทีละขั้นตอน (Step-by-Step) ตั้งแต่ระดับเบื้องต้นไปจนถึงระดับโครงสร้างเครือข่ายครับ</p>\n\n\n\n<h2 class=\"wp-block-heading\">Step 1: แยกแยะปัญหา (Isolate the Issue) &#8211; เป็นที่เครื่องเดียว หรือเป็นทั้งระบบ?</h2>\n\n\n\n<p class=\"wp-block-paragraph\">กฎข้อแรกของการวิเคราะห์ปัญหา (Troubleshooting) คือต้องจำกัดวงของปัญหาให้แคบลงก่อน</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีทดสอบ:</strong> ลองนำสมาร์ทโฟน โน้ตบุ๊ก หรืออุปกรณ์เครื่องอื่นมาเชื่อมต่อเครือข่ายเดียวกันแล้วทดสอบความเร็ว</li>\n\n\n\n<li><strong>วิเคราะห์ผล:</strong>\n<ul class=\"wp-block-list\">\n<li><strong>ถ้าช้าแค่เครื่องเดียว:</strong> ปัญหาอยู่ที่ตัวอุปกรณ์นั้นๆ (เช่น ติดไวรัส/มัลแวร์, ไดรเวอร์ Network Adapter มีปัญหา, หรือ CPU/RAM กำลังทำงานหนัก 100%)</li>\n\n\n\n<li><strong>ถ้าช้าทุกเครื่อง:</strong> ปัญหาอยู่ที่ส่วนกลาง (Router, Switch, หรือผู้ให้บริการ ISP) ให้ข้ามไปลุยต่อใน Step ถัดไป</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">Step 2: ตัดตัวแปรไร้สาย (WiFi vs LAN)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ปัญหาคลื่น WiFi กวนกันเป็นสาเหตุอันดับต้นๆ ที่ทำให้คนเข้าใจผิดว่าเน็ตช้า</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีทดสอบ:</strong> ให้หาคอมพิวเตอร์หรือโน้ตบุ๊ก เสียบสาย LAN เข้ากับ Router โดยตรง (หลีกเลี่ยงการเสียบผ่าน Switch หลายต่อชั่วคราว) แล้วทำ Speed Test</li>\n\n\n\n<li><strong>วิเคราะห์ผล:</strong>\n<ul class=\"wp-block-list\">\n<li><strong>ถ้าเสียบ LAN แล้วเน็ตมาเต็ม (ปกติ):</strong> แสดงว่าเน็ตไม่ได้ช้า แต่ปัญหาอยู่ที่คลื่น WiFi (อาจเกิดจาก Channel ชนกับเพื่อนบ้าน, มีจุดอับสัญญาณ, หรือตั้งค่า Channel Width กว้างเกินไป)</li>\n\n\n\n<li><strong>ถ้าเสียบ LAN แล้วยังช้าอยู่:</strong> แสดงว่าปัญหาอยู่ที่ Router หรือสายสัญญาณขาเข้า (WAN)</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">Step 3: ตรวจสอบ Traffic คอขวด และ Background Processes</h2>\n\n\n\n<p class=\"wp-block-paragraph\">หลายครั้งที่เรารู้สึกว่าเน็ตช้า เพราะมีแอปพลิเคชันหรืออุปกรณ์บางตัวในระบบกำลังกลืนกินแบนด์วิดท์ (Bandwidth Hogging) โดยเฉพาะฝั่งขาอัปโหลด (Upload) ซึ่งถ้าขาอัปโหลดเต็ม จะทำให้ขาเข้า (Download) ช้าลงไปด้วยอย่างมหาศาล</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>จุดที่ต้องตรวจสอบ:</strong>\n<ul class=\"wp-block-list\">\n<li>มีคอมพิวเตอร์เครื่องไหนกำลังรัน Windows Update อยู่เบื้องหลังหรือไม่?</li>\n\n\n\n<li>มีการซิงค์ข้อมูลแบ็คอัปขนาดใหญ่ขึ้นคลาวด์หรือไม่? (เช่น การสำรองข้อมูลระดับระบบด้วย Acronis หรืออุปกรณ์ NAS อย่าง Synology ที่กำลังทำ Cloud Sync ข้ามสาขา)</li>\n\n\n\n<li>มีอุปกรณ์ IoT หรือกล้องวงจรปิดที่สตรีมภาพความละเอียดสูงออกไปภายนอกตลอดเวลาหรือไม่?</li>\n</ul>\n</li>\n\n\n\n<li><strong>วิธีแก้:</strong> เข้าไปที่หน้าตั้งค่าของ Router แล้วดูหัวข้อ Traffic Monitor หากพบ IP ไหนกินแบนด์วิดท์ผิดปกติ ให้เปิดใช้ฟีเจอร์ QoS (Quality of Service) เพื่อบีบความเร็วอุปกรณ์นั้นลง</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">Step 4: เช็กสถานะของฮาร์ดแวร์เครือข่าย (Router / Load Balancer)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">อุปกรณ์เครือข่ายที่ต้องเปิดทำงานตลอด 24 ชั่วโมง อาจเกิดอาการ Memory Leak หรือสะสมความร้อนจนหน่วยประมวลผล (CPU) คอขวด</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ฮาร์ดแวร์ระดับโฮมยูส (Home Use):</strong> ตรวจสอบว่า Router ร้อนเกินไปหรือไม่ หากเปิดทิ้งไว้นานเป็นเดือน ให้ใช้วิธีสุดคลาสสิกคือ <strong>&#8220;ดึงปลั๊กออก รอ 1 นาที แล้วเสียบใหม่ (Power Cycle)&#8221;</strong> เพื่อเคลียร์ Session และ RAM</li>\n\n\n\n<li><strong>ฮาร์ดแวร์ระดับองค์กร (Enterprise / SME):</strong> หากระบบของคุณมีการใช้อุปกรณ์ Load Balancer (เช่น ซีรีส์ของ Cisco, Peplink หรือแบรนด์อื่นๆ) เพื่อรวมเน็ตหลายเส้น ให้ตรวจสอบสถานะของลิงก์ (WAN Status) ว่ามีเส้นใดเส้นหนึ่ง (ISP link) Down หรือมีค่า Latency สูงผิดปกติ จนทำให้ฟีเจอร์ Load Balance จ่าย Traffic ไปผิดเส้นทางหรือไม่</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">Step 5: ตรวจสอบปัญหา DNS Routing (เว็บโหลดช้า แต่สปีดเทสต์ปกติ)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">เคยไหมครับ? ทำ Speed Test ได้ความเร็วทะลุ Gigabit แต่พอเปิดเข้าเว็บไซต์จริงกลับหมุนติ้ว หรือโหลดรูปภาพบนหน้าเว็บเว็บแอปพลิเคชันไม่ขึ้น (โดยเฉพาะเว็บที่ดึง API จากต่างประเทศ)</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>สาเหตุ:</strong> อาจไม่ได้เกิดจากเน็ตช้า แต่เกิดจาก DNS Server ของผู้ให้บริการทำงานล่าช้า (Resolve ช้า) ทำให้แปลงชื่อเว็บเป็น IP Address ไม่ทัน</li>\n\n\n\n<li><strong>วิธีแก้:</strong> เปลี่ยนไปใช้ Public DNS ที่มีความเสถียรและรวดเร็วกว่า เช่น\n<ul class=\"wp-block-list\">\n<li><strong>Cloudflare DNS:</strong> 1.1.1.1 และ 1.0.0.1 (เน้นความเร็วและความเป็นส่วนตัว)</li>\n\n\n\n<li><strong>Google Public DNS:</strong> 8.8.8.8 และ 8.8.4.4 (เสถียรและมาตรฐานระดับโลก)</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">Step 6: ตรวจสอบค่า Ping และ Packet Loss (คุณภาพของสายสัญญาณ)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ความเร็ว (Bandwidth) ไม่ใช่ทุกอย่าง &#8220;คุณภาพของเส้นทาง&#8221; (Latency &amp; Jitter) สำคัญไม่แพ้กัน โดยเฉพาะกับการประชุมออนไลน์ (Zoom, Teams) หรือการเข้าถึงเซิร์ฟเวอร์บน Cloud</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีทดสอบ:</strong> เปิด Command Prompt บน Windows (หรือ Terminal บน Mac) แล้วพิมพ์คำสั่ง <code>ping 8.8.8.8 -t</code></li>\n\n\n\n<li><strong>วิเคราะห์ผล:</strong> สังเกตค่า <code>time=...ms</code> หากตัวเลขสวิงขึ้นลงรุนแรง (เช่น 15ms กระโดดไป 300ms) หรือมีบรรทัดคำว่า <code>Request timed out</code> โผล่มาเป็นระยะๆ (Packet Loss) แสดงว่าสาย Fiber Optic ภายนอกอาจมีการหักงอ, ค่าแสงดรอป (Optical Power ต่ำ), หรือโหนดของ ISP ในพื้นที่กำลังมีปัญหา</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">📌 บทสรุป: เมื่อไหร่ที่ควรโทรแจ้ง ISP?</h2>\n\n\n\n<p class=\"wp-block-paragraph\">หากคุณได้ไล่ตรวจสอบตาม <strong>Step 1 ถึง Step 6</strong> แล้วพบว่า:</p>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li>ทดสอบผ่านสาย LAN เครื่องเดียวตรงๆ ก็ยังช้า</li>\n\n\n\n<li>Restart อุปกรณ์ทั้งหมดแล้วไม่หาย</li>\n\n\n\n<li>ไม่มีอุปกรณ์ใดๆ ในเครือข่ายดึงแบนด์วิดท์ (ไม่มีการซิงค์ NAS หรืออัปโหลดไฟล์แบ็คอัป)</li>\n\n\n\n<li>พบค่า Ping แกว่ง หรือมี Packet Loss ชัดเจน</li>\n</ol>\n\n\n\n<p class=\"wp-block-paragraph\">ข้อมูลการทดสอบเหล่านี้จะเป็น &#8220;หลักฐานชั้นดี&#8221; ที่คุณสามารถนำไปแจ้งกับฝ่าย Support ของผู้ให้บริการอินเทอร์เน็ต (ISP) ได้อย่างมืออาชีพ ซึ่งจะช่วยให้ช่างเทคนิคเข้าใจปัญหาได้อย่างรวดเร็วและสามารถปรับแก้ค่าแสงสัญญาณ หรือรีเซ็ตพอร์ต (Port Reset) จากฝั่งชุมสายให้คุณได้ทันทีครับ!</p>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>ปัญหา &#8220;เน็ตช้า&#8221; หรือ &#8220;อินเทอร์เน็ตหน่วง&#8221; เป็นปัญหาที่ชวนหงุดหงิดที่สุดในการทำงานยุคดิจิทัล หลายคนเมื่อเจออาการเว็บหมุนติ้ว โหลดหน้าเพจไม่ขึ้น หรือปิง (Ping) พุ่งกระฉูด ก็มักจะรีบยกหูโทรหาผู้ให้บริการอินเทอร์เน็ต (ISP) ทันที แต่ในความเป็นจริง ปัญหากว่า 70% มักเกิดจากปัจจัยภายในระบบเครือข่ายของเราเอง เพื่อให้การแก้ปัญหาเป็นไปอย่างรวดเร็วและตรงจุด บทความนี้จะพาคุณไปไล่เช็กสาเหตุของอินเทอร์เน็ตช้าแบบทีละขั้นตอน (Step-by-Step) ตั้งแต่ระดับเบื้องต้นไปจนถึงระดับโครงสร้างเครือข่ายครับ Step 1: แยกแยะปัญหา (Isolate the Issue) &#8211; เป็นที่เครื่องเดียว หรือเป็นทั้งระบบ? กฎข้อแรกของการวิเคราะห์ปัญหา (Troubleshooting) คือต้องจำกัดวงของปัญหาให้แคบลงก่อน Step 2: ตัดตัวแปรไร้สาย (WiFi vs LAN) ปัญหาคลื่น WiFi กวนกันเป็นสาเหตุอันดับต้นๆ ที่ทำให้คนเข้าใจผิดว่าเน็ตช้า Step 3: ตรวจสอบ Traffic คอขวด และ Background Processes หลายครั้งที่เรารู้สึกว่าเน็ตช้า เพราะมีแอปพลิเคชันหรืออุปกรณ์บางตัวในระบบกำลังกลืนกินแบนด์วิดท์ (Bandwidth Hogging)&#8230;</p>\n",
+      "protected": false
+    },
+    "author": 2,
+    "featured_media": 4020,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "inline_featured_image": false,
+      "_kb_optimizer_status": 1,
+      "_kad_blocks_custom_css": "",
+      "_kad_blocks_head_custom_js": "",
+      "_kad_blocks_body_custom_js": "",
+      "_kad_blocks_footer_custom_js": "",
+      "_kadence_starter_templates_imported_post": false,
+      "_kad_post_transparent": "",
+      "_kad_post_title": "",
+      "_kad_post_layout": "",
+      "_kad_post_sidebar_id": "",
+      "_kad_post_content_style": "",
+      "_kad_post_vertical_padding": "",
+      "_kad_post_feature": "",
+      "_kad_post_feature_position": "",
+      "_kad_post_header": false,
+      "_kad_post_footer": false,
+      "_kad_post_classname": "",
+      "footnotes": ""
+    },
+    "categories": [
+      60
+    ],
+    "tags": [],
+    "class_list": [
+      "post-4015",
+      "post",
+      "type-post",
+      "status-publish",
+      "format-standard",
+      "has-post-thumbnail",
+      "hentry",
+      "category-maintain-computer-systems"
+    ],
+    "taxonomy_info": {
+      "category": [
+        {
+          "value": 60,
+          "label": "ดูแลระบบคอมพิวเตอร์"
+        }
+      ]
+    },
+    "featured_image_src_large": [
+      "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-1024x572.webp",
+      1024,
+      572,
+      true
+    ],
+    "author_info": {
+      "display_name": "สุภชัย สุนทรชื่น",
+      "author_link": "https://www.bizgrowtech.com/author/supachai/"
+    },
+    "comment_info": 0,
+    "category_info": [
+      {
+        "term_id": 60,
+        "name": "ดูแลระบบคอมพิวเตอร์",
+        "slug": "maintain-computer-systems",
+        "term_group": 0,
+        "term_taxonomy_id": 60,
+        "taxonomy": "category",
+        "description": "",
+        "parent": 0,
+        "count": 5,
+        "filter": "raw",
+        "cat_ID": 60,
+        "category_count": 5,
+        "category_description": "",
+        "cat_name": "ดูแลระบบคอมพิวเตอร์",
+        "category_nicename": "maintain-computer-systems",
+        "category_parent": 0
+      }
+    ],
+    "tag_info": false,
+    "_links": {
+      "self": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4015",
+          "targetHints": {
+            "allow": [
+              "GET"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4015"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 0,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4015/revisions"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4020"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media?parent=4015"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories?post=4015"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/tags?post=4015"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 2,
+          "name": "สุภชัย สุนทรชื่น",
+          "url": "https://www.bizgrowtech.com/",
+          "description": "",
+          "link": "https://www.bizgrowtech.com/author/supachai/",
+          "slug": "supachai",
+          "avatar_urls": {
+            "24": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "48": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "96": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp"
+          },
+          "kb": {
+            "avatar": "https://secure.gravatar.com/avatar/?s=300&d=mm&r=g",
+            "registered": "January 1, 1970"
+          },
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 4020,
+          "date": "2026-09-15T11:12:41",
+          "slug": "what-should-i-do-if-my-internet-is-slow",
+          "type": "attachment",
+          "link": "https://www.bizgrowtech.com/what-should-i-do-if-my-internet-is-slow/what-should-i-do-if-my-internet-is-slow/",
+          "title": {
+            "rendered": "What should I do if my internet is slow"
+          },
+          "author": 2,
+          "featured_media": 0,
+          "caption": {
+            "rendered": ""
+          },
+          "alt_text": "เน็ตช้าทำไงดี",
+          "media_type": "image",
+          "mime_type": "image/webp",
+          "media_details": {
+            "width": 2560,
+            "height": 1429,
+            "file": "2026/09/What-should-I-do-if-my-internet-is-slow-scaled.webp",
+            "filesize": "149250",
+            "sizes": {
+              "medium": {
+                "file": "What-should-I-do-if-my-internet-is-slow-300x167.webp",
+                "width": 300,
+                "height": 167,
+                "filesize": "8962",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-300x167.webp"
+              },
+              "large": {
+                "file": "What-should-I-do-if-my-internet-is-slow-1024x572.webp",
+                "width": 1024,
+                "height": 572,
+                "filesize": "46750",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-1024x572.webp"
+              },
+              "thumbnail": {
+                "file": "What-should-I-do-if-my-internet-is-slow-150x150.webp",
+                "width": 150,
+                "height": 150,
+                "filesize": "4786",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-150x150.webp"
+              },
+              "medium_large": {
+                "file": "What-should-I-do-if-my-internet-is-slow-768x429.webp",
+                "width": 768,
+                "height": 429,
+                "filesize": "32234",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-768x429.webp"
+              },
+              "1536x1536": {
+                "file": "What-should-I-do-if-my-internet-is-slow-1536x857.webp",
+                "width": 1536,
+                "height": 857,
+                "filesize": "77866",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-1536x857.webp"
+              },
+              "2048x2048": {
+                "file": "What-should-I-do-if-my-internet-is-slow-2048x1143.webp",
+                "width": 2048,
+                "height": 1143,
+                "filesize": "111674",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-2048x1143.webp"
+              },
+              "full": {
+                "file": "What-should-I-do-if-my-internet-is-slow-scaled.webp",
+                "width": 2560,
+                "height": 1429,
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-scaled.webp"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": [],
+              "alt": ""
+            },
+            "original_image": "What-should-I-do-if-my-internet-is-slow.jpg"
+          },
+          "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-is-slow-scaled.webp",
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4020",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4020"
+              }
+            ],
+            "wp:attached-to": [
+              {
+                "embeddable": true,
+                "post_type": "post",
+                "id": 4015,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4015"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 60,
+            "link": "https://www.bizgrowtech.com/category/maintain-computer-systems/",
+            "name": "ดูแลระบบคอมพิวเตอร์",
+            "slug": "maintain-computer-systems",
+            "taxonomy": "category",
+            "_links": {
+              "self": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories/60",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        []
+      ]
+    }
+  },
+  {
+    "id": 4012,
+    "date": "2026-09-15T10:44:41",
+    "date_gmt": "2026-09-15T03:44:41",
+    "guid": {
+      "rendered": "https://www.bizgrowtech.com/?p=4012"
+    },
+    "modified": "2026-09-16T10:00:41",
+    "modified_gmt": "2026-09-16T03:00:41",
+    "slug": "what-should-i-do-if-my-internet-keeps-disconnecting",
+    "status": "publish",
+    "type": "post",
+    "link": "https://www.bizgrowtech.com/what-should-i-do-if-my-internet-keeps-disconnecting/",
+    "title": {
+      "rendered": "เน็ตหลุดบ่อยทำไงดี? เจาะลึก 8 สาเหตุ WiFi หลุดบ่อย พร้อมวิธีตรวจสอบและแก้ไขแบบช่างไอที (อัปเดตล่าสุด)"
+    },
+    "content": {
+      "rendered": "\n<p class=\"wp-block-paragraph\">ปัญหา <strong>&#8220;WiFi หลุดบ่อย&#8221;</strong>, &#8220;เน็ตค้าง&#8221;, หรือ &#8220;ดูวิดีโอแล้วกระตุก&#8221; เป็นหนึ่งในปัญหาสุดคลาสสิกที่สร้างความหงุดหงิดให้กับผู้ใช้งานทั้งในบ้านและออฟฟิศ หลายคนมักโทษว่าเป็นความผิดของผู้ให้บริการอินเทอร์เน็ต (ISP) แต่ในความเป็นจริงแล้ว ปัญหากว่า 80% มักเกิดจากปัจจัยภายในบ้านของเราเอง ไม่ว่าจะเป็นจุดอับสัญญาณ, คลื่นชนกัน, หรือข้อจำกัดของฮาร์ดแวร์</p>\n\n\n\n<p class=\"wp-block-paragraph\">บทความนี้จะพาคุณไปเจาะลึกถึงรากฐานของปัญหา พร้อมแนะนำ <strong>&#8220;วิธีแก้ปัญหา WiFi หลุด&#8221;</strong> แบบ Step-by-Step เพื่อให้คุณสามารถตรวจสอบและแก้ไขระบบเครือข่ายของคุณให้กลับมาเสถียรและเร็วแรงอีกครั้ง</p>\n\n\n\n<h2 class=\"wp-block-heading\">1. จุดอับสัญญาณ (Dead Zones) และระยะทางที่ไกลเกินไป</h2>\n\n\n\n<p class=\"wp-block-paragraph\">คลื่น WiFi คือคลื่นวิทยุประเภทหนึ่งที่มีข้อจำกัดเรื่องระยะทางและสิ่งกีดขวาง หากคุณเดินออกห่างจากเราเตอร์ (Router) มากเกินไป หรือมีสิ่งกีดขวาง สัญญาณจะดรอปลงจนทำให้การเชื่อมต่อหลุดได้</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> สัญญาณ WiFi บนมือถือลดเหลือ 1–2 ขีด, เดินทะลุกำแพงไปอีกห้องแล้วเน็ตหลุด, วิดีโอคอล (Video Call) กระตุกเมื่อเปลี่ยนจุดนั่ง</li>\n\n\n\n<li><strong>สาเหตุเชิงลึก:</strong> วัสดุบางประเภทดูดซับคลื่นสัญญาณได้ดีเยี่ยม เช่น กำแพงคอนกรีตหนาๆ, กระจกเงา, โลหะ, หรือแม้แต่น้ำ (เช่น ตู้ปลาขนาดใหญ่) นอกจากนี้การวาง Router ไว้ในมุมอับ หลังตู้ทีวี หรือใต้บันได จะทำให้คลื่นกระจายตัวได้ไม่ดี</li>\n\n\n\n<li><strong>วิธีแก้ไข (Best Practices):</strong>\n<ul class=\"wp-block-list\">\n<li>ย้าย Router มาไว้บริเวณจุดกึ่งกลางของบ้าน และวางให้อยู่ในที่โล่ง สูงจากพื้นอย่างน้อย 1-1.5 เมตร</li>\n\n\n\n<li>หลีกเลี่ยงการวาง Router ใกล้กับอุปกรณ์ที่ปล่อยคลื่นแม่เหล็กไฟฟ้า เช่น ไมโครเวฟ, โทรศัพท์ไร้สาย หรือลำโพงบลูทูธ</li>\n\n\n\n<li>หากบ้านมีหลายชั้นหรือพื้นที่กว้างมาก แนะนำให้อัปเกรดไปใช้ระบบ <strong>Mesh WiFi</strong> หรือติด <strong>Access Point (AP)</strong> เพิ่มเติม เพื่อสร้างโครงข่ายสัญญาณให้ครอบคลุมทั่วทุกมุมบ้านแบบไร้รอยต่อ</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">2. คลื่นสัญญาณกวนกัน (Channel Interference)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ปัญหานี้พบบ่อยมากในผู้อาศัยในคอนโดมิเนียม หอพัก หรือหมู่บ้านจัดสรรที่อยู่ติดกันมากๆ เมื่อทุกห้องเปิดใช้ WiFi คลื่นสัญญาณจะเกิดการทับซ้อนและกวนกันเอง (Co-Channel Interference)</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> WiFi หลุดบ่อยในช่วงหัวค่ำ (ช่วงที่คนใช้เน็ตเยอะ), เน็ตช้าผิดปกติเป็นบางเวลา, บางครั้งหลุดแล้วเชื่อมต่อกลับมาได้เอง</li>\n\n\n\n<li><strong>สาเหตุเชิงลึก:</strong> Router ทั่วไปมักจะตั้งค่าช่องสัญญาณ (Channel) แบบ Auto ซึ่งบางครั้งมันไปเลือกช่องที่ชนกับเพื่อนบ้านพอดี</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong> ให้เข้าไปที่หน้าตั้งค่าของ Router (ผ่านเว็บบราวเซอร์) เพื่อทำการเปลี่ยน Channel แบบ Manual โดยใช้แอปพลิเคชันอย่าง <em>WiFi Analyzer</em> บนมือถือ เพื่อสแกนหาช่องที่ว่างที่สุด\n<ul class=\"wp-block-list\">\n<li><strong>คลื่น 2.4GHz:</strong> แนะนำให้เลือกใช้เฉพาะช่องสัญญาณที่ไม่ทับซ้อนกันเลย (Non-overlapping channels) คือ <strong>Channel 1, 6 หรือ 11</strong> เท่านั้น</li>\n\n\n\n<li><strong>คลื่น 5GHz:</strong> มีช่องสัญญาณให้เลือกเยอะกว่าและทับซ้อนกันน้อยกว่า ส่วนใหญ่สามารถปล่อยการตั้งค่าเป็น Auto ได้</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">3. ปัญหาจากฟีเจอร์ Smart Connect (รวมคลื่น 2.4GHz และ 5GHz)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">Router รุ่นใหม่ๆ มักจะมีฟีเจอร์ที่รวมชื่อ WiFi (SSID) ของคลื่น 2.4GHz และ 5GHz ไว้เป็นชื่อเดียวกัน โดยให้ตัว Router และมือถือเป็นคนตกลงกันเองว่าจะจับคลื่นไหน เรียกว่า Band Steering</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> มือถือสลับคลื่นไปมาตลอดเวลาทำให้เน็ตกระตุก, เล่นเกมแล้วปิง (Ping) เด้ง, หลุดตอนเดินเปลี่ยนห้อง</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong> หากอุปกรณ์ของคุณมีปัญหาในการสลับคลื่น แนะนำให้เข้าไปปิดฟีเจอร์ Smart Connect / Band Steering ในหน้าตั้งค่า Router แล้ว <strong>แยกชื่อ WiFi ออกจากกันให้ชัดเจน</strong> เช่น <code>HomeWiFi_2.4G</code> และ <code>HomeWiFi_5G</code> จากนั้นให้ผู้ใช้เลือกเชื่อมต่อเอง (คลื่น 5G สำหรับห้องที่อยู่ใกล้ Router และคลื่น 2.4G สำหรับพื้นที่ไกลๆ)</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">4. Router ทำงานหนักเกินไป หรือความร้อนสะสม (Hardware Exhaustion)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">Router ก็คือคอมพิวเตอร์ขนาดเล็กเครื่องหนึ่งที่มี CPU และ RAM หากต้องประมวลผลข้อมูลปริมาณมหาศาลตลอด 24 ชั่วโมง อาจทำให้ระบบเกิดอาการแฮงก์ (Hang) หรือค้างได้</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> เน็ตหลุดพร้อมกันทุกอุปกรณ์ในช่วงเย็น, ไฟที่ Router ติดครบแต่เล่นเน็ตไม่ได้, ต้องใช้วิธีดึงปลั๊กออกแล้วเสียบใหม่ (Restart) ถึงจะหาย</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong>\n<ul class=\"wp-block-list\">\n<li>จัดวาง Router ในจุดที่มีอากาศถ่ายเทสะดวก ไม่วางซ้อนทับกับอุปกรณ์อิเล็กทรอนิกส์อื่นๆ (เช่น กล่องทีวีรับสัญญาณ)</li>\n\n\n\n<li>สร้างนิสัยการดูแลระบบด้วยการ <strong>Restart Router สัปดาห์ละ 1 ครั้ง</strong> เพื่อเคลียร์แคช (Cache) และ RAM</li>\n\n\n\n<li>หาก Router มีอายุการใช้งานเกิน 3-5 ปี หรือเป็นรุ่นเก่าที่แถมมาจากผู้ให้บริการ อาจถึงเวลาที่ต้องพิจารณาซื้อ Router รุ่นใหม่ที่มีประสิทธิภาพสูงกว่ามาเปลี่ยน</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">5. แย่ง Bandwidth กันใช้งาน (Network Congestion)</h2>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> เน็ตหลุดหรือปิงขึ้นกระฉูด เมื่อมีสมาชิกในบ้านเปิดดู YouTube ความละเอียด 4K, โหลดบิททอร์เรนต์ (BitTorrent), หรืออัปเดตเกมไฟล์ใหญ่ๆ</li>\n\n\n\n<li><strong>สาเหตุเชิงลึก:</strong> Bandwidth ของอินเทอร์เน็ตถูกดึงไปใช้จนหมด ทำให้ข้อมูลของอุปกรณ์อื่นๆ วิ่งไม่ผ่าน หรือ Router รับมือกับจำนวนการเชื่อมต่อ (Sessions) ไม่ไหว</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong> เข้าไปเปิดใช้งานฟีเจอร์ <strong>QoS (Quality of Service)</strong> ใน Router เพื่อจัดลำดับความสำคัญของข้อมูล เช่น ให้ความสำคัญกับการเล่นเกมออนไลน์หรือประชุม Zoom เป็นอันดับแรก และจำกัดความเร็ว (Bandwidth Limitation) ของการดาวน์โหลดไฟล์ทั่วไป</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">6. ปัญหาที่ฝั่งตัวรับสัญญาณ (Network Adapter &amp; Driver)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">บางครั้งปัญหาไม่ได้อยู่ที่ Router แต่เป็นที่อุปกรณ์สมาร์ทโฟน โน้ตบุ๊ก หรือ PC ของเราเอง</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> เครื่องอื่นในบ้านใช้งานได้ปกติ ไหลลื่น ไม่มีปัญหา แต่หลุดอยู่แค่เครื่องเราเครื่องเดียว</li>\n\n\n\n<li><strong>วิธีแก้ไข (สำหรับ Windows):</strong>\n<ul class=\"wp-block-list\">\n<li><strong>อัปเดตไดรเวอร์:</strong> ไปที่ <code>Device Manager</code> > <code>Network Adapters</code> > คลิกขวาที่ชื่อการ์ด WiFi ของคุณ > เลือก <code>Update driver</code></li>\n\n\n\n<li><strong>ปิดฟีเจอร์ประหยัดพลังงาน:</strong> ในหน้า Properties ของ WiFi Adapter ไปที่แท็บ <code>Power Management</code> แล้วเอาติ๊กถูกที่ช่อง <em>“Allow the computer to turn off this device to save power”</em> ออก เพื่อป้องกันไม่ให้ Windows ตัดไฟเลี้ยงการ์ด WiFi</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">7. ปัญหา IP ซ้ำซ้อน (IP Conflict) หรือ DHCP ทำงานผิดพลาด</h2>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> เชื่อมต่อ WiFi ได้แป๊บเดียวแล้วเด้งหลุด, มือถือขึ้นข้อความ &#8220;Obtaining IP address&#8230;&#8221; หรือ &#8220;Connected, no internet&#8221;</li>\n\n\n\n<li><strong>สาเหตุเชิงลึก:</strong> ระบบแจก IP อัตโนมัติ (DHCP Server) ใน Router ทำงานรวน ทำให้จ่ายหมายเลข IP เดียวกันให้กับอุปกรณ์ 2 เครื่องในบ้าน ซึ่งจะทำให้ทั้งสองเครื่องสลับกันต่ออินเทอร์เน็ตไม่ได้</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong>\n<ul class=\"wp-block-list\">\n<li>การ Restart Router 1 ครั้ง มักจะแก้ปัญหานี้ได้ทันที</li>\n\n\n\n<li>หากจำเป็นต้องตั้งค่า IP แบบคงที่ (Static IP) ให้กับอุปกรณ์บางตัว เช่น กล้องวงจรปิด หรือปริ้นเตอร์ ให้ตั้งค่า IP ให้อยู่นอกช่วงที่ DHCP แจก (DHCP Pool) เพื่อป้องกันการทับซ้อน</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">8. Firmware ของ Router ล้าสมัย</h2>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ลักษณะอาการ:</strong> อินเทอร์เน็ตหลุดแบบหาสาเหตุไม่ได้, ระบบมีบั๊ก (Bug), เครื่องรีบูตตัวเองบ่อยๆ</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong> ล็อกอินเข้าสู่ระบบจัดการของ Router เพื่อตรวจสอบการอัปเดต Firmware (มักจะอยู่ในเมนู System Tools หรือ Administration) การอัปเดตเฟิร์มแวร์เป็นเวอร์ชันล่าสุดจะช่วยแก้ปัญหาความเสถียรและอุดช่องโหว่ด้านความปลอดภัยได้</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">📌 วิธีเช็กให้ชัวร์: ปัญหาอยู่ที่ &#8220;WiFi&#8221; หรือ &#8220;เน็ตค่ายล่ม&#8221;?</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ก่อนจะรื้อตั้งค่าใหม่ทั้งหมด เราต้องแยกให้ออกก่อนว่าปัญหาเกิดจากอะไร โดยสังเกตง่ายๆ ดังนี้:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ปัญหาเกิดที่ WiFi:</strong> สัญลักษณ์พัด WiFi บนมือถือหายไป, อุปกรณ์ Disconnect จากชื่อเครือข่ายเอง หรือขึ้นให้ใส่รหัสผ่านใหม่</li>\n\n\n\n<li><strong>ปัญหาเกิดที่อินเทอร์เน็ตล่ม (ISP ล่ม):</strong> สัญลักษณ์ WiFi ยังติดอยู่ปกติ เชื่อมต่อกับ Router ได้ (Connected) แต่เปิดเข้าเว็บไซต์อะไรไม่ได้เลย (No Internet)</li>\n</ul>\n\n\n\n<h3 class=\"wp-block-heading\">⚙️ 3 ขั้นตอนทดสอบ (Troubleshooting) แบบรวดเร็ว</h3>\n\n\n\n<ol start=\"1\" class=\"wp-block-list\">\n<li><strong>ทดสอบยืนใกล้ Router:</strong> ถ้ายืนติดกับ Router แล้วเน็ตไม่หลุด แปลว่าปัญหาคือ &#8220;สัญญาณอ่อน&#8221; หรือมีจุดอับสัญญาณ</li>\n\n\n\n<li><strong>ทดสอบเสียบสาย LAN:</strong> ถ้าเสียบสาย LAN เข้าคอมพิวเตอร์แล้วใช้งานได้ปกติ ลื่นไหล แปลว่าปัญหาอยู่ที่ &#8220;คลื่น WiFi&#8221; แน่นอน</li>\n\n\n\n<li><strong>ทดสอบอุปกรณ์อื่น:</strong> ถ้าทดสอบด้วยสาย LAN ก็ยังหลุด และเครื่องอื่นในบ้านก็เป็นเหมือนกันหมด แปลว่า &#8220;อินเทอร์เน็ตมีปัญหา&#8221; ให้โทรแจ้ง Call Center ของค่ายอินเทอร์เน็ตที่คุณใช้งานได้เลย</li>\n</ol>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\">\n<p class=\"wp-block-paragraph\"><strong>สรุปสั้นๆ สำหรับคนไม่มีเวลา:</strong> หากเจอเน็ตหลุดบ่อย ให้เริ่มจากการ <strong>&#8220;ถอดปลั๊ก Router ทิ้งไว้ 1 นาทีแล้วเสียบใหม่&#8221;</strong> หากยังไม่หาย ให้ลอง <strong>&#8220;แยกชื่อ WiFi 2.4G และ 5G ออกจากกัน&#8221;</strong> และท้ายที่สุด หาก Router ของคุณใช้งานมานานกว่า 4 ปีแล้ว การลงทุนเปลี่ยนอัปเกรดฮาร์ดแวร์ใหม่ จะเป็นวิธีจบปัญหาที่คุ้มค่าและเด็ดขาดที่สุดครับ!</p>\n</blockquote>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>ปัญหา &#8220;WiFi หลุดบ่อย&#8221;, &#8220;เน็ตค้าง&#8221;, หรือ &#8220;ดูวิดีโอแล้วกระตุก&#8221; เป็นหนึ่งในปัญหาสุดคลาสสิกที่สร้างความหงุดหงิดให้กับผู้ใช้งานทั้งในบ้านและออฟฟิศ หลายคนมักโทษว่าเป็นความผิดของผู้ให้บริการอินเทอร์เน็ต (ISP) แต่ในความเป็นจริงแล้ว ปัญหากว่า 80% มักเกิดจากปัจจัยภายในบ้านของเราเอง ไม่ว่าจะเป็นจุดอับสัญญาณ, คลื่นชนกัน, หรือข้อจำกัดของฮาร์ดแวร์ บทความนี้จะพาคุณไปเจาะลึกถึงรากฐานของปัญหา พร้อมแนะนำ &#8220;วิธีแก้ปัญหา WiFi หลุด&#8221; แบบ Step-by-Step เพื่อให้คุณสามารถตรวจสอบและแก้ไขระบบเครือข่ายของคุณให้กลับมาเสถียรและเร็วแรงอีกครั้ง 1. จุดอับสัญญาณ (Dead Zones) และระยะทางที่ไกลเกินไป คลื่น WiFi คือคลื่นวิทยุประเภทหนึ่งที่มีข้อจำกัดเรื่องระยะทางและสิ่งกีดขวาง หากคุณเดินออกห่างจากเราเตอร์ (Router) มากเกินไป หรือมีสิ่งกีดขวาง สัญญาณจะดรอปลงจนทำให้การเชื่อมต่อหลุดได้ 2. คลื่นสัญญาณกวนกัน (Channel Interference) ปัญหานี้พบบ่อยมากในผู้อาศัยในคอนโดมิเนียม หอพัก หรือหมู่บ้านจัดสรรที่อยู่ติดกันมากๆ เมื่อทุกห้องเปิดใช้ WiFi คลื่นสัญญาณจะเกิดการทับซ้อนและกวนกันเอง (Co-Channel Interference) 3. ปัญหาจากฟีเจอร์ Smart Connect (รวมคลื่น 2.4GHz&#8230;</p>\n",
+      "protected": false
+    },
+    "author": 2,
+    "featured_media": 4019,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "inline_featured_image": false,
+      "_kb_optimizer_status": 1,
+      "_kad_blocks_custom_css": "",
+      "_kad_blocks_head_custom_js": "",
+      "_kad_blocks_body_custom_js": "",
+      "_kad_blocks_footer_custom_js": "",
+      "_kadence_starter_templates_imported_post": false,
+      "_kad_post_transparent": "",
+      "_kad_post_title": "",
+      "_kad_post_layout": "",
+      "_kad_post_sidebar_id": "",
+      "_kad_post_content_style": "",
+      "_kad_post_vertical_padding": "",
+      "_kad_post_feature": "",
+      "_kad_post_feature_position": "",
+      "_kad_post_header": false,
+      "_kad_post_footer": false,
+      "_kad_post_classname": "",
+      "footnotes": ""
+    },
+    "categories": [
+      60
+    ],
+    "tags": [],
+    "class_list": [
+      "post-4012",
+      "post",
+      "type-post",
+      "status-publish",
+      "format-standard",
+      "has-post-thumbnail",
+      "hentry",
+      "category-maintain-computer-systems"
+    ],
+    "taxonomy_info": {
+      "category": [
+        {
+          "value": 60,
+          "label": "ดูแลระบบคอมพิวเตอร์"
+        }
+      ]
+    },
+    "featured_image_src_large": [
+      "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-1024x559.webp",
+      1024,
+      559,
+      true
+    ],
+    "author_info": {
+      "display_name": "สุภชัย สุนทรชื่น",
+      "author_link": "https://www.bizgrowtech.com/author/supachai/"
+    },
+    "comment_info": 0,
+    "category_info": [
+      {
+        "term_id": 60,
+        "name": "ดูแลระบบคอมพิวเตอร์",
+        "slug": "maintain-computer-systems",
+        "term_group": 0,
+        "term_taxonomy_id": 60,
+        "taxonomy": "category",
+        "description": "",
+        "parent": 0,
+        "count": 5,
+        "filter": "raw",
+        "cat_ID": 60,
+        "category_count": 5,
+        "category_description": "",
+        "cat_name": "ดูแลระบบคอมพิวเตอร์",
+        "category_nicename": "maintain-computer-systems",
+        "category_parent": 0
+      }
+    ],
+    "tag_info": false,
+    "_links": {
+      "self": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4012",
+          "targetHints": {
+            "allow": [
+              "GET"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4012"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 0,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4012/revisions"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4019"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media?parent=4012"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories?post=4012"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/tags?post=4012"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 2,
+          "name": "สุภชัย สุนทรชื่น",
+          "url": "https://www.bizgrowtech.com/",
+          "description": "",
+          "link": "https://www.bizgrowtech.com/author/supachai/",
+          "slug": "supachai",
+          "avatar_urls": {
+            "24": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "48": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "96": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp"
+          },
+          "kb": {
+            "avatar": "https://secure.gravatar.com/avatar/?s=300&d=mm&r=g",
+            "registered": "January 1, 1970"
+          },
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 4019,
+          "date": "2026-09-15T11:11:18",
+          "slug": "what-should-i-do-if-my-internet-keeps-disconnecting",
+          "type": "attachment",
+          "link": "https://www.bizgrowtech.com/what-should-i-do-if-my-internet-keeps-disconnecting/what-should-i-do-if-my-internet-keeps-disconnecting/",
+          "title": {
+            "rendered": "What should I do if my internet keeps disconnecting"
+          },
+          "author": 2,
+          "featured_media": 0,
+          "caption": {
+            "rendered": ""
+          },
+          "alt_text": "เน็ตหลุดบ่อยทำไงดี?",
+          "media_type": "image",
+          "mime_type": "image/webp",
+          "media_details": {
+            "width": 2560,
+            "height": 1396,
+            "file": "2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-scaled.webp",
+            "filesize": "129048",
+            "sizes": {
+              "medium": {
+                "file": "What-should-I-do-if-my-internet-keeps-disconnecting-300x164.webp",
+                "width": 300,
+                "height": 164,
+                "filesize": "7090",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-300x164.webp"
+              },
+              "large": {
+                "file": "What-should-I-do-if-my-internet-keeps-disconnecting-1024x559.webp",
+                "width": 1024,
+                "height": 559,
+                "filesize": "37650",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-1024x559.webp"
+              },
+              "thumbnail": {
+                "file": "What-should-I-do-if-my-internet-keeps-disconnecting-150x150.webp",
+                "width": 150,
+                "height": 150,
+                "filesize": "3712",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-150x150.webp"
+              },
+              "medium_large": {
+                "file": "What-should-I-do-if-my-internet-keeps-disconnecting-768x419.webp",
+                "width": 768,
+                "height": 419,
+                "filesize": "25740",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-768x419.webp"
+              },
+              "1536x1536": {
+                "file": "What-should-I-do-if-my-internet-keeps-disconnecting-1536x838.webp",
+                "width": 1536,
+                "height": 838,
+                "filesize": "65614",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-1536x838.webp"
+              },
+              "2048x2048": {
+                "file": "What-should-I-do-if-my-internet-keeps-disconnecting-2048x1117.webp",
+                "width": 2048,
+                "height": 1117,
+                "filesize": "97186",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-2048x1117.webp"
+              },
+              "full": {
+                "file": "What-should-I-do-if-my-internet-keeps-disconnecting-scaled.webp",
+                "width": 2560,
+                "height": 1396,
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-scaled.webp"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": [],
+              "alt": ""
+            },
+            "original_image": "What-should-I-do-if-my-internet-keeps-disconnecting.jpg"
+          },
+          "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-I-do-if-my-internet-keeps-disconnecting-scaled.webp",
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4019",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4019"
+              }
+            ],
+            "wp:attached-to": [
+              {
+                "embeddable": true,
+                "post_type": "post",
+                "id": 4012,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4012"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 60,
+            "link": "https://www.bizgrowtech.com/category/maintain-computer-systems/",
+            "name": "ดูแลระบบคอมพิวเตอร์",
+            "slug": "maintain-computer-systems",
+            "taxonomy": "category",
+            "_links": {
+              "self": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories/60",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        []
+      ]
+    }
+  },
+  {
+    "id": 4006,
+    "date": "2026-09-15T10:21:47",
+    "date_gmt": "2026-09-15T03:21:47",
+    "guid": {
+      "rendered": "https://www.bizgrowtech.com/?p=4006"
+    },
+    "modified": "2026-09-16T10:11:54",
+    "modified_gmt": "2026-09-16T03:11:54",
+    "slug": "slow-computer-sluggish-windows-what-should-you-check",
+    "status": "publish",
+    "type": "post",
+    "link": "https://www.bizgrowtech.com/slow-computer-sluggish-windows-what-should-you-check/",
+    "title": {
+      "rendered": "คอมช้า Windows อืด ต้องเช็กอะไรบ้าง? เจาะลึกวิธีวิเคราะห์และแก้ปัญหาแบบมือโปร (อัปเดตล่าสุด)"
+    },
+    "content": {
+      "rendered": "\n<p class=\"wp-block-paragraph\">เมื่อเกิดปัญหา <strong>&#8220;คอมช้า&#8221;</strong> หรือ <strong>&#8220;Windows อืด&#8221;</strong> หลายคนมักรีบด่วนสรุปว่าเกิดจาก RAM ไม่พอ หรือเครื่องเก่าเกินไปจนต้องเสียเงินซื้อใหม่ แต่ในความเป็นจริงแล้ว สาเหตุของปัญหาคอมพิวเตอร์ทำงานหน่วงนั้นมาจากหลายปัจจัย ไม่ว่าจะเป็นการทำงานของหน่วยประมวลผล (CPU), ปัญหาดิสก์ทำงานหนัก 100% (Disk 100%), ไวรัส, ไปจนถึงปัญหาเชิงกายภาพอย่างเรื่องความร้อนสะสม</p>\n\n\n\n<p class=\"wp-block-paragraph\">บทความนี้จะพาคุณไปเจาะลึกวิธีการวิเคราะห์ปัญหาแบบทีละขั้นตอน เพื่อให้คุณสามารถหาสาเหตุที่แท้จริงและแก้ไขปัญหา <strong>Windows 10 และ Windows 11 ช้า</strong> ได้อย่างตรงจุดระดับ IT Support</p>\n\n\n\n<h2 class=\"wp-block-heading\">1. แยกแยะพฤติกรรมให้ชัด: &#8220;คอมของคุณช้าตอนไหน?&#8221;</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ก่อนที่จะเริ่มตั้งค่าหรือแก้ไขอะไร การสังเกตอาการเครื่องคือขั้นตอนแรกที่สำคัญที่สุด เพราะช่วงเวลาที่เครื่องเกิดอาการหน่วงจะเป็นตัวชี้เป้าสาเหตุได้อย่างแม่นยำ:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>ช้าตั้งแต่ตอนกดปุ่มเปิดเครื่อง (Boot):</strong> มักเกิดจากมีโปรแกรมเปิดตัวเองอัตโนมัติ (Startup Program) เยอะเกินไป หรือฮาร์ดดิสก์ (HDD) เริ่มเสื่อมสภาพ</li>\n\n\n\n<li><strong>ช้าเฉพาะตอนเปิดบางโปรแกรม หรือเล่นเกม:</strong> อาจเกิดจากสเปคเครื่องไม่ถึงเกณฑ์ของโปรแกรมนั้นๆ หรือ RAM คอขวด</li>\n\n\n\n<li><strong>ช้าเฉพาะตอนเข้าเว็บไซต์:</strong> อาจเกิดจากการเปิดแท็บ (Tab) ทิ้งไว้เยอะเกินไป หรือเป็นปัญหาที่อินเทอร์เน็ต ไม่ใช่ที่ตัวเครื่อง</li>\n\n\n\n<li><strong>ช้าตลอดเวลา (หน่วง กระตุก เมาส์ค้าง):</strong> มักเกิดจากความร้อนสะสม (Thermal Throttling), ไวรัส/Malware หรือปัญหา Disk Usage แตะ 100%</li>\n\n\n\n<li><strong>เพิ่งมาช้าหลังจากการทำ Windows Update:</strong> บ่งชี้ว่าอาจเกิดบั๊กของแพตช์อัปเดต หรือไดรเวอร์ฮาร์ดแวร์ไม่เข้ากันกับระบบ</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">2. ตรวจสอบ CPU Usage (หน่วยประมวลผลทำงานหนักเกินไป)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">CPU เปรียบเสมือนสมองของคอมพิวเตอร์ หากมีหลายโปรแกรมแย่งกันส่งคำสั่ง คอมพิวเตอร์จะตอบสนองช้าลงทันที</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีเช็ก:</strong> กดปุ่ม <code>Ctrl + Shift + Esc</code> เพื่อเปิด <strong>Task Manager</strong> > ไปที่แท็บ <strong>Performance</strong> หรือ <strong>Processes</strong></li>\n\n\n\n<li><strong>เกณฑ์ปกติ:</strong> ขณะเปิดเครื่องทิ้งไว้หน้า Desktop เฉยๆ (Idle) ควรอยู่ที่ 1% &#8211; 15%</li>\n\n\n\n<li><strong>สัญญาณอันตราย:</strong> หาก CPU วิ่ง 80% &#8211; 100% ค้างไว้นานๆ ทั้งที่ไม่ได้เปิดโปรแกรมหนัก</li>\n\n\n\n<li><strong>สาเหตุที่พบบ่อยและวิธีแก้:</strong>\n<ul class=\"wp-block-list\">\n<li><strong>Antivirus Scan:</strong> แอนตี้ไวรัสอาจกำลังสแกนระบบแบบ Full Scan (แนะนำให้รอจนกว่าจะเสร็จ)</li>\n\n\n\n<li><strong>โปรแกรมค้าง (Not Responding):</strong> ในหน้า Processes ลองคลิกที่หัวคอลัมน์ &#8220;CPU&#8221; เพื่อเรียงลำดับดูว่าโปรแกรมไหนกินทรัพยากรสูงสุด หากเป็นโปรแกรมที่ไม่ได้ใช้ ให้คลิกขวาแล้วเลือก <em>End Task</em></li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">3. ตรวจสอบ RAM (หน่วยความจำชั่วคราวเต็ม)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">หาก RAM เต็ม ระบบ Windows จะต้องนำพื้นที่ว่างของฮาร์ดดิสก์มาจำลองเป็น RAM ชั่วคราว (Virtual Memory / Pagefile) ซึ่งฮาร์ดดิสก์ทำงานช้ากว่า RAM มาก ทำให้เครื่องอืดลงอย่างเห็นได้ชัด</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีเช็ก:</strong> Task Manager > Performance > Memory</li>\n\n\n\n<li><strong>เกณฑ์ปกติ:</strong> ใช้งานทั่วไปควรอยู่ประมาณ 40% &#8211; 70%</li>\n\n\n\n<li><strong>สัญญาณอันตราย:</strong> สถานะการใช้งานแตะระดับ 90% &#8211; 100% ตลอดเวลา</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong>\n<ul class=\"wp-block-list\">\n<li>เว็บเบราว์เซอร์อย่าง Google Chrome เป็นตัวกิน RAM มหาศาล ให้ปิดแท็บที่ไม่ได้ใช้งาน หรือเปิดฟีเจอร์ <em>Memory Saver</em> ในตั้งค่าของ Chrome</li>\n\n\n\n<li>หากจำเป็นต้องเปิดหลายโปรแกรมพร้อมกัน การ <strong>เพิ่มความจุ RAM</strong> (ควรอัปเกรดให้มีอย่างน้อย 8GB หรือแนะนำที่ 16GB สำหรับปัจจุบัน) คือทางออกที่คุ้มค่าที่สุด</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">4. ปัญหาคลาสสิก: Disk Usage 100%</h2>\n\n\n\n<p class=\"wp-block-paragraph\">นี่คือ <strong>&#8220;ตัวการอันดับ 1&#8221;</strong> ที่ทำให้คอมพิวเตอร์หรือโน้ตบุ๊กทำงานช้าจนน่าหงุดหงิด มักพบบ่อยในเครื่องที่ยังใช้ฮาร์ดดิสก์แบบจานหมุน (HDD)</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีเช็ก:</strong> Task Manager > Processes > ดูค่าที่คอลัมน์ <strong>Disk</strong></li>\n\n\n\n<li><strong>สัญญาณอันตราย:</strong> ตัวเลขขึ้นสีแดงและค้างอยู่ที่ 100% เป็นเวลาหลายนาที</li>\n\n\n\n<li><strong>สาเหตุที่พบบ่อยและวิธีแก้:</strong>\n<ul class=\"wp-block-list\">\n<li><strong>SysMain (SuperFetch) &amp; Windows Search:</strong> ฟีเจอร์ของ Windows ที่พยายามจำพฤติกรรมผู้ใช้เพื่อโหลดโปรแกรมล่วงหน้า แต่กลับทำให้ HDD รันหนักเกินพิกัด (วิธีแก้: ค้นหา <em>Services</em> ในช่อง Start > หาชื่อ SysMain และ Windows Search > คลิกขวาเลือก Properties > ตั้ง Startup type เป็น Disable > กด Stop)</li>\n\n\n\n<li><strong>การอัปเกรดเป็น SSD:</strong> การเปลี่ยนจาก HDD ไปใช้ฮาร์ดดิสก์แบบโซลิดสเตต (SSD) จะแก้ปัญหา Disk 100% ได้อย่างเด็ดขาดและทำให้คอมบูตเร็วขึ้นหลายเท่าตัว</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">5. พื้นที่ว่างของ Drive C ขาดหาย (ไดรฟ์ระบบเต็ม)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">Drive C คือบ้านของ Windows ระบบจำเป็นต้องมีพื้นที่ว่างในการทำงาน สร้างไฟล์แคช (Temp Files) และจัดการอัปเดต</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>กฎเหล็กที่ควรจำ:</strong> Drive C ควรมีพื้นที่ว่าง <strong>อย่างน้อย 15% &#8211; 20%</strong> ของความจุทั้งหมดเสมอ หากตัวหนังสือไดรฟ์ขึ้นเป็น &#8220;สีแดง&#8221; คอมพิวเตอร์จะเริ่มทำงานผิดปกติ</li>\n\n\n\n<li><strong>วิธีแก้ไข:</strong>\n<ul class=\"wp-block-list\">\n<li>ใช้ฟีเจอร์ <strong>Disk Cleanup</strong> ที่ติดมากับ Windows เพื่อสแกนลบไฟล์ขยะและไฟล์อัปเดตเก่าๆ ที่กินพื้นที่</li>\n\n\n\n<li>เปิดใช้งาน <strong>Storage Sense</strong> (Settings > System > Storage) เพื่อให้ระบบช่วยลบไฟล์ขยะอัตโนมัติ</li>\n\n\n\n<li>ย้ายไฟล์ข้อมูลส่วนตัว เช่น วิดีโอ รูปภาพ หรืองานกราฟิกขนาดใหญ่ ไปเก็บไว้ที่ Drive D หรือ External Hard Drive</li>\n</ul>\n</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">6. จัดการ Startup Programs (โปรแกรมที่รันอัตโนมัติเมื่อเปิดเครื่อง)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">ยิ่งคุณลงโปรแกรมในเครื่องมาก โปรแกรมเหล่านั้นมักจะแอบตั้งค่าให้ตัวมันเองเปิดทำงานอยู่เบื้องหลังทันทีที่เราเปิดคอมพิวเตอร์</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีเช็ก:</strong> เปิด Task Manager > ไปที่แท็บ <strong>Startup</strong> (หรือ Startup apps ใน Windows 11)</li>\n\n\n\n<li><strong>วิธีแก้:</strong> สังเกตคอลัมน์ <em>Startup impact</em> หากเห็นโปรแกรมที่กินทรัพยากร (High) และคุณไม่ได้จำเป็นต้องใช้ทันที เช่น Skype, Spotify, Microsoft Teams, หรือโปรแกรม Updater ต่างๆ ให้คลิกขวาแล้วเลือก <strong>Disable</strong> (เป็นการห้ามเปิดเองตอนบูตเครื่อง ไม่ได้เป็นการถอนการติดตั้ง)</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">7. Windows Update กำลังแอบทำงาน</h2>\n\n\n\n<p class=\"wp-block-paragraph\">หลายครั้งที่คอมพิวเตอร์ช้าลงดื้อๆ อินเทอร์เน็ตหน่วงๆ เป็นเพราะ Windows กำลังแอบดาวน์โหลดและติดตั้งแพตช์ความปลอดภัยอยู่เบื้องหลัง</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีเช็ก:</strong> เข้าไปที่ Settings > Windows Update</li>\n\n\n\n<li><strong>วิธีแก้:</strong> หากพบว่าสถานะกำลัง Download หรือ Installing แนะนำให้ปล่อยให้ระบบทำจนเสร็จสิ้นและ Restart เครื่อง หากคุณกำลังติดธุระสำคัญ สามารถกดปุ่ม <strong>Pause updates</strong> เพื่อหยุดชั่วคราวได้</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">8. เช็กสุขภาพของฮาร์ดดิสก์ (Bad Sector)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">เมื่อหน่วยความจำมีอายุการใช้งานนานขึ้น อาจเกิดอาการเสื่อมสภาพ (Bad Sector) หัวอ่านจะพยายามอ่านข้อมูลซ้ำๆ ในจุดที่เสียเปราะ ทำให้เครื่องเกิดอาการ &#8220;ค้างเป็นพักๆ&#8221; หรือก๊อปปี้ไฟล์ช้าผิดปกติ</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีตรวจสอบเบื้องต้นแบบไวๆ:</strong> เปิด Command Prompt > พิมพ์คำสั่ง <code>wmic diskdrive get status</code> (หากผลลัพธ์ออกเป็น OK แปลว่าเบื้องต้นยังปกติ)</li>\n\n\n\n<li><strong>วิธีตรวจสอบเชิงลึก:</strong> โหลดโปรแกรมฟรีเช่น <strong>CrystalDiskInfo</strong> หรือ <strong>Hard Disk Sentinel</strong> มาเช็กค่า S.M.A.R.T. ของดิสก์ หากพบว่าสถานะขึ้นเป็นสีเหลือง (Caution) หรือสีแดง (Bad) ควรรีบแบ็คอัปข้อมูลสำคัญและเปลี่ยนไดรฟ์ทันที</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">9. สแกนหา Malware และ Virus ที่แอบแฝง</h2>\n\n\n\n<p class=\"wp-block-paragraph\">มัลแวร์บางประเภท เช่น ไวรัสขุดเหรียญคริปโต (Cryptojacking Trojan) จะถูกเขียนโปรแกรมมาให้แอบดึงประสิทธิภาพ CPU หรือ GPU ของเครื่องเราไปใช้อย่างเต็มเหนี่ยวโดยที่เราไม่รู้ตัว</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีแก้ไข:</strong> เปิด <strong>Windows Security</strong> (หรือ Windows Defender) ที่ติดมากับเครื่อง สั่งรัน <strong>Full Scan</strong> ทิ้งไว้ หรือถ้าพบความผิดปกติที่ฝังลึกให้เลือก <strong>Microsoft Defender Offline scan</strong></li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">10. ขุดหา Error เชิงลึกด้วย Event Viewer</h2>\n\n\n\n<p class=\"wp-block-paragraph\">หากเช็กทุกอย่างจากภายนอกแล้วยังไม่พบปัญหา การส่องดู Log ประวัติการแจ้งเตือนระดับระบบ คือวิธีของช่างไอทีมืออาชีพ</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีเช็ก:</strong> กดปุ่ม <code>Win + R</code> > พิมพ์ <code>eventvwr.msc</code> > ไปที่หมวด <strong>Windows Logs</strong> > ดูที่ย่อย <strong>System</strong> และ <strong>Application</strong></li>\n\n\n\n<li><strong>จุดที่ต้องโฟกัส:</strong> มองหาประวัติที่ขึ้นไอคอนกากบาทสีแดง <strong>(Error)</strong> หรือสามเหลี่ยมตกใจสีเหลือง <strong>(Warning)</strong> บ่อยๆ ระบบจะบอก Code ของปัญหาเพื่อให้นำไปค้นหาวิธีแก้เฉพาะทางใน Google ต่อไป</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">11. ระวังปัญหา &#8220;ความร้อน&#8221; (Thermal Throttling)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">เมื่อชิ้นส่วนคอมพิวเตอร์ทำงานหนักจนความร้อนพุ่งสูงเกินเกณฑ์ (โดยทั่วไปคือเกิน 90°C &#8211; 100°C) ระบบจะปกป้องตัวเองด้วยการลดความเร็วสัญญาณนาฬิกาของ CPU ลงอัตโนมัติ อาการนี้เรียกว่า Thermal Throttling</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>อาการที่ฟ้อง:</strong> พัดลมคอมหมุนเสียงดังมาก เครื่องเป่าลมร้อนจัดออกมา และเฟรมเรตตกฮวบเวลาเล่นเกม</li>\n\n\n\n<li><strong>วิธีเช็ก:</strong> ใช้โปรแกรมอย่าง <strong>HWMonitor</strong> หรือ <strong>Core Temp</strong> เพื่อดูอุณหภูมิจริง</li>\n\n\n\n<li><strong>วิธีแก้:</strong> ทำความสะอาดเป่าฝุ่นออกจากพัดลมและฮีตซิงก์, เปลี่ยนทาซิลิโคนระบายความร้อนใหม่ (Thermal Paste), และหลีกเลี่ยงการวางโน้ตบุ๊กบนที่นอนหรือพื้นผิวที่กักเก็บความร้อน</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">12. ตรวจสอบ Network (สำหรับระบบคอมพิวเตอร์องค์กร)</h2>\n\n\n\n<p class=\"wp-block-paragraph\">หากคอมพิวเตอร์ทำงานเอกสารในเครื่องได้ลื่นไหลปกติ แต่จะเกิดอาการ <strong>&#8220;ค้างและหมุนติ้ว&#8221;</strong> เฉพาะตอนเปิดไฟล์จาก Shared Folder, เข้าใช้งานระบบ ERP บริษัท หรือดึงข้อมูล Database แสดงว่าอาจไม่ได้เป็นที่ Windows แต่เป็นปัญหาคอขวดที่ระบบ <strong>Network</strong></p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>วิธีทดสอบเบื้องต้น:</strong> เปิด Command Prompt พิมพ์คำสั่ง <code>ping &lt;IP Router Server ของ หรือ> -t</code></li>\n\n\n\n<li><strong>ข้อสังเกต:</strong> ให้รอดูว่ามีอาการอินเทอร์เน็ตขาดหาย (Request timed out) หรือค่าความหน่วง Latency (time=&#8230;) พุ่งกระโดดหลักร้อยหลักพันมิลลิวินาทีหรือไม่ หากใช่ ควรแจ้งทีม IT Network ให้ตรวจสอบระบบเครือข่าย</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\">📌 สรุปหลักการวิเคราะห์ปัญหาเข้าใจง่าย (ตารางเช็กลิสต์)</h2>\n\n\n\n<figure class=\"wp-block-table\"><table class=\"has-fixed-layout\"><thead><tr><th>ค่าใน Task Manager ที่ผิดปกติ</th><th>อาการที่ผู้ใช้มักจะเจอ</th><th>สาเหตุที่เป็นไปได้ &amp; วิธีแก้ไขเบื้องต้น</th></tr></thead><tbody><tr><td><strong>CPU 100%</strong></td><td>เครื่องหน่วง คลิกแล้วตอบสนองช้ามาก</td><td>รันโปรแกรมหนักไป / Malware -&gt; ปิดโปรแกรมที่ไม่ได้ใช้, สแกนไวรัส</td></tr><tr><td><strong>RAM เกิน 90%</strong></td><td>สลับหน้าต่างโปรแกรมช้า, HDD ทำงานหนักตาม</td><td>เปิดแท็บเบราว์เซอร์เยอะเกิน -&gt; ปิดแท็บ, อัปเกรดเพิ่ม RAM</td></tr><tr><td><strong>Disk 100% แช่ยาว</strong></td><td>เครื่องค้างเป็นพักๆ, รอเปิดเข้าโปรแกรมนาน</td><td>เป็นข้อจำกัดของ HDD จานหมุน -&gt; เปลี่ยนไปใช้ SSD ด่วน</td></tr><tr><td><strong>พื้นที่ Drive C เป็นสีแดง</strong></td><td>ระบบรวน, เซฟงานไม่ได้, อัปเดตไม่ผ่าน</td><td>แคชระบบไม่พอ -&gt; ลบไฟล์ Temp หรือทำ Disk Cleanup</td></tr><tr><td><strong>พัดลมเสียงดัง / CPU ร้อนจัด</strong></td><td>เล่นเกมแล้วกระตุกกะทันหัน เครื่องหน่วงอืด</td><td>Thermal Throttling ป้องกันชิปไหม้ -&gt; ทำความสะอาดระบบระบายความร้อน</td></tr></tbody></table></figure>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\">\n<p class=\"wp-block-paragraph\"><strong>💡 คำแนะนำทิ้งท้าย:</strong> ปัญหา &#8220;คอมช้า&#8221; กว่า 70% สามารถหาสาเหตุเจอได้ผ่านการดู <strong>Task Manager</strong> หากคุณทำตามวิธีการข้างต้นทั้งหมดแล้วเครื่องยังทำงานได้ไม่ทันใจ การอัปเกรดที่เห็นผลลัพธ์คุ้มค่าเงินที่สุดในยุคนี้คือ <strong>การเปลี่ยนฮาร์ดดิสก์ตัวหลักไปใช้ SSD</strong> และ <strong>อัปเกรด RAM ให้ถึง 16GB</strong> รับรองว่าคอมพิวเตอร์เครื่องเดิมของคุณจะกลับมาเร็วและลื่นไหลเหมือนเพิ่งซื้อใหม่แน่นอนครับ!</p>\n</blockquote>\n",
+      "protected": false
+    },
+    "excerpt": {
+      "rendered": "<p>เมื่อเกิดปัญหา &#8220;คอมช้า&#8221; หรือ &#8220;Windows อืด&#8221; หลายคนมักรีบด่วนสรุปว่าเกิดจาก RAM ไม่พอ หรือเครื่องเก่าเกินไปจนต้องเสียเงินซื้อใหม่ แต่ในความเป็นจริงแล้ว สาเหตุของปัญหาคอมพิวเตอร์ทำงานหน่วงนั้นมาจากหลายปัจจัย ไม่ว่าจะเป็นการทำงานของหน่วยประมวลผล (CPU), ปัญหาดิสก์ทำงานหนัก 100% (Disk 100%), ไวรัส, ไปจนถึงปัญหาเชิงกายภาพอย่างเรื่องความร้อนสะสม บทความนี้จะพาคุณไปเจาะลึกวิธีการวิเคราะห์ปัญหาแบบทีละขั้นตอน เพื่อให้คุณสามารถหาสาเหตุที่แท้จริงและแก้ไขปัญหา Windows 10 และ Windows 11 ช้า ได้อย่างตรงจุดระดับ IT Support 1. แยกแยะพฤติกรรมให้ชัด: &#8220;คอมของคุณช้าตอนไหน?&#8221; ก่อนที่จะเริ่มตั้งค่าหรือแก้ไขอะไร การสังเกตอาการเครื่องคือขั้นตอนแรกที่สำคัญที่สุด เพราะช่วงเวลาที่เครื่องเกิดอาการหน่วงจะเป็นตัวชี้เป้าสาเหตุได้อย่างแม่นยำ: 2. ตรวจสอบ CPU Usage (หน่วยประมวลผลทำงานหนักเกินไป) CPU เปรียบเสมือนสมองของคอมพิวเตอร์ หากมีหลายโปรแกรมแย่งกันส่งคำสั่ง คอมพิวเตอร์จะตอบสนองช้าลงทันที 3. ตรวจสอบ RAM (หน่วยความจำชั่วคราวเต็ม) หาก RAM เต็ม ระบบ Windows จะต้องนำพื้นที่ว่างของฮาร์ดดิสก์มาจำลองเป็น&#8230;</p>\n",
+      "protected": false
+    },
+    "author": 2,
+    "featured_media": 4018,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "sticky": false,
+    "template": "",
+    "format": "standard",
+    "meta": {
+      "inline_featured_image": false,
+      "_kb_optimizer_status": 0,
+      "_kad_blocks_custom_css": "",
+      "_kad_blocks_head_custom_js": "",
+      "_kad_blocks_body_custom_js": "",
+      "_kad_blocks_footer_custom_js": "",
+      "_kadence_starter_templates_imported_post": false,
+      "_kad_post_transparent": "",
+      "_kad_post_title": "",
+      "_kad_post_layout": "",
+      "_kad_post_sidebar_id": "",
+      "_kad_post_content_style": "",
+      "_kad_post_vertical_padding": "",
+      "_kad_post_feature": "",
+      "_kad_post_feature_position": "",
+      "_kad_post_header": false,
+      "_kad_post_footer": false,
+      "_kad_post_classname": "",
+      "footnotes": ""
+    },
+    "categories": [
+      60
+    ],
+    "tags": [],
+    "class_list": [
+      "post-4006",
+      "post",
+      "type-post",
+      "status-publish",
+      "format-standard",
+      "has-post-thumbnail",
+      "hentry",
+      "category-maintain-computer-systems"
+    ],
+    "taxonomy_info": {
+      "category": [
+        {
+          "value": 60,
+          "label": "ดูแลระบบคอมพิวเตอร์"
+        }
+      ]
+    },
+    "featured_image_src_large": [
+      "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-1024x559.webp",
+      1024,
+      559,
+      true
+    ],
+    "author_info": {
+      "display_name": "สุภชัย สุนทรชื่น",
+      "author_link": "https://www.bizgrowtech.com/author/supachai/"
+    },
+    "comment_info": 0,
+    "category_info": [
+      {
+        "term_id": 60,
+        "name": "ดูแลระบบคอมพิวเตอร์",
+        "slug": "maintain-computer-systems",
+        "term_group": 0,
+        "term_taxonomy_id": 60,
+        "taxonomy": "category",
+        "description": "",
+        "parent": 0,
+        "count": 5,
+        "filter": "raw",
+        "cat_ID": 60,
+        "category_count": 5,
+        "category_description": "",
+        "cat_name": "ดูแลระบบคอมพิวเตอร์",
+        "category_nicename": "maintain-computer-systems",
+        "category_parent": 0
+      }
+    ],
+    "tag_info": false,
+    "_links": {
+      "self": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4006",
+          "targetHints": {
+            "allow": [
+              "GET"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4006"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 0,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4006/revisions"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4018"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media?parent=4006"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories?post=4006"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "https://www.bizgrowtech.com/wp-json/wp/v2/tags?post=4006"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "author": [
+        {
+          "id": 2,
+          "name": "สุภชัย สุนทรชื่น",
+          "url": "https://www.bizgrowtech.com/",
+          "description": "",
+          "link": "https://www.bizgrowtech.com/author/supachai/",
+          "slug": "supachai",
+          "avatar_urls": {
+            "24": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "48": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp",
+            "96": "https://www.bizgrowtech.com/wp-content/uploads/2026/05/unnamed-2-150x150.webp"
+          },
+          "kb": {
+            "avatar": "https://secure.gravatar.com/avatar/?s=300&d=mm&r=g",
+            "registered": "January 1, 1970"
+          },
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "id": 4018,
+          "date": "2026-09-15T11:09:40",
+          "slug": "what-should-you-check-if-your-computer-or-windows-is-running-slowly",
+          "type": "attachment",
+          "link": "https://www.bizgrowtech.com/slow-computer-sluggish-windows-what-should-you-check/what-should-you-check-if-your-computer-or-windows-is-running-slowly/",
+          "title": {
+            "rendered": "What should you check if your computer or Windows is running slowly"
+          },
+          "author": 2,
+          "featured_media": 0,
+          "caption": {
+            "rendered": ""
+          },
+          "alt_text": "คอมช้า Windows อืด ต้องเช็กอะไรบ้าง",
+          "media_type": "image",
+          "mime_type": "image/webp",
+          "media_details": {
+            "width": 2560,
+            "height": 1396,
+            "file": "2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-scaled.webp",
+            "filesize": "219192",
+            "sizes": {
+              "medium": {
+                "file": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly-300x164.webp",
+                "width": 300,
+                "height": 164,
+                "filesize": "9412",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-300x164.webp"
+              },
+              "large": {
+                "file": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly-1024x559.webp",
+                "width": 1024,
+                "height": 559,
+                "filesize": "67582",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-1024x559.webp"
+              },
+              "thumbnail": {
+                "file": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly-150x150.webp",
+                "width": 150,
+                "height": 150,
+                "filesize": "5458",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-150x150.webp"
+              },
+              "medium_large": {
+                "file": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly-768x419.webp",
+                "width": 768,
+                "height": 419,
+                "filesize": "44794",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-768x419.webp"
+              },
+              "1536x1536": {
+                "file": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly-1536x838.webp",
+                "width": 1536,
+                "height": 838,
+                "filesize": "116928",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-1536x838.webp"
+              },
+              "2048x2048": {
+                "file": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly-2048x1117.webp",
+                "width": 2048,
+                "height": 1117,
+                "filesize": "168748",
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-2048x1117.webp"
+              },
+              "full": {
+                "file": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly-scaled.webp",
+                "width": 2560,
+                "height": 1396,
+                "mime_type": "image/webp",
+                "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-scaled.webp"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": [],
+              "alt": ""
+            },
+            "original_image": "What-should-you-check-if-your-computer-or-Windows-is-running-slowly.jpg"
+          },
+          "source_url": "https://www.bizgrowtech.com/wp-content/uploads/2026/09/What-should-you-check-if-your-computer-or-Windows-is-running-slowly-scaled.webp",
+          "_links": {
+            "self": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media/4018",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/users/2"
+              }
+            ],
+            "replies": [
+              {
+                "embeddable": true,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/comments?post=4018"
+              }
+            ],
+            "wp:attached-to": [
+              {
+                "embeddable": true,
+                "post_type": "post",
+                "id": 4006,
+                "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts/4006"
+              }
+            ],
+            "curies": [
+              {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 60,
+            "link": "https://www.bizgrowtech.com/category/maintain-computer-systems/",
+            "name": "ดูแลระบบคอมพิวเตอร์",
+            "slug": "maintain-computer-systems",
+            "taxonomy": "category",
+            "_links": {
+              "self": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories/60",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/categories"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/taxonomies/category"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://www.bizgrowtech.com/wp-json/wp/v2/posts?categories=60"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ],
+        []
+      ]
+    }
+  }
+]
